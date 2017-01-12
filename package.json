@@ -1,0 +1,21 @@
+{
+  "name": "maprosoft-trello-power-up",
+  "version": "1.0.0",
+  "private": true,
+  "repo": "https://bitbucket.org/maprosoft/maprosoft-trello-power-up.git",
+  "_aerobatic": {
+    "clientConfigVar": "__aerobatic__",
+    "omitClientConfigVar": false,
+    "router": [
+      {
+        "module": "http-headers",
+        "path": "/manifest.json",
+        "options": {
+          "Access-Control-Allow-Origin": "*"
+        }
+      }, {
+        "module": "webpage"
+      }
+    ]
+  }
+}
