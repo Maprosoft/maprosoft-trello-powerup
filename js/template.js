@@ -156,7 +156,7 @@ TrelloPowerUp.initialize({
       // potentially length operation you can provide a function for the title
       // that returns the section title. If you do so, provide a unique id for
       // your section
-      return [{
+      var parkSectionJson = {
         id: 'Yellowstone', // optional if you aren't using a function for the title
         claimed: claimed,
         icon: GRAY_ICON,
@@ -166,7 +166,20 @@ TrelloPowerUp.initialize({
           url: t.signUrl('./section.html', { arg: 'you can pass your section args here' }),
           height: 230
         }
-      }];
+      };
+      var mapSectionJson = {
+        id: 'maprosoft-map', // optional if you aren't using a function for the title
+        claimed: claimed,
+        icon: GRAY_ICON,
+        title: 'Maprosoft Map',
+        content: {
+          type: 'iframe',
+          url: t.signUrl('https://www.maprosoft.com/app/map?team=demo&showAllFeatureTypes=no&showFeatureTypes=Libraries&showMapToolbar=no',
+              { arg: 'you can pass your section args here' }),
+          height: 400
+        }
+      };
+      return [mapSectionJson, parkSectionJson];
     } else {
       return [];
     }
