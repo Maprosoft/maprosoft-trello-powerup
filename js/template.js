@@ -179,7 +179,8 @@ TrelloPowerUp.initialize({
           height: 400
         }
       };
-      return [mapSectionJson, parkSectionJson];
+      //return [mapSectionJson, parkSectionJson];
+      return [mapSectionJson];
     } else {
       return [];
     }
