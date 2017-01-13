@@ -5,10 +5,10 @@ var t = TrelloPowerUp.iframe();
 // you can access arguments passed to your iframe like so
 var mapUrl = t.arg('map-url');
 
-var $mapFrame = $('#map-frame');
-$mapFrame.attr('id', mapUrl);
+//var $mapFrame = $('#map-frame');
+//$mapFrame.attr('id', mapUrl);
 
-var mapFrame = document.getElementById('urls').textContent = urls.join(', ');
+var mapFrame = document.getElementById('map-frame');
 mapFrame.src = mapUrl;
 
 //t.render(function() {
@@ -18,10 +18,10 @@ mapFrame.src = mapUrl;
 //  t.card('attachments')
 //  .get('attachments')
 //  .filter(function(attachment){
-//    return attachment.url.indexOf('http://www.nps.gov/yell/') == 0;
+//    return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
 //  })
-//  .then(function(yellowstoneAttachments){
-//    var urls = yellowstoneAttachments.map(function(a){ return a.url; });
+//  .then(function(mapAttachments) {
+//    var urls = mapAttachments.map(function(a){ return a.url; });
 //    document.getElementById('urls').textContent = urls.join(', ');
 //  })
 //  .then(function(){
