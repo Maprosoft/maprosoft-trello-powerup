@@ -1,10 +1,15 @@
-body {
+body.masked {
   background: rgba(0,0,0,.5);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#content {
+
+body.map {
+  height: 100%;
+}
+
+#overlay-content {
   background: white;
   padding: 24px;
   width: 80%;
