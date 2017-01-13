@@ -26,8 +26,11 @@ t.render(function() {
         //});
         //document.getElementById('urls').textContent = urls.join(', ');
 
-        var mapFrame = document.getElementById('map-frame');
-        mapFrame.src = mapUrl;
+        var mapFrameElement = document.getElementById('map-frame');
+        mapFrameElement.src = mapUrl;
+
+        var mapFrameElement = document.getElementById('map-url-element');
+        mapFrameElement.innerHTML = mapUrl;
   })
   .then(function(){
     return t.sizeTo('#content');

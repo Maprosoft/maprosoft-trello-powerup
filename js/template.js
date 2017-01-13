@@ -175,14 +175,14 @@ TrelloPowerUp.initialize({
     // include in your section.
 
     // we will just claim urls for Yellowstone
-    var claimed = options.entries.filter(function(attachment){
+    var claimed = options.entries.filter(function(attachment) {
       return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
     });
 
     // you can have more than one attachment section on a card
     // you can group items together into one section, have a section
     // per attachment, or anything in between.
-    if(claimed && claimed.length > 0){
+    if (claimed && claimed.length > 0) {
       // if the title for your section requires a network call or other
       // potentially length operation you can provide a function for the title
       // that returns the section title. If you do so, provide a unique id for
@@ -202,7 +202,7 @@ TrelloPowerUp.initialize({
         id: 'maprosoft-map', // optional if you aren't using a function for the title
         claimed: claimed,
         icon: GRAY_ICON,
-        title: 'Maprosoft Map v7',
+        title: 'Maprosoft Map v8',
         content: {
           type: 'iframe',
           url: t.signUrl('./map-section.html',
@@ -223,7 +223,7 @@ TrelloPowerUp.initialize({
             id: 'maprosoft-map', // optional if you aren't using a function for the title
             claimed: claimedAttachments,
             icon: GRAY_ICON,
-            title: 'Maprosoft Map v7 [' + claimIndex + ']',
+            title: 'Maprosoft Map v8 [' + claimIndex + ']',
             content: {
               type: 'iframe',
               url: t.signUrl('./map-section.html',
