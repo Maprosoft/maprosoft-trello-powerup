@@ -4,19 +4,15 @@ var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
 var maprosoftTokenTextField = document.getElementById('maprosoft-token');
-var vegetableSelector = document.getElementById('vegetable');
 
 t.render(function(){
   return Promise.all([
     t.get('board', 'shared', 'maprosoft-token'),
     t.get('board', 'private', 'vegetable')
   ])
-  .spread(function(maprosoftToken, savedVegetable) {
-    if (maprosoftToken && /[0-9][a-z]+/.test(maprosoftToken)) {
-      maprosoftTokenTextField.value = maprosoftToken;
-    }
-    if (savedVegetable && /[a-z]+/.test(savedVegetable)) {
-      vegetableSelector.value = savedVegetable;
+  .spread(function(savedMaprosoftToken, savedVegetable) {
+    if (maprosoftToken && /[0-9][a-z]+/.test(savedMaprosoftToken)) {
+      maprosoftTokenTextField.value = savedMaprosoftToken;
     }
   })
   .then(function(){
