@@ -17,11 +17,13 @@ t.render(function() {
   // from your section
   t.card('attachments')
   .get('attachments')
-  .filter(function(attachment){
+  .filter(function(attachment) {
         return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
   })
   .then(function(attachments) {
-        //var urls = attachments.map(function(a){ return a.url; });
+        //var urls = attachments.map(function(a){
+        //  return a.url;
+        //});
         //document.getElementById('urls').textContent = urls.join(', ');
 
         var mapFrame = document.getElementById('map-frame');
