@@ -117,25 +117,35 @@ var cardButtonCallback = function(t){
     return {
       text: parkMap[parkCode],
       url: urlForCode,
-      callback: function(t){
-        //return t.attach({ url: urlForCode, name: parkMap[parkCode] })
+      callback: function(t) {
+        //return t.attach({
+        //  url: urlForCode,
+        //  name: parkMap[parkCode] })
         //.then(function(){
         //  return t.closePopup();
-        //})
+        //});
+
         return t.attach({
-            id: 'maprosoft-map', // optional if you aren't using a function for the title
-            claimed: claimed,
-            icon: GRAY_ICON,
-            title: 'Maprosoft Map v2',
-            content: {
-              type: 'iframe',
-              url: t.signUrl('./map-section.html',
-                  { arg: 'you can pass your section args here' }),
-              height: 400
-            }
-        }).then(function(){
+              url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
+              name: "My Map"
+        }).then(function() {
               return t.closePopup();
-            })
+        });
+
+        //return t.attach({
+        //    id: 'maprosoft-map', // optional if you aren't using a function for the title
+        //    claimed: claimed,
+        //    icon: GRAY_ICON,
+        //    title: 'Maprosoft Map v3',
+        //    content: {
+        //      type: 'iframe',
+        //      url: t.signUrl('./map-section.html',
+        //          { arg: 'you can pass your section args here' }),
+        //      height: 400
+        //    }
+        //}).then(function(){
+        //      return t.closePopup();
+        //    });
       }
     };
   });
