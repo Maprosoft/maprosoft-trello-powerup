@@ -180,7 +180,7 @@ TrelloPowerUp.initialize({
         }
       };
       //return [mapSectionJson, parkSectionJson];
-      
+
       return [mapSectionJson];
     } else {
       return [];
