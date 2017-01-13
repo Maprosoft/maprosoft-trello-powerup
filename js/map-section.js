@@ -29,7 +29,7 @@ t.render(function() {
         var mapFrameElement = document.getElementById('map-frame');
         mapFrameElement.src = mapUrl;
 
-        var mapFrameElement = document.getElementById('map-url-element');
+        var mapFrameElement = document.getElementById('map-url-debug');
         mapFrameElement.innerHTML = mapUrl;
   })
   .then(function(){
