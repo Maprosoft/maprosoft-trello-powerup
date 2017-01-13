@@ -11,7 +11,7 @@ t.render(function(){
     t.get('board', 'private', 'vegetable')
   ])
   .spread(function(savedMaprosoftToken, savedVegetable) {
-    if (savedMaprosoftToken && /[0-9][a-z]+/.test(savedMaprosoftToken)) {
+    if (savedMaprosoftToken) {
       maprosoftTokenTextField.value = savedMaprosoftToken;
     }
   })
