@@ -118,10 +118,24 @@ var cardButtonCallback = function(t){
       text: parkMap[parkCode],
       url: urlForCode,
       callback: function(t){
-        return t.attach({ url: urlForCode, name: parkMap[parkCode] })
-        .then(function(){
-          return t.closePopup();
-        })
+        //return t.attach({ url: urlForCode, name: parkMap[parkCode] })
+        //.then(function(){
+        //  return t.closePopup();
+        //})
+        return t.attach({
+            id: 'maprosoft-map', // optional if you aren't using a function for the title
+            claimed: claimed,
+            icon: GRAY_ICON,
+            title: 'Maprosoft Map v2',
+            content: {
+              type: 'iframe',
+              url: t.signUrl('./map-section.html',
+                  { arg: 'you can pass your section args here' }),
+              height: 400
+            }
+        }).then(function(){
+              return t.closePopup();
+            })
       }
     };
   });
@@ -217,7 +231,7 @@ TrelloPowerUp.initialize({
   'card-buttons': function(t, options) {
     return [{
       icon: GRAY_ICON,
-      text: 'Template',
+      text: 'Maprosoft map',
       callback: cardButtonCallback
     }];
   },
