@@ -125,11 +125,18 @@ var cardButtonCallback = function(t){
         //  return t.closePopup();
         //});
 
+        //return t.attach({
+        //      url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
+        //      name: "My Map"
+        //}).then(function() {
+        //      return t.closePopup();
+        //});
+
         return t.attach({
-              url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
-              name: "My Map"
+          url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
+          name: "My Map"
         }).then(function() {
-              return t.closePopup();
+          return t.closePopup();
         });
 
         //return t.attach({
@@ -169,7 +176,7 @@ TrelloPowerUp.initialize({
 
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function(attachment){
-      return attachment.url.indexOf('http://www.nps.gov/yell/') == 0;
+      return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
     });
 
     // you can have more than one attachment section on a card
@@ -199,13 +206,33 @@ TrelloPowerUp.initialize({
         content: {
           type: 'iframe',
           url: t.signUrl('./map-section.html',
-              { arg: 'you can pass your section args here' }),
+              { "map-url": 'abc' }),
           height: 400
         }
       };
       //return [mapSectionJson, parkSectionJson];
+      //return [mapSectionJson];
 
-      return [mapSectionJson];
+      var sections = [];
+      if (claimed && claimed.length > 0) {
+        for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
+          var attachment = claimed[claimIndex];
+          var mapSection = {
+            id: 'maprosoft-map', // optional if you aren't using a function for the title
+            claimed: claimed,
+            icon: GRAY_ICON,
+            title: 'Maprosoft Map v3',
+            content: {
+              type: 'iframe',
+              url: t.signUrl('./map-section.html',
+                  { "map-url": attachment.url }),
+              height: 400
+            }
+          };
+          sections.push(mapSection);
+        }
+      }
+      return sections;
     } else {
       return [];
     }
