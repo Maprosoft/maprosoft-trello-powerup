@@ -8,23 +8,26 @@ var mapUrl = t.arg('map-url');
 //var $mapFrame = $('#map-frame');
 //$mapFrame.attr('id', mapUrl);
 
-var mapFrame = document.getElementById('map-frame');
-mapFrame.src = mapUrl;
+//var mapFrame = document.getElementById('map-frame');
+//mapFrame.src = mapUrl;
 
-//t.render(function() {
-//  // make sure your rendering logic lives here, since we will
-//  // recall this method as the user adds and removes attachments
-//  // from your section
-//  t.card('attachments')
-//  .get('attachments')
-//  .filter(function(attachment){
-//    return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
-//  })
-//  .then(function(mapAttachments) {
-//    var urls = mapAttachments.map(function(a){ return a.url; });
-//    document.getElementById('urls').textContent = urls.join(', ');
-//  })
-//  .then(function(){
-//    return t.sizeTo('#content');
-//  });
-//});
+t.render(function() {
+  // make sure your rendering logic lives here, since we will
+  // recall this method as the user adds and removes attachments
+  // from your section
+  t.card('attachments')
+  .get('attachments')
+  .filter(function(attachment){
+        return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
+  })
+  .then(function(attachments) {
+        //var urls = attachments.map(function(a){ return a.url; });
+        //document.getElementById('urls').textContent = urls.join(', ');
+
+        var mapFrame = document.getElementById('map-frame');
+        mapFrame.src = mapUrl;
+  })
+  .then(function(){
+    return t.sizeTo('#content');
+  });
+});

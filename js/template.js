@@ -221,7 +221,7 @@ TrelloPowerUp.initialize({
             id: 'maprosoft-map', // optional if you aren't using a function for the title
             claimed: claimed,
             icon: GRAY_ICON,
-            title: 'Maprosoft Map v5',
+            title: 'Maprosoft Map v6',
             content: {
               type: 'iframe',
               url: t.signUrl('./map-section.html',
@@ -230,6 +230,7 @@ TrelloPowerUp.initialize({
             }
           };
           sections.push(mapSection);
+          break;
         }
       }
       return sections;
