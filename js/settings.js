@@ -25,25 +25,47 @@ t.render(function() {
   })
 });
 
-document.getElementById('save').addEventListener('click', function() {
-  return t.set('board', 'private', 'vegetable', 'Broccoli')
-  .then(function() {
-    return t.set('board', 'shared', 'maprosoft-token', maprosoftTokenTextField.value);
-  })
-  .then(function() {
-    return t.set('board', 'shared', 'maprosoft-team-name', maprosoftTeamNameTextField.value);
-  })
-  .then(function() {
-    //updateSharedMapInfoCache(t);
+//document.getElementById('save').addEventListener('click', function() {
+//  return t.set('board', 'private', 'vegetable', 'Broccoli')
+//  .then(function() {
+//    return t.set('board', 'shared', 'maprosoft-token', maprosoftTokenTextField.value);
+//  })
+//  .then(function() {
+//    return t.set('board', 'shared', 'maprosoft-team-name', maprosoftTeamNameTextField.value);
+//  })
+//  .then(function() {
+//    //updateSharedMapInfoCache(t);
+//
+//    return doGet(retrieveSharedMapsUrl).then(function(sharedMapInfo) {
+//      //var sharedMapInfo = '{"teamName":"demo","mapNames":["General","Stack Panel","Libraries","Parks","Park Highlights","First Fleet Park","Commuting","Driving Directions","Map Rulers"]}';
+//      return t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
+//    });
+//  })
+//  .then(function() {
+//    t.closePopup();
+//  });
+//});
 
-    return doGet(retrieveSharedMapsUrl).then(function(sharedMapInfo) {
-      //var sharedMapInfo = '{"teamName":"demo","mapNames":["General","Stack Panel","Libraries","Parks","Park Highlights","First Fleet Park","Commuting","Driving Directions","Map Rulers"]}';
+document.getElementById('save').addEventListener('click', function() {
+  return Promise.all([
+    t.set('board', 'shared', 'maprosoft-team-name', maprosoftTokenTextField.value),
+    t.set('board', 'shared', 'maprosoft-token', maprosoftTeamNameTextField.value),
+    //t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
+    doGet(retrieveSharedMapsUrl).then(function(sharedMapInfo) {
       return t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
-    });
-  })
+    })
+  ])
+  //.spread(function(token, teamName, sharedMapInfo) {
+  //  if (teamMaprosoftName) {
+  //    maprosoftTeamNameTextField.value = teamMaprosoftName;
+  //  }
+  //  if (savedMaprosoftToken) {
+  //    maprosoftTokenTextField.value = savedMaprosoftToken;
+  //  }
+  //})
   .then(function() {
     t.closePopup();
-  });
+  })
 });
 
 
