@@ -122,7 +122,7 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
-  var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null);
+  //var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null);
   if (cachedSharedMapNames) {
     var popupItems = Object.keys(cachedSharedMapNames).map(function(index) {
       var sharedMapName = cachedSharedMapNames[index];
