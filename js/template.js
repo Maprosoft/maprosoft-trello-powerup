@@ -210,29 +210,50 @@ var cardButtonCallback = function(t) {
     var mapNames = data.mapNames;
     var retrievedSharedMaps = data.mapNames;
 
-    var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
-      var sharedMapName = retrievedSharedMaps[sharedMapKey];
+    //var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
+    //  var sharedMapName = retrievedSharedMaps[sharedMapKey];
+    //  var teamKey = 'demo';
+    //  var encodedSharedMapName = encodeURIComponent(sharedMapName);
+    //  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
+    //  return {
+    //    text: sharedMapName,
+    //    url: sharedMapUrl,
+    //    callback: function(t) {
+    //      return t.attach({
+    //        url: sharedMapUrl,
+    //        name: sharedMapName
+    //      })
+    //      .then(function(){
+    //        return t.closePopup();
+    //      });
+    //    }
+    //  };
+    //});
+
+    var popupItems = [];
+    for (var index = 0; index < mapNames.length; index++) {
+      var sharedMapName = mapNames[index];
       var teamKey = 'demo';
       var encodedSharedMapName = encodeURIComponent(sharedMapName);
       var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-      return {
+      var popupItem = {
         text: sharedMapName,
         url: sharedMapUrl,
         callback: function(t) {
           return t.attach({
-            url: sharedMapUrl,
-            name: sharedMapName
-          })
-          .then(function(){
-            return t.closePopup();
+              url: sharedMapUrl,
+              name: sharedMapName
+          }).then(function(){
+              return t.closePopup();
           });
         }
       };
-    });
+      popupItems.push(popupItem);
+    }
 
     return t.popup({
       title: 'Select a Maprosoft map',
-      items: items,
+      items: popupItems,
       search: {
         count: 5,
         placeholder: 'Search shared maps',
