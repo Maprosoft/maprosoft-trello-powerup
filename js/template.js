@@ -48,7 +48,7 @@ var getBadges = function(t){
       icon = WHITE_ICON;
     }
 
-    if(lowercaseName.indexOf('dynamic') > -1){
+    if (lowercaseName.indexOf('dynamic') > -1){
       // dynamic badges can have their function rerun after a set number
       // of seconds defined by refresh. Minimum of 10 seconds.
       return [{
@@ -123,7 +123,8 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
-  var items = Object.keys(retrievedSharedMaps).map(function(sharedMapName) {
+  var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
+    var sharedMapName = retrievedSharedMaps[sharedMapKey];
     var teamKey = 'demo';
     var encodedSharedMapName = encodeURIComponent(sharedMapName);
     var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
@@ -183,14 +184,14 @@ var cardButtonCallback = function(t) {
 };
 
 TrelloPowerUp.initialize({
-  'attachment-sections': function(t, options){
+  'attachment-sections': function(t, options) {
     // options.entries is a list of the attachments for this card
     // you can look through them and 'claim' any that you want to
     // include in your section.
 
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function(attachment) {
-      return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
+      return attachment.url.indexOf('https://www.maprosoft.com/app/map') === 0 || attachment.url.indexOf('https://www.maprosoft.com/app/shared' === 0;
     });
 
     // you can have more than one attachment section on a card
@@ -255,7 +256,7 @@ TrelloPowerUp.initialize({
   },
   'attachment-thumbnail': function(t, options){
     var parkName = formatNPSUrl(t, options.url);
-    if(parkName){
+    if (parkName) {
       // return an object with some or all of these properties:
       // url, title, image, openText, modified (Date), created (Date), createdBy, modifiedBy
       return {

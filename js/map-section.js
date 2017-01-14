@@ -16,25 +16,25 @@ t.render(function () {
     // recall this method as the user adds and removes attachments
     // from your section
     t.card('attachments')
-        .get('attachments')
-        .filter(function (attachment) {
-            return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
-        })
-        .then(function (attachments) {
-            //var urls = attachments.map(function(a){
-            //  return a.url;
-            //});
-            //document.getElementById('urls').textContent = urls.join(', ');
+    .get('attachments')
+    .filter(function (attachment) {
+        return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
+    })
+    .then(function (attachments) {
+        //var urls = attachments.map(function(a){
+        //  return a.url;
+        //});
+        //document.getElementById('urls').textContent = urls.join(', ');
 
-            var mapFrameElement = document.getElementById('map-frame');
-            mapFrameElement.src = mapUrl;
+        var mapFrameElement = document.getElementById('map-frame');
+        mapFrameElement.src = mapUrl;
 
-            var mapFrameElement = document.getElementById('map-url-debug');
-            if (mapFrameElement) {
-                mapFrameElement.innerHTML = mapUrl;
-            }
-        })
-        .then(function () {
-            return t.sizeTo('#content');
-        });
+        var mapFrameElement = document.getElementById('map-url-debug');
+        if (mapFrameElement) {
+            mapFrameElement.innerHTML = mapUrl;
+        }
+    })
+    .then(function () {
+        return t.sizeTo('#content');
+    });
 });
