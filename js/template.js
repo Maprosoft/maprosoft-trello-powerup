@@ -125,8 +125,6 @@ var cardButtonCallback = function(t) {
   var popupItems = [];
   t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
     if (data) {
-      // ???
-    } else {
       var sharedMapInfo = data;
       if (sharedMapInfo && sharedMapInfo.mapNames) {
         popupItems = Object.keys(sharedMapInfo.mapNames).map(function(index) {
@@ -151,6 +149,8 @@ var cardButtonCallback = function(t) {
       } else {
         popupItems = [];
       }
+    } else {
+      // ???
     }
   });
   return t.popup({
