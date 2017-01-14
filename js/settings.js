@@ -11,12 +11,12 @@ t.render(function() {
     t.get('board', 'shared', 'maprosoft-team-name'),
     t.get('board', 'shared', 'maprosoft-token')
   ])
-  .spread(function(teamMaprosoftName, savedMaprosoftToken) {
-        if (teamMaprosoftName) {
-          maprosoftTeamNameTextField.value = teamMaprosoftName;
-        }
-    if (savedMaprosoftToken) {
-      maprosoftTokenTextField.value = savedMaprosoftToken;
+  .spread(function(teamName, token) {
+    if (teamName) {
+      maprosoftTeamNameTextField.value = teamName;
+    }
+    if (token) {
+      maprosoftTokenTextField.value = token;
     }
   })
   .then(function(){
@@ -46,12 +46,16 @@ t.render(function() {
 //  });
 //});
 
+var buildRetrieveSharedMapsUrl = function(teamName, token) {
+
+};
+
 document.getElementById('save').addEventListener('click', function() {
   return Promise.all([
-    t.set('board', 'shared', 'maprosoft-team-name', maprosoftTokenTextField.value),
-    t.set('board', 'shared', 'maprosoft-token', maprosoftTeamNameTextField.value),
+    t.set('board', 'shared', 'maprosoft-team-name', maprosoftTeamNameTextField.value),
+    t.set('board', 'shared', 'maprosoft-token', maprosoftTokenTextField.value),
     //t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
-    doGet(retrieveSharedMapsUrl).then(function(sharedMapInfo) {
+    doGet(buildRetrieveSharedMapsUrl(maprosoftTeamNameTextField.value, maprosoftTokenTextField.value)).then(function(sharedMapInfo) {
       return t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
     })
   ])

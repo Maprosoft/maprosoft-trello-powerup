@@ -6,7 +6,7 @@ var GRAY_ICON = './images/icon-gray.svg';
 //var Promise = TrelloPowerUp.Promise;
 //var t = TrelloPowerUp.iframe();
 
-var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
+//var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
 //var cachedMapInfo = {};
 
 var doGet = function(url) {
