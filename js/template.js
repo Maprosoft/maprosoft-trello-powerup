@@ -205,6 +205,7 @@ var cardButtonCallback = function(t) {
   //});
 
 
+  var popupItems = [];
   var promise = retrieveSharedMaps(t);
   var promise = promise.then(function(data) {
     var mapNames = data.mapNames;
@@ -230,7 +231,6 @@ var cardButtonCallback = function(t) {
     //  };
     //});
 
-    var popupItems = [];
     for (var index = 0; index < mapNames.length; index++) {
       var sharedMapName = mapNames[index];
       var teamKey = 'demo';
@@ -251,16 +251,16 @@ var cardButtonCallback = function(t) {
       popupItems.push(popupItem);
     }
 
-    return t.popup({
-      title: 'Select a Maprosoft map',
-      items: popupItems,
-      search: {
-        count: 5,
-        placeholder: 'Search shared maps',
-        empty: 'No share map found'
-      }
-    });
+  });
 
+  return t.popup({
+    title: 'Select a Maprosoft map',
+    items: popupItems,
+    search: {
+      count: 5,
+      placeholder: 'Search shared maps',
+      empty: 'No share map found'
+    }
   });
 
 
