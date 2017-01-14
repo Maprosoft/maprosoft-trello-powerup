@@ -119,7 +119,7 @@ var retrieveSharedMaps = function(t) {
   var retrievedSharedMaps = [];
   var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
   var promise = doGet(retrieveSharedMapsUrl);
-  promise = promise.done(function(data) {
+  promise = promise.then(function(data) {
     //retrievedSharedMaps = data;
     var mapNames = data.mapNames;
     retrievedSharedMaps = data.mapNames;
