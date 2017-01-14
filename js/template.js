@@ -79,17 +79,28 @@ var getBadges = function(t){
 };
 
 var retrieveSharedMaps = function(t) {
-  var retrievedSharedMaps = {
-    general: 'General',
-    stackPanel: 'Stack Panel',
-    libraries: 'Libraries',
-    parks: 'Parks',
-    parkHighlights: 'Park Highlights',
-    firstFleetPark: 'First Fleet Park',
-    commuting: 'Commuting',
-    drivingDirections: 'Driving Directions',
-    mapRulers: 'Map Rulers'
-  };
+  //var retrievedSharedMaps = {
+  //  general: 'General',
+  //  stackPanel: 'Stack Panel',
+  //  libraries: 'Libraries',
+  //  parks: 'Parks',
+  //  parkHighlights: 'Park Highlights',
+  //  firstFleetPark: 'First Fleet Park',
+  //  commuting: 'Commuting',
+  //  drivingDirections: 'Driving Directions',
+  //  mapRulers: 'Map Rulers'
+  //};
+
+  //return retrievedSharedMaps;
+
+  var retrievedSharedMaps = [];
+  var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
+  var promise = $.getJSON(retrieveSharedMapsUrl).done(function(data) {
+    //retrievedSharedMaps = data;
+    var mapNames = data.mapNames;
+    retrievedSharedMaps = data.mapNames;
+  });
+  promise.resolve();
   return retrievedSharedMaps;
 };
 
@@ -98,7 +109,7 @@ var formatNPSUrl = function(t, url){
     return null;
   }
   var parkShort = /^https?:\/\/www\.nps\.gov\/([a-z]{4})\//.exec(url)[1];
-  if(parkShort && parkMap[parkShort]){
+  if (parkShort && parkMap[parkShort]){
     return parkMap[parkShort];
   } else{
     return null;
@@ -138,26 +149,62 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
-  var retrievedSharedMaps = retrieveSharedMaps(t);
-  var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
-    var sharedMapName = retrievedSharedMaps[sharedMapKey];
+  //var retrievedSharedMapsPromise = retrieveSharedMaps(t);
+  //retrievedSharedMapsPromise.done(function(data) {
+  //
+  //});
+  //var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
+  //  var sharedMapName = retrievedSharedMaps[sharedMapKey];
+  //  var teamKey = 'demo';
+  //  var encodedSharedMapName = encodeURIComponent(sharedMapName);
+  //  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
+  //  return {
+  //    text: sharedMapName,
+  //    url: sharedMapUrl,
+  //    callback: function(t) {
+  //      return t.attach({
+  //        url: sharedMapUrl,
+  //        name: sharedMapName
+  //      })
+  //      .then(function(){
+  //        return t.closePopup();
+  //      });
+  //    }
+  //  };
+  //});
+  //
+  //return t.popup({
+  //  title: 'Select a Maprosoft map',
+  //  items: items,
+  //  search: {
+  //    count: 5,
+  //    placeholder: 'Search shared maps',
+  //    empty: 'No share map found'
+  //  }
+  //});
+
+  var mapNames = retrieveSharedMaps(t);
+  var popupItems = [];
+  for (var index = 0; index < mapNames.length; index++) {
+    var sharedMapName = mapNames[index];
     var teamKey = 'demo';
     var encodedSharedMapName = encodeURIComponent(sharedMapName);
     var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-    return {
+    var popupItem = {
       text: sharedMapName,
       url: sharedMapUrl,
       callback: function(t) {
         return t.attach({
-          url: sharedMapUrl,
-          name: sharedMapName
-        })
-        .then(function(){
-          return t.closePopup();
+            url: sharedMapUrl,
+            name: sharedMapName
+        }).then(function(){
+            return t.closePopup();
         });
       }
     };
-  });
+    popupItems.push(popupItem);
+  }
+
 
   return t.popup({
     title: 'Select a Maprosoft map',
