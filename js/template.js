@@ -110,7 +110,7 @@ var cardButtonCallback = function(t) {
   if (sharedMapInfo && sharedMapInfo.mapNames) {
     var popupItems = Object.keys(sharedMapInfo.mapNames).map(function(index) {
       var sharedMapName = sharedMapInfo.mapNames[index];
-      var teamKey = 'demo';
+      var teamKey = sharedMapInfo.teamName;
       var encodedSharedMapName = encodeURIComponent(sharedMapName);
       var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
       return {
