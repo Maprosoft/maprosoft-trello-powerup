@@ -81,7 +81,7 @@ var getBadges = function(t){
 var doGet = function(url) {
   var getPromise = new Promise(function(resolve, reject) {
     var request = new XMLHttpRequest();
-    request.open('GET', urlForLocale(resourceUrl, targetLocale), true);
+    request.open('GET', url, true);
     request.onload = function() {
       try {
         if (request.status === 200) {
