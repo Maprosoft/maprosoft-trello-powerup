@@ -205,7 +205,8 @@ var cardButtonCallback = function(t) {
   //});
 
 
-  var promise = retrieveSharedMaps(t).then(function(data) {
+  var promise = retrieveSharedMaps(t);
+  var promise = promise.then(function(data) {
     var mapNames = data.mapNames;
     var retrievedSharedMaps = data.mapNames;
 
