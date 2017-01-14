@@ -47,15 +47,17 @@ t.render(function() {
 //});
 
 var buildRetrieveSharedMapsUrl = function(teamName, token) {
-
+  return 'https://www.maprosoft.com/app/shared?team=' + teamName + '&getSharedMapNames=yes';
 };
 
 document.getElementById('save').addEventListener('click', function() {
+  var teamName = maprosoftTeamNameTextField.value;
+  var token = maprosoftTokenTextField.value;
   return Promise.all([
-    t.set('board', 'shared', 'maprosoft-team-name', maprosoftTeamNameTextField.value),
-    t.set('board', 'shared', 'maprosoft-token', maprosoftTokenTextField.value),
+    t.set('board', 'shared', 'maprosoft-team-name', teamName),
+    t.set('board', 'shared', 'maprosoft-token', token),
     //t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
-    doGet(buildRetrieveSharedMapsUrl(maprosoftTeamNameTextField.value, maprosoftTokenTextField.value)).then(function(sharedMapInfo) {
+    doGet(buildRetrieveSharedMapsUrl(teamName, token)).then(function(sharedMapInfo) {
       return t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
     })
   ])
