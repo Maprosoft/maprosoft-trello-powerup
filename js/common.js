@@ -3,6 +3,9 @@
 var WHITE_ICON = './images/icon-white.svg';
 var GRAY_ICON = './images/icon-gray.svg';
 
+//var Promise = TrelloPowerUp.Promise;
+var t = TrelloPowerUp.iframe();
+
 var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
 var cachedSharedMapNames = [];
 
