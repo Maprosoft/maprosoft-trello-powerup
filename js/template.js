@@ -3,20 +3,31 @@
 var WHITE_ICON = './images/icon-white.svg';
 var GRAY_ICON = './images/icon-gray.svg';
 
-var parkMap = {
-  acad: 'Acadia National Park',
-  arch: 'Arches National Park',
-  badl: 'Badlands National Park',
-  brca: 'Bryce Canyon National Park',
-  crla: 'Crater Lake National Park',
-  dena: 'Denali National Park',
-  glac: 'Glacier National Park',
-  grca: 'Grand Canyon National Park',
-  grte: 'Grand Teton National Park',
-  olym: 'Olympic National Park',
-  yell: 'Yellowstone National Park',
-  yose: 'Yosemite National Park',
-  zion: 'Zion National Park'
+//var parkMap = {
+//  acad: 'Acadia National Park',
+//  arch: 'Arches National Park',
+//  badl: 'Badlands National Park',
+//  brca: 'Bryce Canyon National Park',
+//  crla: 'Crater Lake National Park',
+//  dena: 'Denali National Park',
+//  glac: 'Glacier National Park',
+//  grca: 'Grand Canyon National Park',
+//  grte: 'Grand Teton National Park',
+//  olym: 'Olympic National Park',
+//  yell: 'Yellowstone National Park',
+//  yose: 'Yosemite National Park',
+//  zion: 'Zion National Park'
+//};
+var retrievedSharedMaps = {
+  general: 'General',
+  stackPanel: 'Stack Panel',
+  libraries: 'Libraries',
+  parks: 'Parks',
+  parkHighlights: 'Park Highlights',
+  firstFleetPark: 'First Fleet Park',
+  commuting: 'Commuting',
+  drivingDirections: 'Driving Directions',
+  mapRulers: 'Map Rulers'
 };
 
 var getBadges = function(t){
@@ -111,19 +122,22 @@ var boardButtonCallback = function(t){
   });
 };
 
-var cardButtonCallback = function(t){
-  var items = Object.keys(parkMap).map(function(parkCode){
-    var urlForCode = 'http://www.nps.gov/' + parkCode + '/';
+var cardButtonCallback = function(t) {
+  var items = Object.keys(retrievedSharedMaps).map(function(sharedMapName) {
+    var teamKey = 'demo';
+    var encodedSharedMapName = encodeURIComponent(sharedMapName);
+    var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
     return {
-      text: parkMap[parkCode],
-      url: urlForCode,
+      text: sharedMapName,
+      url: sharedMapUrl,
       callback: function(t) {
-        //return t.attach({
-        //  url: urlForCode,
-        //  name: parkMap[parkCode] })
-        //.then(function(){
-        //  return t.closePopup();
-        //});
+        return t.attach({
+          url: sharedMapUrl,
+          name: sharedMapName
+        })
+        .then(function(){
+          return t.closePopup();
+        });
 
         //return t.attach({
         //      url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
@@ -132,12 +146,12 @@ var cardButtonCallback = function(t){
         //      return t.closePopup();
         //});
 
-        return t.attach({
-          url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
-          name: "My Map"
-        }).then(function() {
-          return t.closePopup();
-        });
+        //return t.attach({
+        //  url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
+        //  name: "My Map"
+        //}).then(function() {
+        //  return t.closePopup();
+        //});
 
         //return t.attach({
         //    id: 'maprosoft-map', // optional if you aren't using a function for the title
@@ -158,12 +172,12 @@ var cardButtonCallback = function(t){
   });
 
   return t.popup({
-    title: 'Popup Search Example',
+    title: 'Select a Maprosoft map',
     items: items,
     search: {
       count: 5,
-      placeholder: 'Search National Parks',
-      empty: 'No parks found'
+      placeholder: 'Search shared maps',
+      empty: 'No share map found'
     }
   });
 };
