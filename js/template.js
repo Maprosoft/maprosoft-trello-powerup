@@ -1,39 +1,12 @@
 /* global TrelloPowerUp */
 
-var WHITE_ICON = './images/icon-white.svg';
-var GRAY_ICON = './images/icon-gray.svg';
+//var WHITE_ICON = './images/icon-white.svg';
+//var GRAY_ICON = './images/icon-gray.svg';
+//
+//var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
+//var cachedSharedMapNames = [];
 
-//var parkMap = {
-//  acad: 'Acadia National Park',
-//  arch: 'Arches National Park',
-//  badl: 'Badlands National Park',
-//  brca: 'Bryce Canyon National Park',
-//  crla: 'Crater Lake National Park',
-//  dena: 'Denali National Park',
-//  glac: 'Glacier National Park',
-//  grca: 'Grand Canyon National Park',
-//  grte: 'Grand Teton National Park',
-//  olym: 'Olympic National Park',
-//  yell: 'Yellowstone National Park',
-//  yose: 'Yosemite National Park',
-//  zion: 'Zion National Park'
-//};
-//var retrievedSharedMaps = {
-//  general: 'General',
-//  stackPanel: 'Stack Panel',
-//  libraries: 'Libraries',
-//  parks: 'Parks',
-//  parkHighlights: 'Park Highlights',
-//  firstFleetPark: 'First Fleet Park',
-//  commuting: 'Commuting',
-//  drivingDirections: 'Driving Directions',
-//  mapRulers: 'Map Rulers'
-//};
-
-var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
-var cachedSharedMapNames = [];
-
-var getBadges = function(t){
+var getBadges = function(t) {
   return t.card('name')
   .get('name')
   .then(function(cardName){
@@ -81,68 +54,40 @@ var getBadges = function(t){
   })
 };
 
-var doGet = function(url) {
-  var getPromise = new Promise(function(resolve, reject) {
-    var request = new XMLHttpRequest();
-    request.open('GET', url, true);
-    request.onload = function() {
-      try {
-        if (request.status === 200) {
-          var responseJson = JSON.parse(request.responseText);
-          return resolve(responseJson);
-        } else if (request.status === 404) {
-          return reject(new i18nError.LocaleNotFound(targetLocale + " not found."));
-        } else {
-          return reject(new i18nError.Unknown("Unable to load locale, status: " + request.status));
-        }
-      } catch(ex) {
-        return reject(new i18nError.Unknown(ex.message));
-      }
-    };
-    request.send();
-  });
-  return getPromise;
-};
-
-//var retrieveSharedMaps = function(t) {
-//  //var retrievedSharedMaps = {
-//  //  general: 'General',
-//  //  stackPanel: 'Stack Panel',
-//  //  libraries: 'Libraries',
-//  //  parks: 'Parks',
-//  //  parkHighlights: 'Park Highlights',
-//  //  firstFleetPark: 'First Fleet Park',
-//  //  commuting: 'Commuting',
-//  //  drivingDirections: 'Driving Directions',
-//  //  mapRulers: 'Map Rulers'
-//  //};
-//
-//  //return retrievedSharedMaps;
-//
-//  var retrievedSharedMaps = [];
-//  var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
-//  var promise = doGet(retrieveSharedMapsUrl);
-//  //promise = promise.then(function(data) {
-//  //  //retrievedSharedMaps = data;
-//  //  var mapNames = data.mapNames;
-//  //  retrievedSharedMaps = data.mapNames;
-//  //});
-//  //promise.resolve();
-//  //return retrievedSharedMaps;
-//  return promise;
+//var doGet = function(url) {
+//  var getPromise = new Promise(function(resolve, reject) {
+//    var request = new XMLHttpRequest();
+//    request.open('GET', url, true);
+//    request.onload = function() {
+//      try {
+//        if (request.status === 200) {
+//          var responseJson = JSON.parse(request.responseText);
+//          return resolve(responseJson);
+//        } else if (request.status === 404) {
+//          return reject(new i18nError.LocaleNotFound(targetLocale + " not found."));
+//        } else {
+//          return reject(new i18nError.Unknown("Unable to load locale, status: " + request.status));
+//        }
+//      } catch(ex) {
+//        return reject(new i18nError.Unknown(ex.message));
+//      }
+//    };
+//    request.send();
+//  });
+//  return getPromise;
 //};
-
-var formatNPSUrl = function(t, url){
-  if(!/^https?:\/\/www\.nps\.gov\/[a-z]{4}\//.test(url)){
-    return null;
-  }
-  var parkShort = /^https?:\/\/www\.nps\.gov\/([a-z]{4})\//.exec(url)[1];
-  if (parkShort && parkMap[parkShort]){
-    return parkMap[parkShort];
-  } else{
-    return null;
-  }
-};
+//
+//var formatNPSUrl = function(t, url){
+//  if(!/^https?:\/\/www\.nps\.gov\/[a-z]{4}\//.test(url)){
+//    return null;
+//  }
+//  var parkShort = /^https?:\/\/www\.nps\.gov\/([a-z]{4})\//.exec(url)[1];
+//  if (parkShort && parkMap[parkShort]){
+//    return parkMap[parkShort];
+//  } else{
+//    return null;
+//  }
+//};
 
 var boardButtonCallback = function(t){
   return t.popup({
@@ -177,25 +122,30 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
-  var popupItems = Object.keys(cachedSharedMapNames).map(function(index) {
-    var sharedMapName = cachedSharedMapNames[index];
-    var teamKey = 'demo';
-    var encodedSharedMapName = encodeURIComponent(sharedMapName);
-    var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-    return {
-      text: sharedMapName,
-      url: sharedMapUrl,
-      callback: function(t) {
-        return t.attach({
-          url: sharedMapUrl,
-          name: sharedMapName
-        })
-        .then(function(){
-          return t.closePopup();
-        });
-      }
-    };
-  });
+  var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null);
+  if (cachedSharedMapNames) {
+    var popupItems = Object.keys(cachedSharedMapNames).map(function(index) {
+      var sharedMapName = cachedSharedMapNames[index];
+      var teamKey = 'demo';
+      var encodedSharedMapName = encodeURIComponent(sharedMapName);
+      var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
+      return {
+        text: sharedMapName,
+        url: sharedMapUrl,
+        callback: function(t) {
+          return t.attach({
+            url: sharedMapUrl,
+            name: sharedMapName
+          })
+          .then(function(){
+            return t.closePopup();
+          });
+        }
+      };
+    });
+  } else {
+    var popupItems = [];
+  }
   return t.popup({
     title: 'Select a Maprosoft map',
     items: popupItems,
@@ -207,9 +157,9 @@ var cardButtonCallback = function(t) {
   });
 };
 
-doGet(retrieveSharedMapsUrl).then(function(data) {
-  cachedSharedMapNames = data.mapNames;
-});
+//doGet(retrieveSharedMapsUrl).then(function(data) {
+//  cachedSharedMapNames = data.mapNames;
+//});
 
 TrelloPowerUp.initialize({
   'attachment-sections': function(t, options) {

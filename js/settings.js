@@ -6,13 +6,12 @@ var t = TrelloPowerUp.iframe();
 var maprosoftTeamNameTextField = document.getElementById('maprosoft-team-name');
 var maprosoftTokenTextField = document.getElementById('maprosoft-token');
 
-t.render(function(){
+t.render(function() {
   return Promise.all([
     t.get('board', 'shared', 'maprosoft-team-name'),
-    t.get('board', 'shared', 'maprosoft-token'),
-    t.get('board', 'private', 'vegetable')
+    t.get('board', 'shared', 'maprosoft-token')
   ])
-  .spread(function(teamMaprosoftName, savedMaprosoftToken, savedVegetable) {
+  .spread(function(teamMaprosoftName, savedMaprosoftToken) {
         if (teamMaprosoftName) {
           maprosoftTeamNameTextField.value = teamMaprosoftName;
         }
@@ -33,6 +32,12 @@ document.getElementById('save').addEventListener('click', function() {
   })
   .then(function() {
     return t.set('board', 'shared', 'maprosoft-team-name', maprosoftTeamNameTextField.value);
+  })
+  .then(function() {
+    return doGet(retrieveSharedMapsUrl).then(function(sharedMapInfo) {
+      //var sharedMapInfo = '{"teamName":"demo","mapNames":["General","Stack Panel","Libraries","Parks","Park Highlights","First Fleet Park","Commuting","Driving Directions","Map Rulers"]}';
+      return t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
+    });
   })
   .then(function() {
     t.closePopup();
