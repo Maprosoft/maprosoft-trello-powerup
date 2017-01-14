@@ -18,17 +18,17 @@ var GRAY_ICON = './images/icon-gray.svg';
 //  yose: 'Yosemite National Park',
 //  zion: 'Zion National Park'
 //};
-var retrievedSharedMaps = {
-  general: 'General',
-  stackPanel: 'Stack Panel',
-  libraries: 'Libraries',
-  parks: 'Parks',
-  parkHighlights: 'Park Highlights',
-  firstFleetPark: 'First Fleet Park',
-  commuting: 'Commuting',
-  drivingDirections: 'Driving Directions',
-  mapRulers: 'Map Rulers'
-};
+//var retrievedSharedMaps = {
+//  general: 'General',
+//  stackPanel: 'Stack Panel',
+//  libraries: 'Libraries',
+//  parks: 'Parks',
+//  parkHighlights: 'Park Highlights',
+//  firstFleetPark: 'First Fleet Park',
+//  commuting: 'Commuting',
+//  drivingDirections: 'Driving Directions',
+//  mapRulers: 'Map Rulers'
+//};
 
 var getBadges = function(t){
   return t.card('name')
@@ -78,6 +78,21 @@ var getBadges = function(t){
   })
 };
 
+var retrieveSharedMaps = function(t) {
+  var retrievedSharedMaps = {
+    general: 'General',
+    stackPanel: 'Stack Panel',
+    libraries: 'Libraries',
+    parks: 'Parks',
+    parkHighlights: 'Park Highlights',
+    firstFleetPark: 'First Fleet Park',
+    commuting: 'Commuting',
+    drivingDirections: 'Driving Directions',
+    mapRulers: 'Map Rulers'
+  };
+  return retrievedSharedMaps;
+};
+
 var formatNPSUrl = function(t, url){
   if(!/^https?:\/\/www\.nps\.gov\/[a-z]{4}\//.test(url)){
     return null;
@@ -123,6 +138,7 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
+  var retrievedSharedMaps = retrieveSharedMaps(t);
   var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
     var sharedMapName = retrievedSharedMaps[sharedMapKey];
     var teamKey = 'demo';
@@ -139,35 +155,6 @@ var cardButtonCallback = function(t) {
         .then(function(){
           return t.closePopup();
         });
-
-        //return t.attach({
-        //      url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
-        //      name: "My Map"
-        //}).then(function() {
-        //      return t.closePopup();
-        //});
-
-        //return t.attach({
-        //  url: t.signUrl('./map-section.html', { arg: 'you can pass your section args here' }),
-        //  name: "My Map"
-        //}).then(function() {
-        //  return t.closePopup();
-        //});
-
-        //return t.attach({
-        //    id: 'maprosoft-map', // optional if you aren't using a function for the title
-        //    claimed: claimed,
-        //    icon: GRAY_ICON,
-        //    title: 'Maprosoft Map v3',
-        //    content: {
-        //      type: 'iframe',
-        //      url: t.signUrl('./map-section.html',
-        //          { arg: 'you can pass your section args here' }),
-        //      height: 400
-        //    }
-        //}).then(function(){
-        //      return t.closePopup();
-        //    });
       }
     };
   });
@@ -202,32 +189,6 @@ TrelloPowerUp.initialize({
       // potentially length operation you can provide a function for the title
       // that returns the section title. If you do so, provide a unique id for
       // your section
-      var parkSectionJson = {
-        id: 'Yellowstone', // optional if you aren't using a function for the title
-        claimed: claimed,
-        icon: GRAY_ICON,
-        title: 'Example Attachment Section: Yellowstone',
-        content: {
-          type: 'iframe',
-          url: t.signUrl('./section.html', { arg: 'you can pass your section args here' }),
-          height: 230
-        }
-      };
-      var mapSectionJson = {
-        id: 'maprosoft-map', // optional if you aren't using a function for the title
-        claimed: claimed,
-        icon: GRAY_ICON,
-        title: 'Maprosoft Map v13',
-        content: {
-          type: 'iframe',
-          url: t.signUrl('./map-section.html',
-              { "map-url": 'abc' }),
-          height: 400
-        }
-      };
-      //return [mapSectionJson, parkSectionJson];
-      //return [mapSectionJson];
-
       var sections = [];
       if (claimed && claimed.length > 0) {
         for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
