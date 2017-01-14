@@ -141,42 +141,6 @@ var cardButtonCallback = function(t) {
   });
 };
 
-var cardButtonCallbackOLD = function(t) {
-  //var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null);
-  if (cachedMapInfo && cachedMapInfo.mapNames) {
-    var popupItems = Object.keys(cachedMapInfo.mapNames).map(function(index) {
-      var sharedMapName = cachedMapInfo.mapNames[index];
-      var teamKey = 'demo';
-      var encodedSharedMapName = encodeURIComponent(sharedMapName);
-      var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-      return {
-        text: sharedMapName,
-        url: sharedMapUrl,
-        callback: function(t) {
-          return t.attach({
-            url: sharedMapUrl,
-            name: sharedMapName
-          })
-          .then(function(){
-            return t.closePopup();
-          });
-        }
-      };
-    });
-  } else {
-    var popupItems = [];
-  }
-  return t.popup({
-    title: 'Select a Maprosoft map',
-    items: popupItems,
-    search: {
-      count: 5,
-      placeholder: 'Search shared maps',
-      empty: 'No share map found'
-    }
-  });
-};
-
 //doGet(retrieveSharedMapsUrl).then(function(data) {
 //  cachedSharedMapNames = data.mapNames;
 //});
