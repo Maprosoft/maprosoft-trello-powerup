@@ -44,12 +44,12 @@ var formatNPSUrl = function(t, url){
   }
 };
 
-//doGet(retrieveSharedMapsUrl).then(function(data) {
-//  cachedSharedMapNames = data.mapNames;
-//});
-
-var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
-  console.log(data);
-  cachedSharedMapNames = data;
+doGet(retrieveSharedMapsUrl).then(function(data) {
+  cachedSharedMapNames = data.mapNames;
 });
+
+//var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
+//  console.log(data);
+//  cachedSharedMapNames = data;
+//});
 
