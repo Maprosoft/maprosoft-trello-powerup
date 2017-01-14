@@ -177,26 +177,47 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
-  var popupItems = [];
-  for (var index = 0; index < cachedSharedMapNames.length; index++) {
+  //var popupItems = [];
+  //for (var index = 0; index < cachedSharedMapNames.length; index++) {
+  //  var sharedMapName = cachedSharedMapNames[index];
+  //  var teamKey = 'demo';
+  //  var encodedSharedMapName = encodeURIComponent(sharedMapName);
+  //  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
+  //  var popupItem = {
+  //    text: sharedMapName,
+  //    url: sharedMapUrl,
+  //    callback: function(t) {
+  //      return t.attach({
+  //        url: sharedMapUrl,
+  //        name: sharedMapName
+  //      }).then(function() {
+  //        return t.closePopup();
+  //      });
+  //    }
+  //  };
+  //  popupItems.push(popupItem);
+  //}
+
+  var popupItems = Object.keys(cachedSharedMapNames).map(function(index) {
     var sharedMapName = cachedSharedMapNames[index];
     var teamKey = 'demo';
     var encodedSharedMapName = encodeURIComponent(sharedMapName);
     var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-    var popupItem = {
+    return {
       text: sharedMapName,
       url: sharedMapUrl,
       callback: function(t) {
         return t.attach({
           url: sharedMapUrl,
           name: sharedMapName
-        }).then(function(){
+        })
+        .then(function(){
           return t.closePopup();
         });
       }
     };
-    popupItems.push(popupItem);
-  }
+  });
+
   return t.popup({
     title: 'Select a Maprosoft map',
     items: popupItems,
