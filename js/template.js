@@ -177,27 +177,6 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
-  //var popupItems = [];
-  //for (var index = 0; index < cachedSharedMapNames.length; index++) {
-  //  var sharedMapName = cachedSharedMapNames[index];
-  //  var teamKey = 'demo';
-  //  var encodedSharedMapName = encodeURIComponent(sharedMapName);
-  //  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-  //  var popupItem = {
-  //    text: sharedMapName,
-  //    url: sharedMapUrl,
-  //    callback: function(t) {
-  //      return t.attach({
-  //        url: sharedMapUrl,
-  //        name: sharedMapName
-  //      }).then(function() {
-  //        return t.closePopup();
-  //      });
-  //    }
-  //  };
-  //  popupItems.push(popupItem);
-  //}
-
   var popupItems = Object.keys(cachedSharedMapNames).map(function(index) {
     var sharedMapName = cachedSharedMapNames[index];
     var teamKey = 'demo';
@@ -217,7 +196,6 @@ var cardButtonCallback = function(t) {
       }
     };
   });
-
   return t.popup({
     title: 'Select a Maprosoft map',
     items: popupItems,
@@ -227,132 +205,6 @@ var cardButtonCallback = function(t) {
       empty: 'No share map found'
     }
   });
-};
-
-var cardButtonCallbackOLD = function(t) {
-  //var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
-  //  var sharedMapName = retrievedSharedMaps[sharedMapKey];
-  //  var teamKey = 'demo';
-  //  var encodedSharedMapName = encodeURIComponent(sharedMapName);
-  //  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-  //  return {
-  //    text: sharedMapName,
-  //    url: sharedMapUrl,
-  //    callback: function(t) {
-  //      return t.attach({
-  //        url: sharedMapUrl,
-  //        name: sharedMapName
-  //      })
-  //      .then(function(){
-  //        return t.closePopup();
-  //      });
-  //    }
-  //  };
-  //});
-  //
-  //return t.popup({
-  //  title: 'Select a Maprosoft map',
-  //  items: items,
-  //  search: {
-  //    count: 5,
-  //    placeholder: 'Search shared maps',
-  //    empty: 'No share map found'
-  //  }
-  //});
-
-
-  var popupItems = [];
-  var promise = retrieveSharedMaps(t);
-  var promise = promise.then(function(data) {
-    var mapNames = data.mapNames;
-    var retrievedSharedMaps = data.mapNames;
-    //cachedSharedMaps = retrievedSharedMaps;
-
-    //var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
-    //  var sharedMapName = retrievedSharedMaps[sharedMapKey];
-    //  var teamKey = 'demo';
-    //  var encodedSharedMapName = encodeURIComponent(sharedMapName);
-    //  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-    //  return {
-    //    text: sharedMapName,
-    //    url: sharedMapUrl,
-    //    callback: function(t) {
-    //      return t.attach({
-    //        url: sharedMapUrl,
-    //        name: sharedMapName
-    //      })
-    //      .then(function(){
-    //        return t.closePopup();
-    //      });
-    //    }
-    //  };
-    //});
-
-    for (var index = 0; index < mapNames.length; index++) {
-      var sharedMapName = mapNames[index];
-      var teamKey = 'demo';
-      var encodedSharedMapName = encodeURIComponent(sharedMapName);
-      var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-      var popupItem = {
-        text: sharedMapName,
-        url: sharedMapUrl,
-        callback: function(t) {
-          return t.attach({
-              url: sharedMapUrl,
-              name: sharedMapName
-          }).then(function(){
-              return t.closePopup();
-          });
-        }
-      };
-      popupItems.push(popupItem);
-    }
-
-  });
-
-  return t.popup({
-    title: 'Select a Maprosoft map',
-    items: popupItems,
-    search: {
-      count: 5,
-      placeholder: 'Search shared maps',
-      empty: 'No share map found'
-    }
-  });
-
-
-  //var mapNames = retrieveSharedMaps(t);
-  //var popupItems = [];
-  //for (var index = 0; index < mapNames.length; index++) {
-  //  var sharedMapName = mapNames[index];
-  //  var teamKey = 'demo';
-  //  var encodedSharedMapName = encodeURIComponent(sharedMapName);
-  //  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-  //  var popupItem = {
-  //    text: sharedMapName,
-  //    url: sharedMapUrl,
-  //    callback: function(t) {
-  //      return t.attach({
-  //          url: sharedMapUrl,
-  //          name: sharedMapName
-  //      }).then(function(){
-  //          return t.closePopup();
-  //      });
-  //    }
-  //  };
-  //  popupItems.push(popupItem);
-  //}
-  //
-  //
-  //return t.popup({
-  //  title: 'Select a Maprosoft map',
-  //  items: items,
-  //  search: {
-  //    count: 5,
-  //    placeholder: 'Search shared maps',
-  //    empty: 'No share map found'
-  //  }
-  //});
 };
 
 doGet(retrieveSharedMapsUrl).then(function(data) {
