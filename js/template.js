@@ -30,6 +30,9 @@ var GRAY_ICON = './images/icon-gray.svg';
 //  mapRulers: 'Map Rulers'
 //};
 
+var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
+var cachedSharedMapNames = [];
+
 var getBadges = function(t){
   return t.card('name')
   .get('name')
@@ -101,33 +104,33 @@ var doGet = function(url) {
   return getPromise;
 };
 
-var retrieveSharedMaps = function(t) {
-  //var retrievedSharedMaps = {
-  //  general: 'General',
-  //  stackPanel: 'Stack Panel',
-  //  libraries: 'Libraries',
-  //  parks: 'Parks',
-  //  parkHighlights: 'Park Highlights',
-  //  firstFleetPark: 'First Fleet Park',
-  //  commuting: 'Commuting',
-  //  drivingDirections: 'Driving Directions',
-  //  mapRulers: 'Map Rulers'
-  //};
-
-  //return retrievedSharedMaps;
-
-  var retrievedSharedMaps = [];
-  var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
-  var promise = doGet(retrieveSharedMapsUrl);
-  //promise = promise.then(function(data) {
-  //  //retrievedSharedMaps = data;
-  //  var mapNames = data.mapNames;
-  //  retrievedSharedMaps = data.mapNames;
-  //});
-  //promise.resolve();
-  //return retrievedSharedMaps;
-  return promise;
-};
+//var retrieveSharedMaps = function(t) {
+//  //var retrievedSharedMaps = {
+//  //  general: 'General',
+//  //  stackPanel: 'Stack Panel',
+//  //  libraries: 'Libraries',
+//  //  parks: 'Parks',
+//  //  parkHighlights: 'Park Highlights',
+//  //  firstFleetPark: 'First Fleet Park',
+//  //  commuting: 'Commuting',
+//  //  drivingDirections: 'Driving Directions',
+//  //  mapRulers: 'Map Rulers'
+//  //};
+//
+//  //return retrievedSharedMaps;
+//
+//  var retrievedSharedMaps = [];
+//  var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
+//  var promise = doGet(retrieveSharedMapsUrl);
+//  //promise = promise.then(function(data) {
+//  //  //retrievedSharedMaps = data;
+//  //  var mapNames = data.mapNames;
+//  //  retrievedSharedMaps = data.mapNames;
+//  //});
+//  //promise.resolve();
+//  //return retrievedSharedMaps;
+//  return promise;
+//};
 
 var formatNPSUrl = function(t, url){
   if(!/^https?:\/\/www\.nps\.gov\/[a-z]{4}\//.test(url)){
@@ -174,6 +177,38 @@ var boardButtonCallback = function(t){
 };
 
 var cardButtonCallback = function(t) {
+  var popupItems = [];
+  for (var index = 0; index < cachedSharedMapNames.length; index++) {
+    var sharedMapName = cachedSharedMapNames[index];
+    var teamKey = 'demo';
+    var encodedSharedMapName = encodeURIComponent(sharedMapName);
+    var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
+    var popupItem = {
+      text: sharedMapName,
+      url: sharedMapUrl,
+      callback: function(t) {
+        return t.attach({
+          url: sharedMapUrl,
+          name: sharedMapName
+        }).then(function(){
+          return t.closePopup();
+        });
+      }
+    };
+    popupItems.push(popupItem);
+  }
+  return t.popup({
+    title: 'Select a Maprosoft map',
+    items: popupItems,
+    search: {
+      count: 5,
+      placeholder: 'Search shared maps',
+      empty: 'No share map found'
+    }
+  });
+};
+
+var cardButtonCallbackOLD = function(t) {
   //var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
   //  var sharedMapName = retrievedSharedMaps[sharedMapKey];
   //  var teamKey = 'demo';
@@ -210,6 +245,7 @@ var cardButtonCallback = function(t) {
   var promise = promise.then(function(data) {
     var mapNames = data.mapNames;
     var retrievedSharedMaps = data.mapNames;
+    //cachedSharedMaps = retrievedSharedMaps;
 
     //var items = Object.keys(retrievedSharedMaps).map(function(sharedMapKey) {
     //  var sharedMapName = retrievedSharedMaps[sharedMapKey];
@@ -297,6 +333,10 @@ var cardButtonCallback = function(t) {
   //  }
   //});
 };
+
+doGet(retrieveSharedMapsUrl).then(function(data) {
+  cachedSharedMapNames = data.mapNames;
+});
 
 TrelloPowerUp.initialize({
   'attachment-sections': function(t, options) {
