@@ -78,6 +78,29 @@ var getBadges = function(t){
   })
 };
 
+var doGet = function(url) {
+  var getPromise = new Promise(function(resolve, reject) {
+    var request = new XMLHttpRequest();
+    request.open('GET', urlForLocale(resourceUrl, targetLocale), true);
+    request.onload = function() {
+      try {
+        if (request.status === 200) {
+          var responseJson = JSON.parse(request.responseText);
+          return resolve(responseJson);
+        } else if (request.status === 404) {
+          return reject(new i18nError.LocaleNotFound(targetLocale + " not found."));
+        } else {
+          return reject(new i18nError.Unknown("Unable to load locale, status: " + request.status));
+        }
+      } catch(ex) {
+        return reject(new i18nError.Unknown(ex.message));
+      }
+    };
+    request.send();
+  });
+  return getPromise;
+};
+
 var retrieveSharedMaps = function(t) {
   //var retrievedSharedMaps = {
   //  general: 'General',
@@ -95,7 +118,7 @@ var retrieveSharedMaps = function(t) {
 
   var retrievedSharedMaps = [];
   var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
-  var promise = $.getJSON(retrieveSharedMapsUrl).done(function(data) {
+  var promise = doGet(retrieveSharedMapsUrl).done(function(data) {
     //retrievedSharedMaps = data;
     var mapNames = data.mapNames;
     retrievedSharedMaps = data.mapNames;
