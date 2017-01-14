@@ -7,7 +7,8 @@ var GRAY_ICON = './images/icon-gray.svg';
 var t = TrelloPowerUp.iframe();
 
 var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
-var cachedSharedMapNames = [];
+//var cachedSharedMapNames = [];
+var cachedMapInfo = {};
 
 var doGet = function(url) {
   var getPromise = new Promise(function(resolve, reject) {
@@ -44,12 +45,16 @@ var formatNPSUrl = function(t, url){
   }
 };
 
+//doGet(retrieveSharedMapsUrl).then(function(data) {
+//  cachedSharedMapNames = data.mapNames;
+//});
+
 doGet(retrieveSharedMapsUrl).then(function(data) {
-  cachedSharedMapNames = data.mapNames;
+  cachedMapInfo = data;
 });
 
-//var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
-//  console.log(data);
-//  cachedSharedMapNames = data;
-//});
+var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
+  console.log('xxxxxxxxxxx');
+  cachedMapInfo = data;
+});
 

@@ -123,9 +123,9 @@ var boardButtonCallback = function(t){
 
 var cardButtonCallback = function(t) {
   //var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null);
-  if (cachedSharedMapNames) {
-    var popupItems = Object.keys(cachedSharedMapNames).map(function(index) {
-      var sharedMapName = cachedSharedMapNames[index];
+  if (cachedMapInfo && cachedMapInfo.mapNames) {
+    var popupItems = Object.keys(cachedMapInfo.mapNames).map(function(index) {
+      var sharedMapName = cachedMapInfo.mapNames[index];
       var teamKey = 'demo';
       var encodedSharedMapName = encodeURIComponent(sharedMapName);
       var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
