@@ -32,6 +32,11 @@ var doGet = function(url) {
   return getPromise;
 };
 
+var getFreshMapInfo = function(teamKey) {
+  var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=' + teamKey + '&getSharedMapNames=yes';
+  return doGet(retrieveSharedMapsUrl);
+};
+
 var formatNPSUrl = function(t, url) {
   if(!/^https?:\/\/www\.nps\.gov\/[a-z]{4}\//.test(url)){
     return null;

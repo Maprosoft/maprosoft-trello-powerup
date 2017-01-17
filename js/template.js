@@ -150,7 +150,7 @@ var cardButtonCallback = function(t) {
         return sharedMapInfo;
       } else {
         // If we don't have anything let's go fetch it
-        return getFreshMapInfo(); // Should return a Promise
+        return getFreshMapInfo('demo'); // Should return a Promise
       }})
     .then(function(sharedMapInfo) {
       return popupItems = Object.keys(sharedMapInfo.mapNames).map(function (index) {
@@ -166,9 +166,9 @@ var cardButtonCallback = function(t) {
               url: sharedMapUrl,
               name: sharedMapName
             })
-                .then(function () {
-                  return t.closePopup();
-                });
+            .then(function () {
+              return t.closePopup();
+            });
           }
         };
       })
