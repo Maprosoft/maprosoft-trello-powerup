@@ -157,9 +157,9 @@ var getSharedMapPopupItems = function(t, options) {
   //  }
   //})
   .spread(function(sharedMapInfo, teamName, token) {
-      if (sharedMapInfo && sharedMapInfo.mapNames) {
-        return buildSharedMapPopupItems(t, sharedMapInfo);
-      } else {
+      //if (sharedMapInfo && sharedMapInfo.mapNames) {
+      //  return buildSharedMapPopupItems(t, sharedMapInfo);
+      //} else {
         // If we don't have anything let's go fetch it
         if (teamName) {
           var teamKey = teamName;
@@ -169,7 +169,7 @@ var getSharedMapPopupItems = function(t, options) {
         return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
           return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
-      }
+      //}
   });
 };
 
