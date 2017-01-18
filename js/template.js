@@ -103,7 +103,7 @@ var primeSharedMapInfo = function(t) {
   });
 };
 
-var cardButtonCallbackOLD = function(t) {
+var cardButtonCallbackV1 = function(t) {
   primeSharedMapInfo(t);
 
   var sharedMapInfo = cachedCardInfo;
@@ -141,7 +141,7 @@ var cardButtonCallbackOLD = function(t) {
   });
 };
 
-var cardButtonCallback = function(t) {
+var cardButtonCallbackV2 = function(t) {
   // Check for cached map info
   t.get('board', 'shared', 'cached-shared-map-info', null)
     .then(function(sharedMapInfo) {
@@ -268,8 +268,12 @@ TrelloPowerUp.initialize({
   'card-buttons': function(t, options) {
     return [{
       icon: GRAY_ICON,
-      text: 'Maprosoft map',
-      callback: cardButtonCallback
+      text: 'v1 Maprosoft map',
+      callback: cardButtonCallbackV1
+    }, {
+      icon: GRAY_ICON,
+      text: 'v2 Maprosoft map',
+      callback: cardButtonCallbackV2
     }];
   },
   'card-detail-badges': function(t, options) {
