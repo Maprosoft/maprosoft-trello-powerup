@@ -1,5 +1,6 @@
 /* global TrelloPowerUp */
 
+var MAPROSOFT_ICON = './images/Maprosoft-logo-no-text.svg';
 var WHITE_ICON = './images/icon-white.svg';
 var GRAY_ICON = './images/icon-gray.svg';
 
