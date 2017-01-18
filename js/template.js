@@ -156,7 +156,7 @@ var getSharedMapPopupItems = function(t, options) {
   //    }
   //  }
   //})
-  .then(function(sharedMapInfo, teamName, token) {
+  .spread(function(sharedMapInfo, teamName, token) {
       if (sharedMapInfo && sharedMapInfo.mapNames) {
         return buildSharedMapPopupItems(t, sharedMapInfo);
       } else {
@@ -166,7 +166,7 @@ var getSharedMapPopupItems = function(t, options) {
         } else {
           var teamKey = 'demo';
         }
-        return getFreshMapInfo('demo').then(function(retrievedSharedMapInfo) {
+        return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
           return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
       }
