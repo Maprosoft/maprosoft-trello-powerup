@@ -54,6 +54,10 @@ var getSharedMapInfo = function(t) {
   return t.get('board', 'shared', 'cached-shared-map-info', null);
 };
 
+var isMapLinkAttachment = function(attachment) {
+  return attachment.url.indexOf('https://www.maprosoft.com/app/map') === 0 || attachment.url.indexOf('https://www.maprosoft.com/app/shared') === 0;
+};
+
 //var updateSharedMapInfoCache = function(t) {
 //  return t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
 //    cachedMapInfo = data;

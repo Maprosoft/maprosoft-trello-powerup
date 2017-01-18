@@ -195,7 +195,7 @@ TrelloPowerUp.initialize({
 
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function(attachment) {
-      return attachment.url.indexOf('https://www.maprosoft.com/app/map') === 0 || attachment.url.indexOf('https://www.maprosoft.com/app/shared') === 0;
+      return isMapLinkAttachment(attachment);
     });
 
     // you can have more than one attachment section on a card
@@ -207,25 +207,23 @@ TrelloPowerUp.initialize({
       // that returns the section title. If you do so, provide a unique id for
       // your section
       var sections = [];
-      if (claimed && claimed.length > 0) {
-        for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
-          var attachment = claimed[claimIndex];
-          var claimedAttachments = [];
-          claimedAttachments.push(attachment);
-          var mapSection = {
-            id: 'maprosoft-map', // optional if you aren't using a function for the title
-            claimed: claimedAttachments,
-            icon: MAPROSOFT_ICON,
-            title: 'Maprosoft Map v13 [' + claimIndex + ']',
-            content: {
-              type: 'iframe',
-              url: t.signUrl('./map-section.html',
-                  { "map-url": attachment.url }),
-              height: 400
-            }
-          };
-          sections.push(mapSection);
-        }
+      for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
+        var attachment = claimed[claimIndex];
+        var claimedAttachments = [];
+        claimedAttachments.push(attachment);
+        var mapSection = {
+          id: 'maprosoft-map', // optional if you aren't using a function for the title
+          claimed: claimedAttachments,
+          icon: MAPROSOFT_ICON,
+          title: 'Maprosoft Map v13 [' + claimIndex + ']',
+          content: {
+            type: 'iframe',
+            url: t.signUrl('./map-section.html',
+                { "map-url": attachment.url }),
+            height: 400
+          }
+        };
+        sections.push(mapSection);
       }
       return sections;
     } else {
