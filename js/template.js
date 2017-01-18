@@ -166,7 +166,7 @@ var getSharedMapPopupItems = function(t, options) {
         } else {
           var teamKey = 'demo';
         }
-        getFreshMapInfo('demo').then(function(retrievedSharedMapInfo) {
+        return getFreshMapInfo('demo').then(function(retrievedSharedMapInfo) {
           return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
       }
