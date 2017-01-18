@@ -138,30 +138,48 @@ var cardButtonCallbackV1 = function(t) {
 
 var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
+  //var retrievedSharedMapInfo = null;
   return Promise.all([
     t.get('board', 'shared', 'cached-shared-map-info', null),
     t.get('board', 'shared', 'maprosoft-team-name', null),
     t.get('board', 'shared', 'maprosoft-token', null)
   ])
-  .spread(function(sharedMapInfo, teamName, token) {
-    if (sharedMapInfo && sharedMapInfo.mapNames) {
-      return sharedMapInfo;
-    } else {
-      // If we don't have anything let's go fetch it
-      if (teamName) {
-        return getFreshMapInfo(teamName); // Should return a Promise
+  //.spread(function(sharedMapInfo, teamName, token) {
+  //  if (sharedMapInfo && sharedMapInfo.mapNames) {
+  //    retrievedSharedMapInfo = sharedMapInfo;
+  //  } else {
+  //    // If we don't have anything let's go fetch it
+  //    if (teamName) {
+  //      retrievedSharedMapInfo = getFreshMapInfo(teamName); // Should return a Promise
+  //    } else {
+  //      retrievedSharedMapInfo = getFreshMapInfo('demo'); // Should return a Promise
+  //    }
+  //  }
+  //})
+  .then(function(sharedMapInfo, teamName, token) {
+      if (sharedMapInfo && sharedMapInfo.mapNames) {
+        return buildSharedMapPopupItems(t, sharedMapInfo);
       } else {
-        return getFreshMapInfo('demo'); // Should return a Promise
+        // If we don't have anything let's go fetch it
+        if (teamName) {
+          var teamKey = teamName;
+        } else {
+          var teamKey = 'demo';
+        }
+        getFreshMapInfo('demo').then(function(retrievedSharedMapInfo) {
+          return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+        });
       }
-    }
-  })
-  .then(function(sharedMapInfo) {
-    var teamKey = sharedMapInfo.teamName;
-    return popupItems = Object.keys(sharedMapInfo.mapNames).map(function (index) {
-      var sharedMapName = sharedMapInfo.mapNames[index];
-      return buildSharedMapPopupItem(t, teamKey, sharedMapName);
-    })
   });
+};
+
+var buildSharedMapPopupItems = function(t, sharedMapInfo) {
+  var teamKey = sharedMapInfo.teamName;
+  var popupItems = Object.keys(sharedMapInfo.mapNames).map(function (index) {
+    var sharedMapName = sharedMapInfo.mapNames[index];
+    return buildSharedMapPopupItem(t, teamKey, sharedMapName);
+  });
+  return popupItems;
 };
 
 var buildSharedMapPopupItem = function(t, teamKey, sharedMapName) {
