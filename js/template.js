@@ -1,10 +1,5 @@
 /* global TrelloPowerUp */
 
-//var WHITE_ICON = './images/icon-white.svg';
-//var GRAY_ICON = './images/icon-gray.svg';
-//
-//var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
-//var cachedSharedMapNames = [];
 var cachedCardInfo = {};
 
 var getBadges = function(t) {
@@ -12,7 +7,7 @@ var getBadges = function(t) {
   .get('name')
   .then(function(cardName){
     var badgeColor;
-    var icon = GRAY_ICON;
+    var icon = MAPROSOFT_ICON;
     var lowercaseName = cardName.toLowerCase();
     if(lowercaseName.indexOf('green') > -1){
       badgeColor = 'green';
@@ -220,7 +215,7 @@ TrelloPowerUp.initialize({
           var mapSection = {
             id: 'maprosoft-map', // optional if you aren't using a function for the title
             claimed: claimedAttachments,
-            icon: GRAY_ICON,
+            icon: MAPROSOFT_ICON,
             title: 'Maprosoft Map v13 [' + claimIndex + ']',
             content: {
               type: 'iframe',
@@ -294,7 +289,7 @@ TrelloPowerUp.initialize({
     var parkName = formatNPSUrl(t, options.url);
     if(parkName){
       return {
-        icon: GRAY_ICON,
+        icon: MAPROSOFT_ICON,
         text: parkName
       };
     } else {
