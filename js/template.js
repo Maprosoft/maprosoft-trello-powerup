@@ -138,9 +138,9 @@ var cardButtonCallbackV1 = function(t) {
 
 var getSharedMapPopupItems = function(t, options) {
   return Promise.all([
-    t.get('board', 'shared', 'cached-shared-map-info'),
-    t.get('board', 'shared', 'maprosoft-team-name'),
-    t.get('board', 'shared', 'maprosoft-token')
+    t.get('board', 'shared', 'cached-shared-map-info', null),
+    t.get('board', 'shared', 'maprosoft-team-name', null),
+    t.get('board', 'shared', 'maprosoft-token', null)
   ])
   .spread(function(sharedMapInfo, teamName, token) {
     if (sharedMapInfo && sharedMapInfo.mapNames) {
