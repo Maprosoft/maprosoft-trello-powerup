@@ -148,11 +148,11 @@ var getSharedMapPopupItems = function(t, options) {
       return sharedMapInfo;
     } else {
       // If we don't have anything let's go fetch it
-      if (teamName) {
-        return getFreshMapInfo(teamName); // Should return a Promise
-      } else {
+      //if (teamName) {
+      //  return getFreshMapInfo(teamName); // Should return a Promise
+      //} else {
         return getFreshMapInfo('demo'); // Should return a Promise
-      }
+      //}
     }
   })
   .then(function(sharedMapInfo) {
@@ -176,41 +176,6 @@ var getSharedMapPopupItems = function(t, options) {
       };
     })
   });
-};
-
-var getSharedMapPopupItemsOLD = function(t, options) {
-  // Check for cached map info
-  return t.get('board', 'shared', 'cached-shared-map-info', null)
-    .then(function(sharedMapInfo) {
-      // If cached mapInfo exists, keep going
-      if (sharedMapInfo && sharedMapInfo.mapNames) {
-        return sharedMapInfo;
-      } else {
-        // If we don't have anything let's go fetch it
-        return getFreshMapInfo('demo'); // Should return a Promise
-      }
-    })
-    .then(function(sharedMapInfo) {
-      return popupItems = Object.keys(sharedMapInfo.mapNames).map(function (index) {
-        var sharedMapName = sharedMapInfo.mapNames[index];
-        var teamKey = sharedMapInfo.teamName;
-        var encodedSharedMapName = encodeURIComponent(sharedMapName);
-        var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-        return {
-          text: sharedMapName,
-          url: sharedMapUrl,
-          callback: function (t) {
-            return t.attach({
-              url: sharedMapUrl,
-              name: sharedMapName
-            })
-            .then(function () {
-              return t.closePopup();
-            });
-          }
-        };
-      })
-    });
 };
 
 var cardButtonCallbackV2 = function(t) {
