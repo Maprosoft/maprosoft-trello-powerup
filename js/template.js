@@ -137,6 +137,7 @@ var cardButtonCallbackV1 = function(t) {
 };
 
 var getSharedMapPopupItems = function(t, options) {
+  var Promise = TrelloPowerUp.Promise;
   return Promise.all([
     t.get('board', 'shared', 'cached-shared-map-info', null),
     t.get('board', 'shared', 'maprosoft-team-name', null),
