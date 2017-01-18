@@ -33,8 +33,8 @@ t.render(function () {
         if (mapFrameElement) {
             mapFrameElement.innerHTML = mapUrl;
         }
-    })
-    .then(function () {
-        return t.sizeTo('#content');
+    //})
+    //.then(function () {
+    //    return t.sizeTo('#content');
     });
 });
