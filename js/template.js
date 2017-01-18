@@ -137,8 +137,6 @@ var cardButtonCallbackV1 = function(t) {
 };
 
 var getSharedMapPopupItems = function(t, options) {
-  var teamName = maprosoftTeamNameTextField.value;
-  var token = maprosoftTokenTextField.value;
   return Promise.all([
     t.get('board', 'shared', 'cached-shared-map-info', teamName),
     t.get('board', 'shared', 'maprosoft-team-name', teamName),
