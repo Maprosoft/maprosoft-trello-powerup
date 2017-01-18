@@ -136,9 +136,9 @@ var cardButtonCallbackV1 = function(t) {
   });
 };
 
-var cardButtonCallbackV2 = function(t) {
+var getSharedMapPopupItems = function(t, options) {
   // Check for cached map info
-  t.get('board', 'shared', 'cached-shared-map-info', null)
+  return t.get('board', 'shared', 'cached-shared-map-info', null)
     .then(function(sharedMapInfo) {
       // If cached mapInfo exists, keep going
       if (sharedMapInfo && sharedMapInfo.mapNames) {
@@ -167,18 +167,19 @@ var cardButtonCallbackV2 = function(t) {
           }
         };
       })
-    })
-    .then(function(popupItems) {
-      return t.popup({
-        title: 'Select a Maprosoft map',
-        items: popupItems,
-        search: {
-          count: 5,
-          placeholder: 'Search shared maps',
-          empty: 'No share map found'
-        }
-      });
     });
+};
+
+var cardButtonCallbackV2 = function(t) {
+  return t.popup({
+    title: 'Select a Maprosoft map',
+    items: getSharedMapPopupItems,
+    search: {
+      count: 5,
+      placeholder: 'Search shared maps',
+      empty: 'No share map found'
+    }
+  });
 };
 
 //doGet(retrieveSharedMapsUrl).then(function(data) {
