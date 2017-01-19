@@ -62,14 +62,9 @@ document.getElementById('save').addEventListener('click', function() {
       return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfo);
     })
   ])
-  //.spread(function(token, teamName, sharedMapInfo) {
-  //  if (teamMaprosoftName) {
-  //    maprosoftTeamNameTextField.value = teamMaprosoftName;
-  //  }
-  //  if (savedMaprosoftToken) {
-  //    maprosoftTokenTextField.value = savedMaprosoftToken;
-  //  }
-  //})
+  .spread(function(teamName, token, sharedMapInfo) {
+    console.log('saved team name and token');
+  })
   .then(function() {
     t.closePopup();
   })
