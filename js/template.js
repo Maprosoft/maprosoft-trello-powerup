@@ -221,6 +221,14 @@ var cardButtonCallbackV2 = function(t) {
   });
 };
 
+var locationMapCallback = function(t) {
+  return t.popup({
+    title: 'Enter a location',
+    url: './settings.html',
+    height: 400
+  });
+};
+
 //doGet(retrieveSharedMapsUrl).then(function(data) {
 //  cachedSharedMapNames = data.mapNames;
 //});
@@ -307,6 +315,10 @@ TrelloPowerUp.initialize({
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Map',
       callback: cardButtonCallbackV2
+    }, {
+      icon: MAPROSOFT_ICON_GRAY,
+      text: 'Location Map',
+      callback: locationMapCallback
     }];
   },
   'card-detail-badges': function(t, options) {
