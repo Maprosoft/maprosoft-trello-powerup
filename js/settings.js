@@ -8,8 +8,8 @@ var maprosoftTokenTextField = document.getElementById('maprosoft-token');
 
 t.render(function() {
   return Promise.all([
-    t.get('board', 'shared', 'maprosoft-team-name'),
-    t.get('board', 'shared', 'maprosoft-token')
+    t.get('board', 'shared', 'maprosoft-team-name', null),
+    t.get('board', 'shared', 'maprosoft-token', null)
   ])
   .spread(function(teamName, token) {
     if (teamName) {

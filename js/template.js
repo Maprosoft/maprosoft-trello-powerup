@@ -167,6 +167,9 @@ var getSharedMapPopupItems = function(t, options) {
           var teamKey = 'demo';
         }
         return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
+          t.set('board', 'shared', 'cached-shared-map-info', retrievedSharedMapInfo).then(function() {
+            // saved for next time
+          });
           return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
       //}
