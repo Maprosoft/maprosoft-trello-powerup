@@ -7,17 +7,17 @@ var getBadges = function(t) {
   .get('name')
   .then(function(cardName){
     var badgeColor;
-    var icon = MAPROSOFT_ICON;
+    var icon = MAPROSOFT_ICON_GRAY;
     var lowercaseName = cardName.toLowerCase();
     if (lowercaseName.indexOf('green') > -1){
       badgeColor = 'green';
-      icon = WHITE_ICON;
+      icon = MAPROSOFT_ICON_COLOR;
     } else if(lowercaseName.indexOf('yellow') > -1){
       badgeColor = 'yellow';
-      icon = WHITE_ICON;
+      icon = MAPROSOFT_ICON_COLOR;
     } else if(lowercaseName.indexOf('red') > -1){
       badgeColor = 'red';
-      icon = WHITE_ICON;
+      icon = MAPROSOFT_ICON_COLOR;
     }
 
     if (lowercaseName.indexOf('dynamic') > -1){
@@ -254,7 +254,7 @@ TrelloPowerUp.initialize({
         var mapSection = {
           id: 'maprosoft-map', // optional if you aren't using a function for the title
           claimed: claimedAttachments,
-          icon: MAPROSOFT_ICON,
+          icon: MAPROSOFT_ICON_GRAY,
           title: 'Maprosoft Map v13 [' + claimIndex + ']',
           content: {
             type: 'iframe',
@@ -290,7 +290,7 @@ TrelloPowerUp.initialize({
   },
   'board-buttons': function(t, options){
     return [{
-      icon: WHITE_ICON,
+      icon: MAPROSOFT_ICON_COLOR,
       text: 'Template',
       callback: boardButtonCallback
     }];
@@ -299,13 +299,13 @@ TrelloPowerUp.initialize({
     return getBadges(t);
   },
   'card-buttons': function(t, options) {
-    return [{
-      icon: MAPROSOFT_ICON,
+    return [/*{
+      icon: MAPROSOFT_ICON_GRAY,
       text: 'v1 Maprosoft map',
       callback: cardButtonCallbackV1
-    }, {
-      icon: GRAY_ICON,
-      text: 'v2 Maprosoft map',
+    }, */{
+      icon: MAPROSOFT_ICON_GRAY,
+      text: 'Map',
       callback: cardButtonCallbackV2
     }];
   },
@@ -327,7 +327,7 @@ TrelloPowerUp.initialize({
     var parkName = formatNPSUrl(t, options.url);
     if(parkName){
       return {
-        icon: MAPROSOFT_ICON,
+        icon: MAPROSOFT_ICON_GRAY,
         text: parkName
       };
     } else {
