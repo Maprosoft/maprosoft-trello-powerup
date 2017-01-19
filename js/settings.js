@@ -3,9 +3,6 @@
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
-var maprosoftTeamNameTextField = document.getElementById(TEAM_NAME_KEY);
-var maprosoftTokenTextField = document.getElementById(TEAM_TOKEN_KEY);
-
 t.render(function() {
   return Promise.all([
     t.get('board', 'shared', TEAM_NAME_KEY),
@@ -13,9 +10,11 @@ t.render(function() {
   ])
   .spread(function(teamName, token) {
     if (teamName) {
+      var maprosoftTeamNameTextField = document.getElementById(TEAM_NAME_KEY);
       maprosoftTeamNameTextField.value = teamName;
     }
     if (token) {
+      var maprosoftTokenTextField = document.getElementById(TEAM_TOKEN_KEY);
       maprosoftTokenTextField.value = token;
     }
   })
@@ -51,6 +50,8 @@ var buildRetrieveSharedMapsUrl = function(teamName, token) {
 };
 
 document.getElementById('save').addEventListener('click', function() {
+  var maprosoftTeamNameTextField = document.getElementById(TEAM_NAME_KEY);
+  var maprosoftTokenTextField = document.getElementById(TEAM_TOKEN_KEY);
   var teamName = maprosoftTeamNameTextField.value;
   var token = maprosoftTokenTextField.value;
   return Promise.all([
