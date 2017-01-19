@@ -6,7 +6,7 @@ var GRAY_ICON = './images/icon-gray.svg';
 
 var CACHED_SHARED_MAP_INFO_KEY = 'cached-shared-map-info';
 var TEAM_NAME_KEY = 'maprosoft-team-name';
-var TEAM_TOKEN_KEY = 'x';
+var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 
 //var Promise = TrelloPowerUp.Promise;
 //var t = TrelloPowerUp.iframe();
