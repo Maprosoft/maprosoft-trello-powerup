@@ -9,7 +9,7 @@ var getBadges = function(t) {
     var badgeColor;
     var icon = MAPROSOFT_ICON;
     var lowercaseName = cardName.toLowerCase();
-    if(lowercaseName.indexOf('green') > -1){
+    if (lowercaseName.indexOf('green') > -1){
       badgeColor = 'green';
       icon = WHITE_ICON;
     } else if(lowercaseName.indexOf('yellow') > -1){
