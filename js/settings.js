@@ -3,13 +3,13 @@
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
-var maprosoftTeamNameTextField = document.getElementById('maprosoft-team-name');
-var maprosoftTokenTextField = document.getElementById('maprosoft-token');
+var maprosoftTeamNameTextField = document.getElementById(TEAM_NAME_KEY);
+var maprosoftTokenTextField = document.getElementById(TEAM_TOKEN_KEY);
 
 t.render(function() {
   return Promise.all([
-    t.get('board', 'shared', 'maprosoft-team-name'),
-    t.get('board', 'shared', 'maprosoft-token')
+    t.get('board', 'shared', TEAM_NAME_KEY),
+    t.get('board', 'shared', TEAM_TOKEN_KEY)
   ])
   .spread(function(teamName, token) {
     if (teamName) {
@@ -28,17 +28,17 @@ t.render(function() {
 //document.getElementById('save').addEventListener('click', function() {
 //  return t.set('board', 'private', 'vegetable', 'Broccoli')
 //  .then(function() {
-//    return t.set('board', 'shared', 'maprosoft-token', maprosoftTokenTextField.value);
+//    return t.set('board', 'shared', TEAM_TOKEN_KEY, maprosoftTokenTextField.value);
 //  })
 //  .then(function() {
-//    return t.set('board', 'shared', 'maprosoft-team-name', maprosoftTeamNameTextField.value);
+//    return t.set('board', 'shared', TEAM_NAME_KEY, maprosoftTeamNameTextField.value);
 //  })
 //  .then(function() {
 //    //updateSharedMapInfoCache(t);
 //
 //    return doGet(retrieveSharedMapsUrl).then(function(sharedMapInfo) {
 //      //var sharedMapInfo = '{"teamName":"demo","mapNames":["General","Stack Panel","Libraries","Parks","Park Highlights","First Fleet Park","Commuting","Driving Directions","Map Rulers"]}';
-//      return t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
+//      return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfo);
 //    });
 //  })
 //  .then(function() {
@@ -54,11 +54,11 @@ document.getElementById('save').addEventListener('click', function() {
   var teamName = maprosoftTeamNameTextField.value;
   var token = maprosoftTokenTextField.value;
   return Promise.all([
-    t.set('board', 'shared', 'maprosoft-team-name', teamName),
-    t.set('board', 'shared', 'maprosoft-token', token),
-    //t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
+    t.set('board', 'shared', TEAM_NAME_KEY, teamName),
+    t.set('board', 'shared', TEAM_TOKEN_KEY, token),
+    //t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfo);
     doGet(buildRetrieveSharedMapsUrl(teamName, token)).then(function(sharedMapInfo) {
-      return t.set('board', 'shared', 'cached-shared-map-info', sharedMapInfo);
+      return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfo);
     })
   ])
   //.spread(function(token, teamName, sharedMapInfo) {

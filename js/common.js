@@ -4,6 +4,10 @@ var MAPROSOFT_ICON = './images/Maprosoft-logo-no-text-gray.svg';
 var WHITE_ICON = './images/icon-white.svg';
 var GRAY_ICON = './images/icon-gray.svg';
 
+var CACHED_SHARED_MAP_INFO_KEY = 'cached-shared-map-info';
+var TEAM_NAME_KEY = 'maprosoft-team-key';
+var TEAM_TOKEN_KEY = 'maprosoft-team-token';
+
 //var Promise = TrelloPowerUp.Promise;
 //var t = TrelloPowerUp.iframe();
 
@@ -51,7 +55,7 @@ var formatNPSUrl = function(t, url) {
 };
 
 var getSharedMapInfo = function(t) {
-  return t.get('board', 'shared', 'cached-shared-map-info', null);
+  return t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null);
 };
 
 var isMapLinkAttachment = function(attachment) {
@@ -59,7 +63,7 @@ var isMapLinkAttachment = function(attachment) {
 };
 
 //var updateSharedMapInfoCache = function(t) {
-//  return t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
+//  return t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null).then(function(data) {
 //    cachedMapInfo = data;
 //  });
 //};
@@ -72,7 +76,7 @@ var isMapLinkAttachment = function(attachment) {
 //  cachedMapInfo = data;
 //});
 
-//var cachedSharedMapNames = t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
+//var cachedSharedMapNames = t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null).then(function(data) {
 //  console.log('xxxxxxxxxxx');
 //  cachedMapInfo = data;
 //});

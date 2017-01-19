@@ -84,7 +84,7 @@ var boardButtonCallback = function(t){
 
 var primeSharedMapInfo = function(t) {
   var popupItems = [];
-  t.get('board', 'shared', 'cached-shared-map-info').then(function(data) {
+  t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY).then(function(data) {
     if (data) {
       var sharedMapInfo = data;
       if (sharedMapInfo && sharedMapInfo.mapNames) {
@@ -140,9 +140,9 @@ var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   //var retrievedSharedMapInfo = null;
   return Promise.all([
-    t.get('board', 'shared', 'cached-shared-map-info'),
-    t.get('board', 'shared', 'maprosoft-team-name'),
-    t.get('board', 'shared', 'maprosoft-token')
+    t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
+    t.get('board', 'shared', TEAM_NAME_KEY),
+    t.get('board', 'shared', TEAM_TOKEN_KEY)
   ])
   //.spread(function(sharedMapInfo, teamName, token) {
   //  if (sharedMapInfo && sharedMapInfo.mapNames) {
@@ -167,7 +167,7 @@ var getSharedMapPopupItems = function(t, options) {
           var teamKey = 'demo';
         }
         return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
-          t.set('board', 'shared', 'cached-shared-map-info', retrievedSharedMapInfo).then(function() {
+          t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, retrievedSharedMapInfo).then(function() {
             // saved for next time
           });
           return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
