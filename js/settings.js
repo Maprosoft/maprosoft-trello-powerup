@@ -47,7 +47,12 @@ document.getElementById('save').addEventListener('click', function() {
         return t.set('board', 'shared', TEAM_TOKEN_KEY, token);
   }).then(function() {
         return doGet(buildRetrieveSharedMapsUrl(teamName, token));
-  }).then(function() {
+  }).then(function(sharedMapInfo) {
+        if (sharedMapInfo) {
+
+        } else {
+
+        }
         var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
         return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
   }).then(function() {
