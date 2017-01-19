@@ -84,9 +84,9 @@ var boardButtonCallback = function(t){
 
 var primeSharedMapInfo = function(t) {
   var popupItems = [];
-  t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY).then(function(data) {
-    if (data) {
-      var sharedMapInfo = data;
+  t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY).then(function(sharedMapInfoJson) {
+    if (sharedMapInfoJson) {
+      var sharedMapInfo = JSON.parse(sharedMapInfoJson);
       if (sharedMapInfo && sharedMapInfo.mapNames) {
         cachedCardInfo = sharedMapInfo;
       } else {
@@ -156,10 +156,15 @@ var getSharedMapPopupItems = function(t, options) {
   //    }
   //  }
   //})
-  .spread(function(sharedMapInfo, teamName, token) {
-      //if (sharedMapInfo && sharedMapInfo.mapNames) {
-      //  return buildSharedMapPopupItems(t, sharedMapInfo);
-      //} else {
+  .spread(function(sharedMapInfoJson, teamName, token) {
+      if (sharedMapInfoJson) {
+        var sharedMapInfo = JSON.parse(sharedMapInfoJson);
+      } else {
+        var sharedMapInfo = null;
+      }
+      if (sharedMapInfo && sharedMapInfo.mapNames) {
+        return buildSharedMapPopupItems(t, sharedMapInfo);
+      } else {
         // If we don't have anything let's go fetch it
         if (teamName) {
           var teamKey = teamName;
@@ -167,12 +172,13 @@ var getSharedMapPopupItems = function(t, options) {
           var teamKey = 'demo';
         }
         return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
-          t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, retrievedSharedMapInfo).then(function() {
+          var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+          t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
             // saved for next time
           });
           return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
-      //}
+      }
   });
 };
 

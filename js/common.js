@@ -54,9 +54,9 @@ var formatNPSUrl = function(t, url) {
   }
 };
 
-var getSharedMapInfo = function(t) {
-  return t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null);
-};
+//var getSharedMapInfo = function(t) {
+//  return t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null);
+//};
 
 var isMapLinkAttachment = function(attachment) {
   return attachment.url.indexOf('https://www.maprosoft.com/app/map') === 0 || attachment.url.indexOf('https://www.maprosoft.com/app/shared') === 0;

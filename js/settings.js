@@ -57,14 +57,14 @@ document.getElementById('save').addEventListener('click', function() {
   return Promise.all([
     t.set('board', 'shared', TEAM_NAME_KEY, teamName),
     t.set('board', 'shared', TEAM_TOKEN_KEY, token),
-    //t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfo);
     doGet(buildRetrieveSharedMapsUrl(teamName, token)).then(function(sharedMapInfo) {
-      return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfo);
+      var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
+      return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
     })
   ])
-  .spread(function(teamName, token, sharedMapInfo) {
-    console.log('saved team name and token');
-  })
+  //.spread(function(teamName, token, sharedMapInfo) {
+  //  console.log('saved team name and token');
+  //})
   .then(function() {
     t.closePopup();
   })
