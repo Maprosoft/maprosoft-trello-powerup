@@ -6,7 +6,7 @@ var GRAY_ICON = './images/icon-gray.svg';
 
 var CACHED_SHARED_MAP_INFO_KEY = 'cached-shared-map-info';
 var TEAM_NAME_KEY = 'maprosoft-team-name';
-var TEAM_TOKEN_KEY = 'maprosoft-team-token';
+var TEAM_TOKEN_KEY = 'x';
 
 //var Promise = TrelloPowerUp.Promise;
 //var t = TrelloPowerUp.iframe();
@@ -24,12 +24,12 @@ var doGet = function(url) {
           var responseJson = JSON.parse(request.responseText);
           return resolve(responseJson);
         } else if (request.status === 404) {
-          return reject(new i18nError.LocaleNotFound(targetLocale + " not found."));
+          return reject(new Error("resource not found."));
         } else {
-          return reject(new i18nError.Unknown("Unable to load locale, status: " + request.status));
+          return reject(new Error("Unable to load locale, status: " + request.status));
         }
       } catch(ex) {
-        return reject(new i18nError.Unknown(ex.message));
+        return reject(new Error(ex.message));
       }
     };
     request.send();
