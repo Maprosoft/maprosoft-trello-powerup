@@ -84,7 +84,7 @@ var boardButtonCallback = function(t){
 
 var primeSharedMapInfo = function(t) {
   var popupItems = [];
-  t.get('board', 'shared', 'cached-shared-map-info', null).then(function(data) {
+  t.get('board', 'shared', 'cached-shared-map-info').then(function(data) {
     if (data) {
       var sharedMapInfo = data;
       if (sharedMapInfo && sharedMapInfo.mapNames) {
@@ -140,9 +140,9 @@ var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   //var retrievedSharedMapInfo = null;
   return Promise.all([
-    t.get('board', 'shared', 'cached-shared-map-info', null),
-    t.get('board', 'shared', 'maprosoft-team-name', null),
-    t.get('board', 'shared', 'maprosoft-token', null)
+    t.get('board', 'shared', 'cached-shared-map-info'),
+    t.get('board', 'shared', 'maprosoft-team-name'),
+    t.get('board', 'shared', 'maprosoft-token')
   ])
   //.spread(function(sharedMapInfo, teamName, token) {
   //  if (sharedMapInfo && sharedMapInfo.mapNames) {
