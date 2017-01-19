@@ -14,6 +14,10 @@ var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 //var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
 //var cachedMapInfo = {};
 
+var buildRetrieveSharedMapsUrl = function(teamName, token) {
+  return 'https://www.maprosoft.com/app/shared?team=' + teamName + '&getSharedMapNames=yes';
+};
+
 var doGet = function(url) {
   var getPromise = new Promise(function(resolve, reject) {
     var request = new XMLHttpRequest();
@@ -37,8 +41,9 @@ var doGet = function(url) {
   return getPromise;
 };
 
-var getFreshMapInfo = function(teamKey) {
-  var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=' + teamKey + '&getSharedMapNames=yes';
+var getFreshMapInfo = function(teamName) {
+  var token = null;
+  var retrieveSharedMapsUrl = buildRetrieveSharedMapsUrl(teamName, token);
   return doGet(retrieveSharedMapsUrl);
 };
 
