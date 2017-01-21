@@ -30,18 +30,6 @@ document.getElementById('save').addEventListener('click', function() {
   var teamName = maprosoftTeamNameTextField.value;
   var token = maprosoftTokenTextField.value;
 
-  //return Promise.all([
-  //  t.set('board', 'shared', TEAM_NAME_KEY, teamName),
-  //  t.set('board', 'shared', TEAM_TOKEN_KEY, token),
-  //  doGet(buildRetrieveSharedMapsUrl(teamName, token)).then(function(sharedMapInfo) {
-  //    var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
-  //    return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
-  //  })
-  //])
-  //.then(function() {
-  //  return t.closePopup();
-  //});
-
   return t.set('board', 'shared', TEAM_NAME_KEY, teamName)
   .then(function() {
         return t.set('board', 'shared', TEAM_TOKEN_KEY, token);

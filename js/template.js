@@ -116,9 +116,9 @@ var cardButtonCallbackV1 = function(t) {
             url: sharedMapUrl,
             name: sharedMapName
           })
-              .then(function(){
-                return t.closePopup();
-              });
+          .then(function(){
+            return t.closePopup();
+          });
         }
       };
     });
@@ -224,7 +224,7 @@ var cardButtonCallbackV2 = function(t) {
 var locationMapCallback = function(t) {
   return t.popup({
     title: 'Enter a location',
-    url: './settings.html',
+    url: './location-entry.html',
     height: 400
   });
 };
