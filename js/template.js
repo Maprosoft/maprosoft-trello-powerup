@@ -58,7 +58,7 @@ var boardButtonCallback = function(t){
         text: 'Map Overlay',
         callback: function(t){
           return t.overlay({
-            url: './map-section.html',
+            url: './map-operlay.html',
             args: {
               overlayMode: true
             }
@@ -198,6 +198,8 @@ TrelloPowerUp.initialize({
       var sections = [];
       for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
         var attachment = claimed[claimIndex];
+        // Capture the attachment variable in a closure so that it's attributes are safe to pass
+        // into promises such as the signUrl function.
         (function(attachment) {
           var claimedAttachments = [];
           claimedAttachments.push(attachment);
