@@ -50,42 +50,58 @@ var getBadges = function(t) {
   })
 };
 
-var boardButtonCallback = function(t){
-  return t.popup({
-    title: 'Maprosoft board actions',
-    items: [
-      {
-        text: 'Map Overlay',
-        callback: function(t) {
-          return t.get('board', 'shared', TEAM_NAME_KEY)
-          .then(function(teamName) {
-              var generalMapUrl = buildGeneralMapUrl(teamName);
-              return t.overlay({
-                url: './map-overlay.html',
-                args: {
-                  'map-url': generalMapUrl,
-                  overlayMode: true
-                }
-              })
-              .then(function(){
-                return t.closePopup();
-              });
-          });
-        }
-      }, {
-        text: 'Open Board Bar',
-        callback: function(t){
-          return t.boardBar({
-            url: './board-bar.html',
-            height: 200
-          })
-          .then(function(){
-            return t.closePopup();
-          });
-        }
-      }
-    ]
-  });
+var boardButtonCallback = function(t) {
+  return t.get('board', 'shared', TEAM_NAME_KEY)
+      .then(function(teamName) {
+        var generalMapUrl = buildGeneralMapUrl(teamName);
+        return t.overlay({
+          url: './map-overlay.html',
+          args: {
+            'map-url': generalMapUrl,
+            overlayMode: true
+          }
+        })
+            .then(function(){
+              return t.closePopup();
+            });
+      });
+
+  //return t.popup({
+  //  title: 'Maprosoft board actions',
+  //  items: [
+  //    {
+  //      text: 'Map Overlay',
+  //      callback: function(t) {
+  //        return t.get('board', 'shared', TEAM_NAME_KEY)
+  //        .then(function(teamName) {
+  //            var generalMapUrl = buildGeneralMapUrl(teamName);
+  //            return t.overlay({
+  //              url: './map-overlay.html',
+  //              args: {
+  //                'map-url': generalMapUrl,
+  //                overlayMode: true
+  //              }
+  //            })
+  //            .then(function(){
+  //              return t.closePopup();
+  //            });
+  //        });
+  //      }
+  //    }
+  //    , {
+  //      text: 'Open Board Bar',
+  //      callback: function(t){
+  //        return t.boardBar({
+  //          url: './board-bar.html',
+  //          height: 200
+  //        })
+  //        .then(function(){
+  //          return t.closePopup();
+  //        });
+  //      }
+  //    }
+  //  ]
+  //});
 };
 
 var getSharedMapPopupItems = function(t, options) {
