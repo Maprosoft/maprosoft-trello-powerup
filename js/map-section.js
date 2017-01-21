@@ -25,6 +25,11 @@ var resizeOverlayMap = function() {
     mapFrameElement.height = mapHeight;
 };
 
+var handleWindowResize = function(event) {
+    resizeOverlayMap();
+    event.preventDefault();
+};
+
 t.render(function () {
     // make sure your rendering logic lives here, since we will
     // recall this method as the user adds and removes attachments
@@ -33,6 +38,8 @@ t.render(function () {
     if (inOverlayMode) {
         resizeOverlayMap();
         mapFrameElement.src = mapUrl;
+
+        optimizedResize.addWindowResizeListener(handleWindowResize);
 
         // close overlay if user clicks outside our content
         document.addEventListener('click', function(e) {

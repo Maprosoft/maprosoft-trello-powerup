@@ -96,22 +96,54 @@ var isMapLinkAttachment = function(attachment) {
   return attachment.url.indexOf('https://www.maprosoft.com/app/map') === 0 || attachment.url.indexOf('https://www.maprosoft.com/app/shared') === 0;
 };
 
-//var updateSharedMapInfoCache = function(t) {
-//  return t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null).then(function(data) {
-//    cachedMapInfo = data;
-//  });
-//};
+// This example is from https://developer.mozilla.org/en-US/docs/Web/Events/resize:
+var optimizedResize = (function() {
 
-//doGet(retrieveSharedMapsUrl).then(function(data) {
-//  cachedSharedMapNames = data.mapNames;
-//});
+  var callbacks = [],
+      running = false;
 
-//doGet(retrieveSharedMapsUrl).then(function(data) {
-//  cachedMapInfo = data;
-//});
+  // fired on resize event
+  function resize() {
 
-//var cachedSharedMapNames = t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null).then(function(data) {
-//  console.log('xxxxxxxxxxx');
-//  cachedMapInfo = data;
-//});
+    if (!running) {
+      running = true;
+
+      if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(runCallbacks);
+      } else {
+        setTimeout(runCallbacks, 66);
+      }
+    }
+
+  }
+
+  // run the actual callbacks
+  function runCallbacks() {
+
+    callbacks.forEach(function(callback) {
+      callback();
+    });
+
+    running = false;
+  }
+
+  // adds callback to loop
+  function addCallback(callback) {
+
+    if (callback) {
+      callbacks.push(callback);
+    }
+
+  }
+
+  return {
+    // public method to add additional callback
+    addWindowResizeListener: function(callback) {
+      if (!callbacks.length) {
+        window.addEventListener('resize', resize);
+      }
+      addCallback(callback);
+    }
+  }
+}());
 
