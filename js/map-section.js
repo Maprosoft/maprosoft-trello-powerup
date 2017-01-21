@@ -16,26 +16,27 @@ t.render(function () {
     // make sure your rendering logic lives here, since we will
     // recall this method as the user adds and removes attachments
     // from your section
-    t.card('attachments')
-    .get('attachments')
-    .filter(function (attachment) {
-        return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
-    })
-    .then(function (attachments) {
-        //var urls = attachments.map(function(a){
-        //  return a.url;
-        //});
-        //document.getElementById('urls').textContent = urls.join(', ');
-
-        var mapFrameElement = document.getElementById('map-frame');
+    var mapFrameElement = document.getElementById('map-frame');
+    if (inOverlayMode) {
         mapFrameElement.src = mapUrl;
+    } else {
+        t.card('attachments')
+        .get('attachments')
+        .filter(function (attachment) {
+            return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
+        })
+        .then(function (attachments) {
+            //var urls = attachments.map(function(a){
+            //  return a.url;
+            //});
+            //document.getElementById('urls').textContent = urls.join(', ');
 
-        var mapFrameElement = document.getElementById('map-url-debug');
-        if (mapFrameElement) {
-            mapFrameElement.innerHTML = mapUrl;
-        }
-    //})
-    //.then(function () {
-    //    return t.sizeTo('#content');
-    });
+            mapFrameElement.src = mapUrl;
+
+            //var mapUrlDebugElement = document.getElementById('map-url-debug');
+            //if (mapUrlDebugElement) {
+            //    mapUrlDebugElement.innerHTML = mapUrl;
+            //}
+        });
+    }
 });
