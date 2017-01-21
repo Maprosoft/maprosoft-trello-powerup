@@ -49,7 +49,7 @@ document.getElementById('save-location').addEventListener('click', function() {
             var geocodedLocation = geocodeResult.data.geocodedLocation;
             return t.get('board', 'shared', TEAM_NAME_KEY)
             .then(function(teamName) {
-                  var url = buildUrlWithDropPin(teamName, geocodedLocation.latitude, geocodedLocation.longitude);
+                  var url = buildUrlWithDropPin(teamName, data.inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
                   return t.attach({
                     url: url,
                     name: data.inputAddress
