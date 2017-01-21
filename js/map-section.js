@@ -12,22 +12,26 @@ var inOverlayMode = t.arg('overlayMode');
 //var mapFrame = document.getElementById('map-frame');
 //mapFrame.src = mapUrl;
 
+var resizeOverlayMap = function() {
+    var mapFrameElement = document.getElementById('map-frame');
+    var overlayContentElement = document.getElementById('map-overlay-content');
+    //var overlayContentHeight = overlayContentElement.offsetHeight;
+    var overlayContentHeight = overlayContentElement.offsetHeight;
+    //var headerElement = document.getElementById('map-overlay-header');
+    //var headerHeight = headerElement.offsetHeight;
+    //var mapHeight = overlayContentHeight - headerHeight;
+    var mapOffsetTop = mapFrameElement.offsetTop;
+    var mapHeight = overlayContentHeight - mapOffsetTop;
+    mapFrameElement.height = mapHeight;
+};
+
 t.render(function () {
     // make sure your rendering logic lives here, since we will
     // recall this method as the user adds and removes attachments
     // from your section
     var mapFrameElement = document.getElementById('map-frame');
     if (inOverlayMode) {
-        var overlayContentElement = document.getElementById('map-overlay-content');
-        //var overlayContentHeight = overlayContentElement.offsetHeight;
-        var overlayContentHeight = overlayContentElement.offsetHeight;
-        //var headerElement = document.getElementById('map-overlay-header');
-        //var headerHeight = headerElement.offsetHeight;
-        //var mapHeight = overlayContentHeight - headerHeight;
-        var mapOffsetTop = mapFrameElement.offsetTop;
-        var mapHeight = overlayContentHeight - mapOffsetTop;
-        
-        mapFrameElement.height = mapHeight;
+        resizeOverlayMap();
         mapFrameElement.src = mapUrl;
 
         // close overlay if user clicks outside our content
