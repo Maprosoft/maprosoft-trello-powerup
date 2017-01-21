@@ -225,7 +225,7 @@ var locationMapCallback = function(t) {
   return t.popup({
     title: 'Enter a location',
     url: './location-entry.html',
-    height: 300
+    height: 250
   });
 };
 
