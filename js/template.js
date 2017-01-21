@@ -60,6 +60,7 @@ var boardButtonCallback = function(t){
           return t.overlay({
             url: './map-overlay.html',
             args: {
+              'map-url': 'https://www.maprosoft.com/app/map',
               overlayMode: true
             }
           })
