@@ -224,8 +224,7 @@ var cardButtonCallbackV2 = function(t) {
 var locationMapCallback = function(t) {
   return t.popup({
     title: 'Enter a location',
-    url: './location-entry.html',
-    height: 400
+    url: './location-entry.html'
   });
 };
 
@@ -313,7 +312,7 @@ TrelloPowerUp.initialize({
       callback: cardButtonCallbackV1
     }, */{
       icon: MAPROSOFT_ICON_GRAY,
-      text: 'Map',
+      text: 'Shared Map',
       callback: cardButtonCallbackV2
     }, {
       icon: MAPROSOFT_ICON_GRAY,
