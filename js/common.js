@@ -23,10 +23,13 @@ var buildGeocodeAddressUrl = function(token, address) {
 var buildUrlWithDropPin = function(teamNameOrKey, address, latitude, longitude) {
   var encodedTeamNameOrKey = encodeURIComponent(teamNameOrKey);
   var encodedAddress = encodeURIComponent(address);
-  return 'https://www.maprosoft.com/app/shared?team=' + encodedTeamNameOrKey +
+  return 'https://www.maprosoft.com/app?team=' + encodedTeamNameOrKey +
       '&dropPinTitle=' + encodedAddress +
       '&dropPinLatitude=' + latitude +
-      '&dropPinLongitude=' + longitude;
+      '&dropPinLongitude=' + longitude +
+      '&customLatitude=' + latitude +
+      '&customLongitude=' + longitude +
+      '&customZoom=16';
 };
 
 var buildRetrieveSharedMapsUrl = function(teamName, token) {
