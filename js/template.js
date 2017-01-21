@@ -98,44 +98,6 @@ var primeSharedMapInfo = function(t) {
   });
 };
 
-var cardButtonCallbackV1 = function(t) {
-  primeSharedMapInfo(t);
-
-  var sharedMapInfo = cachedCardInfo;
-  if (sharedMapInfo && sharedMapInfo.mapNames) {
-    var popupItems = Object.keys(sharedMapInfo.mapNames).map(function(index) {
-      var sharedMapName = sharedMapInfo.mapNames[index];
-      var teamKey = sharedMapInfo.teamName;
-      var encodedSharedMapName = encodeURIComponent(sharedMapName);
-      var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
-      return {
-        text: sharedMapName,
-        url: sharedMapUrl,
-        callback: function(t) {
-          return t.attach({
-            url: sharedMapUrl,
-            name: sharedMapName
-          })
-          .then(function(){
-            return t.closePopup();
-          });
-        }
-      };
-    });
-  } else {
-    var popupItems = [];
-  }
-  return t.popup({
-    title: 'Select a Maprosoft map',
-    items: popupItems,
-    search: {
-      count: 5,
-      placeholder: 'Search shared maps',
-      empty: 'No share map found'
-    }
-  });
-};
-
 var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   //var retrievedSharedMapInfo = null;
@@ -209,7 +171,7 @@ var buildSharedMapPopupItem = function(t, teamKey, sharedMapName) {
   };
 };
 
-var cardButtonCallbackV2 = function(t) {
+var cardButtonCallback = function(t) {
   return t.popup({
     title: 'Select a Maprosoft map',
     items: getSharedMapPopupItems,
@@ -307,14 +269,10 @@ TrelloPowerUp.initialize({
     return getBadges(t);
   },
   'card-buttons': function(t, options) {
-    return [/*{
-      icon: MAPROSOFT_ICON_GRAY,
-      text: 'v1 Maprosoft map',
-      callback: cardButtonCallbackV1
-    }, */{
+    return [{
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Shared Map',
-      callback: cardButtonCallbackV2
+      callback: cardButtonCallback
     }, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',

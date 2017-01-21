@@ -4,24 +4,6 @@ var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
 t.render(function() {
-  //return Promise.all([
-  //  t.get('board', 'shared', TEAM_NAME_KEY),
-  //  t.get('board', 'shared', TEAM_TOKEN_KEY)
-  //])
-  //.spread(function(teamName, token) {
-  //  if (teamName) {
-  //    var addressTextArea = document.getElementById('address');
-  //    maprosoftTeamNameTextField.value = teamName;
-  //  }
-  //  if (token) {
-  //    var maprosoftTokenTextField = document.getElementById(TEAM_TOKEN_KEY);
-  //    maprosoftTokenTextField.value = token;
-  //  }
-  //})
-  //.then(function(){
-  //  t.sizeTo('#settings-content')
-  //  .done();
-  //})
 });
 
 document.getElementById('save-location').addEventListener('click', function() {
