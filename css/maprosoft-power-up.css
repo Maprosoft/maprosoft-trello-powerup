@@ -9,6 +9,13 @@ body.map {
   height: 100%;
 }
 
+#map-overlay-content {
+  background: white;
+  padding: 24px;
+  width: 80%;
+  height: 80%;
+}
+
 #overlay-content {
   background: white;
   padding: 24px;

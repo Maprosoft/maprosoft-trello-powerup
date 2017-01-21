@@ -52,21 +52,22 @@ var getBadges = function(t) {
 
 var boardButtonCallback = function(t){
   return t.popup({
-    title: 'Popup List Example',
+    title: 'Maprosoft board actions',
     items: [
       {
-        text: 'Open Overlay',
+        text: 'Map Overlay',
         callback: function(t){
           return t.overlay({
-            url: './overlay.html',
-            args: { rand: (Math.random() * 100).toFixed(0) }
+            url: './map-section.html',
+            args: {
+              overlayMode: true
+            }
           })
           .then(function(){
             return t.closePopup();
           });
         }
-      },
-      {
+      }, {
         text: 'Open Board Bar',
         callback: function(t){
           return t.boardBar({
@@ -82,25 +83,8 @@ var boardButtonCallback = function(t){
   });
 };
 
-var primeSharedMapInfo = function(t) {
-  var popupItems = [];
-  t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY).then(function(sharedMapInfoJson) {
-    if (sharedMapInfoJson) {
-      var sharedMapInfo = JSON.parse(sharedMapInfoJson);
-      if (sharedMapInfo && sharedMapInfo.mapNames) {
-        cachedCardInfo = sharedMapInfo;
-      } else {
-        // ???
-      }
-    } else {
-      // ???
-    }
-  });
-};
-
 var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
-  //var retrievedSharedMapInfo = null;
   return Promise.all([
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
     t.get('board', 'shared', TEAM_NAME_KEY),
@@ -145,17 +129,18 @@ var getSharedMapPopupItems = function(t, options) {
 };
 
 var buildSharedMapPopupItems = function(t, sharedMapInfo) {
-  var teamKey = sharedMapInfo.teamName;
+  var teamName = sharedMapInfo.teamName;
   var popupItems = Object.keys(sharedMapInfo.mapNames).map(function (index) {
     var sharedMapName = sharedMapInfo.mapNames[index];
-    return buildSharedMapPopupItem(t, teamKey, sharedMapName);
+    return buildSharedMapPopupItem(t, teamName, sharedMapName);
   });
   return popupItems;
 };
 
-var buildSharedMapPopupItem = function(t, teamKey, sharedMapName) {
+var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
   var encodedSharedMapName = encodeURIComponent(sharedMapName);
-  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + teamKey + '/' + encodedSharedMapName;
+  var encodeTeamName = encodeURIComponent(teamName);
+  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodeTeamName + '/' + encodedSharedMapName;
   return {
     text: sharedMapName,
     url: sharedMapUrl,
@@ -171,7 +156,7 @@ var buildSharedMapPopupItem = function(t, teamKey, sharedMapName) {
   };
 };
 
-var cardButtonCallback = function(t) {
+var addSharedMapCallback = function(t) {
   return t.popup({
     title: 'Select a Maprosoft map',
     items: getSharedMapPopupItems,
@@ -183,19 +168,13 @@ var cardButtonCallback = function(t) {
   });
 };
 
-var locationMapCallback = function(t) {
+var addLocationMapCallback = function(t) {
   return t.popup({
     title: 'Enter a location',
     url: './location-entry.html',
     height: 250
   });
 };
-
-//doGet(retrieveSharedMapsUrl).then(function(data) {
-//  cachedSharedMapNames = data.mapNames;
-//});
-
-//primeSharedMapInfo(t);
 
 TrelloPowerUp.initialize({
   'attachment-sections': function(t, options) {
@@ -261,7 +240,7 @@ TrelloPowerUp.initialize({
   'board-buttons': function(t, options){
     return [{
       icon: MAPROSOFT_ICON_COLOR,
-      text: 'Template',
+      text: 'Maprosoft',
       callback: boardButtonCallback
     }];
   },
@@ -272,11 +251,11 @@ TrelloPowerUp.initialize({
     return [{
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Shared Map',
-      callback: cardButtonCallback
+      callback: addSharedMapCallback
     }, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',
-      callback: locationMapCallback
+      callback: addLocationMapCallback
     }];
   },
   'card-detail-badges': function(t, options) {
