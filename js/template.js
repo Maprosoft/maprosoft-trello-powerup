@@ -63,7 +63,7 @@ var boardButtonCallback = function(t){
               return t.overlay({
                 url: './map-overlay.html',
                 args: {
-                  'map-url': 'https://www.maprosoft.com/app/map?team=' + generalMapUrl,
+                  'map-url': generalMapUrl,
                   overlayMode: true
                 }
               })
