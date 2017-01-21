@@ -58,7 +58,7 @@ var boardButtonCallback = function(t){
         text: 'Map Overlay',
         callback: function(t){
           return t.overlay({
-            url: './map-operlay.html',
+            url: './map-overlay.html',
             args: {
               overlayMode: true
             }
