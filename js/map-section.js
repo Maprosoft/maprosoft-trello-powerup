@@ -4,7 +4,7 @@ var t = TrelloPowerUp.iframe();
 
 // you can access arguments passed to your iframe like so
 var mapUrl = t.arg('map-url');
-var inOverlayMode = t.arg('overlay-mode');
+var inOverlayMode = t.arg('overlayMode');
 
 //var $mapFrame = $('#map-frame');
 //$mapFrame.attr('id', mapUrl);
