@@ -26,7 +26,7 @@ t.render(function() {
 
 document.getElementById('save-location').addEventListener('click', function() {
   var addressTextArea = document.getElementById('address');
-  var address = addressTextArea.innerHTML;
+  var address = addressTextArea.value;
   if (address) {
     return t.get('board', 'shared', TEAM_TOKEN_KEY)
         .then(function(token) {
