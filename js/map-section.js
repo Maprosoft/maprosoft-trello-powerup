@@ -27,7 +27,6 @@ var resizeOverlayMap = function() {
 
 var handleWindowResize = function(event) {
     resizeOverlayMap();
-    event.preventDefault();
 };
 
 t.render(function () {
