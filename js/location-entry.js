@@ -57,7 +57,7 @@ document.getElementById('save-location').addEventListener('click', function() {
                   .then(function(){
                     return t.closePopup();
                   });
-            };
+            });
           } else {
             return t.closePopup();
           }
