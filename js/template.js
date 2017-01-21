@@ -56,16 +56,20 @@ var boardButtonCallback = function(t){
     items: [
       {
         text: 'Map Overlay',
-        callback: function(t){
-          return t.overlay({
-            url: './map-overlay.html',
-            args: {
-              'map-url': 'https://www.maprosoft.com/app/map',
-              overlayMode: true
-            }
-          })
-          .then(function(){
-            return t.closePopup();
+        callback: function(t) {
+          return t.get('board', 'shared', TEAM_NAME_KEY)
+          .then(function(teamName) {
+              var generalMapUrl = buildGeneralMapUrl(teamName);
+              return t.overlay({
+                url: './map-overlay.html',
+                args: {
+                  'map-url': 'https://www.maprosoft.com/app/map?team=' + generalMapUrl,
+                  overlayMode: true
+                }
+              })
+              .then(function(){
+                return t.closePopup();
+              });
           });
         }
       }, {
