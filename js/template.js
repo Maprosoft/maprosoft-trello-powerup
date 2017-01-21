@@ -264,7 +264,7 @@ TrelloPowerUp.initialize({
   'board-buttons': function(t, options){
     return [{
       icon: MAPROSOFT_ICON_COLOR,
-      text: 'Maprosoft',
+      text: 'Maprosoft Map',
       callback: boardButtonCallback
     }];
   },
