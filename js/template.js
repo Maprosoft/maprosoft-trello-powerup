@@ -198,21 +198,22 @@ TrelloPowerUp.initialize({
       var sections = [];
       for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
         var attachment = claimed[claimIndex];
-        var claimedAttachments = [];
-        claimedAttachments.push(attachment);
-        var mapSection = {
-          id: 'maprosoft-map', // optional if you aren't using a function for the title
-          claimed: claimedAttachments,
-          icon: MAPROSOFT_ICON_GRAY,
-          title: 'Maprosoft Map',
-          content: {
-            type: 'iframe',
-            url: t.signUrl('./map-section.html',
-                { "map-url": attachment.url }),
-            height: 400
-          }
-        };
-        sections.push(mapSection);
+        (function(attachment) {
+          var claimedAttachments = [];
+          claimedAttachments.push(attachment);
+          var mapSection = {
+            id: 'maprosoft-map', // optional if you aren't using a function for the title
+            claimed: claimedAttachments,
+            icon: MAPROSOFT_ICON_GRAY,
+            title: 'Maprosoft Map',
+            content: {
+              type: 'iframe',
+              url: t.signUrl('./map-section.html', { "map-url": attachment.url }),
+              height: 400
+            }
+          };
+          sections.push(mapSection);
+        })(attachment);
       }
       return sections;
     } else {
