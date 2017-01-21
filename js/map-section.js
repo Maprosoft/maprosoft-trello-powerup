@@ -19,9 +19,9 @@ t.render(function () {
     var mapFrameElement = document.getElementById('map-frame');
     if (inOverlayMode) {
         var overlayContentElement = document.getElementById('map-overlay-content');
-        var overlayContentHeight = overlayContentElement.style.height;
+        var overlayContentHeight = overlayContentElement.offsetHeight;
         var headerElement = document.getElementById('map-overlay-header');
-        var headerHeight = headerElement.style.height;
+        var headerHeight = headerElement.offsetHeight;
         var mapHeight = overlayContentHeight - headerHeight;
 
         mapFrameElement.height = mapHeight;
