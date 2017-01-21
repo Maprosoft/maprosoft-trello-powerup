@@ -18,6 +18,13 @@ t.render(function () {
     // from your section
     var mapFrameElement = document.getElementById('map-frame');
     if (inOverlayMode) {
+        var overlayContentElement = document.getElementById('map-overlay-content');
+        var overlayContentHeight = overlayContentElement.style.height;
+        var headerElement = document.getElementById('map-overlay-header');
+        var headerHeight = headerElement.style.height;
+        var mapHeight = overlayContentHeight - headerHeight;
+
+        mapFrameElement.height = mapHeight;
         mapFrameElement.src = mapUrl;
 
         // close overlay if user clicks outside our content
