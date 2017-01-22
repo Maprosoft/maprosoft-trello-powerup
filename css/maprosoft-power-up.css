@@ -36,3 +36,7 @@ body.map-section {
 .hidden {
   display: none;
 }
+
+#error-message {
+  color: darkred;
+}
