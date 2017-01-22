@@ -167,7 +167,7 @@ var addLocationMapCallback = function(t) {
   });
 };
 
-var buildMapSection = function(t, claimIndex, attachment) {
+var buildMapSection = function(t, attachment) {
   // Capture the attachment variable in a closure so that it's attributes are safe to pass
   // into promises such as the signUrl function.
   //(function(attachment) {
@@ -180,10 +180,10 @@ var buildMapSection = function(t, claimIndex, attachment) {
   });
   //console.log('Signed URL for attachment ' + attachmentUrl + " => " + signedUrl);
   var mapSection = {
-    id: 'maprosoft-map-' + claimIndex, // optional if you aren't using a function for the title
+    //id: 'maprosoft-map', // optional if you aren't using a function for the title
     claimed: claimedAttachments,
     icon: MAPROSOFT_ICON_GRAY,
-    title: 'Maprosoft Map ' + claimIndex,
+    title: 'Maprosoft Map',
     content: {
       type: 'iframe',
       url: signedUrl,
@@ -218,7 +218,7 @@ TrelloPowerUp.initialize({
       var sections = [];
       for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
         var attachment = claimed[claimIndex];
-        var mapSection = buildMapSection(t, claimIndex, attachment);
+        var mapSection = buildMapSection(t, attachment);
         sections.push(mapSection);
       }
       return sections;
