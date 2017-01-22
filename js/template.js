@@ -53,19 +53,29 @@ var getBadges = function(t) {
 var boardButtonCallback = function(t) {
   return t.get('board', 'shared', TEAM_NAME_KEY)
       .then(function(teamName) {
-        var generalMapUrl = buildGeneralMapUrl(teamName);
-        var settingsOk = teamName && teamName.length;
-        return t.overlay({
-          url: './map-overlay.html',
-          args: {
-            settingsOk: settingsOk,
-            'map-url': generalMapUrl,
-            overlayMode: true
-          }
-        })
-        .then(function(){
-          return t.closePopup();
-        });
+        if (teamName) {
+          var generalMapUrl = buildGeneralMapUrl(teamName);
+          var settingsOk = teamName && teamName.length;
+          return t.overlay({
+            url: './map-overlay.html',
+            args: {
+              settingsOk: settingsOk,
+              'map-url': generalMapUrl,
+              overlayMode: true
+            }
+          })
+          .then(function(){
+            return t.closePopup();
+          });
+        } else {
+          return t.overlay({
+            url: './no-settings.html',
+            args: {}
+          })
+          .then(function () {
+            return t.closePopup();
+          });
+        }
       });
 };
 
@@ -76,38 +86,16 @@ var getSharedMapPopupItems = function(t, options) {
     t.get('board', 'shared', TEAM_NAME_KEY),
     t.get('board', 'shared', TEAM_TOKEN_KEY)
   ])
-  //.spread(function(sharedMapInfo, teamName, token) {
-  //  if (sharedMapInfo && sharedMapInfo.mapNames) {
-  //    retrievedSharedMapInfo = sharedMapInfo;
-  //  } else {
-  //    // If we don't have anything let's go fetch it
-  //    if (teamName) {
-  //      retrievedSharedMapInfo = getFreshMapInfo(teamName); // Should return a Promise
-  //    } else {
-  //      retrievedSharedMapInfo = getFreshMapInfo('demo'); // Should return a Promise
-  //    }
-  //  }
-  //})
   .spread(function(sharedMapInfoJson, teamName, token) {
       if (teamName && token && sharedMapInfoJson) {
         var sharedMapInfo = JSON.parse(sharedMapInfoJson);
       } else {
         var sharedMapInfo = null;
-        //return t.closePopup()
-        //  .then(function () {
-        //    return t.overlay({
-        //      url: './no-settings.html',
-        //      args: {}
-        //    })
-        //  });
         return t.overlay({
           url: './no-settings.html',
           args: {}
         })
         .then(function () {
-          setTimeout(function() {
-            t.closePopup();
-          }, 1000);
           return t.closePopup();
         });
       }
