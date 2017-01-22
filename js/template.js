@@ -173,6 +173,15 @@ var buildMapSection = function(t, attachment) {
   //(function(attachment) {
   var claimedAttachments = [];
   claimedAttachments.push(attachment);
+  var attachmentUrl = attachment.url;
+  //var signedUrl = t.signUrl('./map-section.html', {
+  //  "map-url": attachmentUrl,
+  //  settingsOk: true
+  //});
+  var signedUrl = t.signUrl('./map-section.html', {
+    "map-url": attachmentUrl,
+    settingsOk: true
+  }).bind(attachmentUrl);
   var mapSection = {
     id: 'maprosoft-map', // optional if you aren't using a function for the title
     claimed: claimedAttachments,
@@ -180,10 +189,7 @@ var buildMapSection = function(t, attachment) {
     title: 'Maprosoft Map',
     content: {
       type: 'iframe',
-      url: t.signUrl('./map-section.html', {
-        "map-url": attachment.url,
-        settingsOk: true
-      }),
+      url: signedUrl,
       height: 400
     }
   };
@@ -213,27 +219,7 @@ TrelloPowerUp.initialize({
       for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
         var attachment = claimed[claimIndex];
         var mapSection = buildMapSection(t, attachment);
-        //// Capture the attachment variable in a closure so that it's attributes are safe to pass
-        //// into promises such as the signUrl function.
-        ////(function(attachment) {
-        //  var claimedAttachments = [];
-        //  claimedAttachments.push(attachment);
-        //  var mapSection = {
-        //    id: 'maprosoft-map', // optional if you aren't using a function for the title
-        //    claimed: claimedAttachments,
-        //    icon: MAPROSOFT_ICON_GRAY,
-        //    title: 'Maprosoft Map',
-        //    content: {
-        //      type: 'iframe',
-        //      url: t.signUrl('./map-section.html', {
-        //        "map-url": attachment.url,
-        //        settingsOk: true
-        //      }),
-        //      height: 400
-        //    }
-        //  };
-          sections.push(mapSection);
-        //})(claimed[claimIndex]);
+        sections.push(mapSection);
       }
       return sections;
     } else {
