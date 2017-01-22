@@ -31,7 +31,7 @@ t.render(function () {
         mapFrameElement.style.display='block';
         noSettingsSectionElement.style.display='none';
     } else {
-        mapFrameElement.style.display='block';
+        mapFrameElement.style.display='none';
         noSettingsSectionElement.style.display='block';
     }
     if (inOverlayMode) {
@@ -42,7 +42,7 @@ t.render(function () {
         // close overlay if user clicks outside our content
         document.addEventListener('click', function(event) {
             var eventtarget = event.target;
-            if (eventtarget.tagName == 'BODY' || eventtarget.id == 'close-map-overlay') {
+            if (eventtarget.tagName == 'BODY' || eventtarget.id == 'close-map-overlay' || eventtarget.id == 'i.fa..fa-window-close') {
                 t.closeOverlay().done();
             }
         });
