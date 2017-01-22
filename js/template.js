@@ -89,7 +89,7 @@ var getSharedMapPopupItems = function(t, options) {
   //  }
   //})
   .spread(function(sharedMapInfoJson, teamName, token) {
-      if (sharedMapInfoJson) {
+      if (teamName && token && sharedMapInfoJson) {
         var sharedMapInfo = JSON.parse(sharedMapInfoJson);
       } else {
         var sharedMapInfo = null;
