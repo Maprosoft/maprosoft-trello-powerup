@@ -193,6 +193,7 @@ var buildMapSection = function(t, attachment) {
       height: 400
     }
   };
+  console.log('Built map section: ' + attachmentUrl);
   return mapSection;
 };
 
@@ -220,6 +221,7 @@ TrelloPowerUp.initialize({
         var attachment = claimed[claimIndex];
         var mapSection = buildMapSection(t, attachment);
         sections.push(mapSection);
+        break;
       }
       return sections;
     } else {
