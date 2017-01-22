@@ -34,7 +34,11 @@ document.getElementById('save-settings').addEventListener('click', function() {
   .then(function() {
         return t.set('board', 'shared', TEAM_TOKEN_KEY, token);
   }).then(function() {
-        return doGet(buildRetrieveSharedMapsUrl(teamName, token));
+        return doGet(buildRetrieveSharedMapsUrl(teamName, token))
+        .reject(function() {
+            var errorMessageElement = document.getElementById('error-message');
+            errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
+        });
   }).then(function(sharedMapInfo) {
       if (sharedMapInfo && sharedMapInfo.teamName && sharedMapInfo.mapNames) {
           var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
