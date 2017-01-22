@@ -221,7 +221,6 @@ TrelloPowerUp.initialize({
         var attachment = claimed[claimIndex];
         var mapSection = buildMapSection(t, attachment);
         sections.push(mapSection);
-        break;
       }
       return sections;
     } else {
