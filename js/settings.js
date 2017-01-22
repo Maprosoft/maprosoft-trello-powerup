@@ -49,9 +49,6 @@ document.getElementById('save-settings').addEventListener('click', function() {
       }
   }).then(function() {
         return t.closePopup();
-  }).reject(function() {
-      var errorMessageElement = document.getElementById('error-message');
-      errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
   });
 });
 
