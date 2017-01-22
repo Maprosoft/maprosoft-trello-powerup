@@ -171,8 +171,8 @@ var buildMapSection = function(t, attachment) {
   // Capture the attachment variable in a closure so that it's attributes are safe to pass
   // into promises such as the signUrl function.
   //(function(attachment) {
-  var claimedAttachments = [];
-  claimedAttachments.push(attachment);
+  var claimedAttachments = [attachment];
+  //claimedAttachments.push(attachment);
   var attachmentUrl = attachment.url;
   var signedUrl = t.signUrl('./map-section.html', {
     "map-url": attachmentUrl,
