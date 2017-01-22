@@ -3,23 +3,14 @@
 var t = TrelloPowerUp.iframe();
 
 // you can access arguments passed to your iframe like so
+var settingsOk = t.arg('settingsOk');
 var mapUrl = t.arg('map-url');
 var inOverlayMode = t.arg('overlayMode');
-
-//var $mapFrame = $('#map-frame');
-//$mapFrame.attr('id', mapUrl);
-
-//var mapFrame = document.getElementById('map-frame');
-//mapFrame.src = mapUrl;
 
 var resizeOverlayMap = function() {
     var mapFrameElement = document.getElementById('map-frame');
     var overlayContentElement = document.getElementById('map-overlay-content');
-    //var overlayContentHeight = overlayContentElement.offsetHeight;
     var overlayContentHeight = overlayContentElement.offsetHeight;
-    //var headerElement = document.getElementById('map-overlay-header');
-    //var headerHeight = headerElement.offsetHeight;
-    //var mapHeight = overlayContentHeight - headerHeight;
     var mapOffsetTop = mapFrameElement.offsetTop;
     var mapHeight = overlayContentHeight - mapOffsetTop;
     mapFrameElement.height = mapHeight;
@@ -34,9 +25,17 @@ t.render(function () {
     // recall this method as the user adds and removes attachments
     // from your section
     var mapFrameElement = document.getElementById('map-frame');
+    var noSettingsSectionElement = document.getElementById('no-settings-section');
+    if (settingsOk) {
+        mapFrameElement.src = mapUrl;
+        mapFrameElement.style.display='block';
+        noSettingsSectionElement.style.display='none';
+    } else {
+        mapFrameElement.style.display='block';
+        noSettingsSectionElement.style.display='block';
+    }
     if (inOverlayMode) {
         resizeOverlayMap();
-        mapFrameElement.src = mapUrl;
 
         optimizedResize.addWindowResizeListener(handleWindowResize);
 

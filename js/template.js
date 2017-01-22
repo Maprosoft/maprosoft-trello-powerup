@@ -54,16 +54,18 @@ var boardButtonCallback = function(t) {
   return t.get('board', 'shared', TEAM_NAME_KEY)
       .then(function(teamName) {
         var generalMapUrl = buildGeneralMapUrl(teamName);
+        var settingsOk = teamName != null;
         return t.overlay({
           url: './map-overlay.html',
           args: {
+            settingsOk: settingsOk,
             'map-url': generalMapUrl,
             overlayMode: true
           }
         })
-            .then(function(){
-              return t.closePopup();
-            });
+        .then(function(){
+          return t.closePopup();
+        });
       });
 
   //return t.popup({
