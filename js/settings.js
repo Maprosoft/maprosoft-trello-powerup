@@ -29,6 +29,8 @@ document.getElementById('save-settings').addEventListener('click', function() {
   var maprosoftTokenTextField = document.getElementById(TEAM_TOKEN_KEY);
   var teamName = maprosoftTeamNameTextField.value;
   var token = maprosoftTokenTextField.value;
+  var errorMessageElement = document.getElementById('error-message');
+  errorMessageElement.innerHTML
 
   return t.set('board', 'shared', TEAM_NAME_KEY, teamName)
   .then(function() {
@@ -52,7 +54,6 @@ document.getElementById('save-settings').addEventListener('click', function() {
   }).then(function() {
         return t.closePopup();
   }).catch(function() {
-      var errorMessageElement = document.getElementById('error-message');
       errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
   });
 });
