@@ -23,6 +23,8 @@ t.render(function() {
 document.getElementById('save-location').addEventListener('click', function() {
   var addressTextArea = document.getElementById('address');
   var address = addressTextArea.value;
+  var errorMessageElement = document.getElementById('error-message');
+  errorMessageElement.innerHTML = '';
   if (address) {
     return t.get('board', 'shared', TEAM_TOKEN_KEY)
         .then(function(token) {
@@ -63,6 +65,8 @@ document.getElementById('save-location').addEventListener('click', function() {
           return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
         }).then(function() {
           return t.closePopup();
+        }).catch(function() {
+          errorMessageElement.innerHTML = 'There was a problem getting information from Maprosoft. Check your settings and internet connection.';
         });
   } else {
     return t.closePopup();
