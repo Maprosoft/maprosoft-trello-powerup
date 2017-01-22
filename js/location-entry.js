@@ -4,6 +4,20 @@ var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
 t.render(function() {
+  return t.get('board', 'shared', TEAM_TOKEN_KEY)
+      .then(function(token) {
+        if (token) {
+          return geocodeAddress(token, address);
+        } else {
+          return t.overlay({
+            url: './no-settings.html',
+            args: {}
+          })
+          .then(function () {
+            return t.closePopup();
+          });
+        }
+      });
 });
 
 document.getElementById('save-location').addEventListener('click', function() {
@@ -23,17 +37,7 @@ document.getElementById('save-location').addEventListener('click', function() {
 
     return t.get('board', 'shared', TEAM_TOKEN_KEY)
         .then(function(token) {
-          if (token) {
-            return geocodeAddress(token, address);
-          } else {
-            return t.overlay({
-              url: './no-settings.html',
-              args: {}
-            })
-            .then(function(){
-              return t.closePopup();
-            });
-          }
+          return geocodeAddress(token, address);
         }).then(function(geocodeResult) {
           /*
           Example result:
