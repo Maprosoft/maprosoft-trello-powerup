@@ -42,7 +42,7 @@ t.render(function () {
         // close overlay if user clicks outside our content
         document.addEventListener('click', function(event) {
             var eventtarget = event.target;
-            if (eventtarget.tagName == 'BODY' || eventtarget.id == 'close-map-overlay' || eventtarget.id == 'i.fa..fa-window-close') {
+            if (eventtarget.tagName == 'BODY' || eventtarget.id == 'close-map-overlay' || eventtarget.id == 'close-map-overlay-button') {
                 t.closeOverlay().done();
             }
         });
