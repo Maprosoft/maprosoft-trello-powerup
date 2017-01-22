@@ -54,7 +54,7 @@ var boardButtonCallback = function(t) {
   return t.get('board', 'shared', TEAM_NAME_KEY)
       .then(function(teamName) {
         var generalMapUrl = buildGeneralMapUrl(teamName);
-        var settingsOk = teamName != null;
+        var settingsOk = teamName && teamName.length;
         return t.overlay({
           url: './map-overlay.html',
           args: {
