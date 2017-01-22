@@ -27,6 +27,7 @@ t.render(function () {
     var mapUrl = t.arg('map-url');
     var inOverlayMode = t.arg('overlayMode');
 
+    console.log('Rendering map section for URL ' + mapUrl);
 
     // make sure your rendering logic lives here, since we will
     // recall this method as the user adds and removes attachments
