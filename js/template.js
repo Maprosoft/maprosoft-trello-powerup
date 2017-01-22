@@ -188,7 +188,7 @@ TrelloPowerUp.initialize({
       // your section
       var sections = [];
       for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
-        var attachment = claimed[claimIndex];
+        //var attachment = claimed[claimIndex];
         // Capture the attachment variable in a closure so that it's attributes are safe to pass
         // into promises such as the signUrl function.
         (function(attachment) {
@@ -209,7 +209,7 @@ TrelloPowerUp.initialize({
             }
           };
           sections.push(mapSection);
-        })(attachment);
+        })(claimed[claimIndex]);
       }
       return sections;
     } else {
