@@ -24,7 +24,7 @@ t.render(function() {
   })
 });
 
-document.getElementById('save').addEventListener('click', function() {
+document.getElementById('save-settings').addEventListener('click', function() {
   var maprosoftTeamNameTextField = document.getElementById(TEAM_NAME_KEY);
   var maprosoftTokenTextField = document.getElementById(TEAM_TOKEN_KEY);
   var teamName = maprosoftTeamNameTextField.value;
@@ -41,4 +41,15 @@ document.getElementById('save').addEventListener('click', function() {
   }).then(function() {
         return t.closePopup();
   });
+});
+
+document.getElementById('clear-settings').addEventListener('click', function() {
+  return t.set('board', 'shared', TEAM_NAME_KEY, '')
+      .then(function() {
+        return t.set('board', 'shared', TEAM_TOKEN_KEY, '');
+      }).then(function() {
+        return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, '{}');
+      }).then(function() {
+        return t.closePopup();
+      });
 });
