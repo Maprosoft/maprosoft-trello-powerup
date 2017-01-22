@@ -205,7 +205,9 @@ TrelloPowerUp.initialize({
 
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function(attachment) {
-      return isMapLinkAttachment(attachment);
+      var isMapLinkAttachment = isMapLinkAttachment(attachment);
+      console.log('Returning ' + isMapLinkAttachment + ' for attachment ' + attachment.url);
+      return isMapLinkAttachment;
     });
 
     // you can have more than one attachment section on a card
