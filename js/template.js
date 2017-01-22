@@ -195,7 +195,7 @@ var buildMapSection = function(t, attachment) {
       height: 400
     }
   };
-  console.log('Built map section: ' + attachmentUrl);
+  //console.log('Built map section: ' + attachmentUrl);
   return mapSection;
 };
 
@@ -208,7 +208,7 @@ TrelloPowerUp.initialize({
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function(attachment) {
       var claim = isMapLinkAttachment(attachment);
-      console.log('Returning ' + claim + ' for attachment ' + attachment.url);
+      //console.log('Returning ' + claim + ' for attachment ' + attachment.url);
       return claim;
     });
 
