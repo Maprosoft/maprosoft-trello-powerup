@@ -24,17 +24,6 @@ document.getElementById('save-location').addEventListener('click', function() {
   var addressTextArea = document.getElementById('address');
   var address = addressTextArea.value;
   if (address) {
-
-    //var locationEntrySectionElement = document.getElementById('location-entry-content');
-    //var noSettingsSectionElement = document.getElementById('no-settings-section');
-    //if (settingsOk) {
-    //  locationEntrySectionElement.style.display='block';
-    //  noSettingsSectionElement.style.display='none';
-    //} else {
-    //  locationEntrySectionElement.style.display='none';
-    //  noSettingsSectionElement.style.display='block';
-    //}
-
     return t.get('board', 'shared', TEAM_TOKEN_KEY)
         .then(function(token) {
           return geocodeAddress(token, address);
