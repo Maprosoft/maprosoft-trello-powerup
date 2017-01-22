@@ -187,14 +187,14 @@ TrelloPowerUp.initialize({
       // that returns the section title. If you do so, provide a unique id for
       // your section
       var sections = [];
-      for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
-        //var attachment = claimed[claimIndex];
+      for (let claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
+        let attachment = claimed[claimIndex];
         // Capture the attachment variable in a closure so that it's attributes are safe to pass
         // into promises such as the signUrl function.
-        (function(attachment) {
-          var claimedAttachments = [];
+        //(function(attachment) {
+          let claimedAttachments = [];
           claimedAttachments.push(attachment);
-          var mapSection = {
+          let mapSection = {
             id: 'maprosoft-map', // optional if you aren't using a function for the title
             claimed: claimedAttachments,
             icon: MAPROSOFT_ICON_GRAY,
@@ -209,7 +209,7 @@ TrelloPowerUp.initialize({
             }
           };
           sections.push(mapSection);
-        })(claimed[claimIndex]);
+        //})(claimed[claimIndex]);
       }
       return sections;
     } else {
