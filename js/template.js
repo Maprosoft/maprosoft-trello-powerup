@@ -167,6 +167,29 @@ var addLocationMapCallback = function(t) {
   });
 };
 
+var buildMapSection = function(attachment) {
+  // Capture the attachment variable in a closure so that it's attributes are safe to pass
+  // into promises such as the signUrl function.
+  //(function(attachment) {
+  var claimedAttachments = [];
+  claimedAttachments.push(attachment);
+  var mapSection = {
+    id: 'maprosoft-map', // optional if you aren't using a function for the title
+    claimed: claimedAttachments,
+    icon: MAPROSOFT_ICON_GRAY,
+    title: 'Maprosoft Map',
+    content: {
+      type: 'iframe',
+      url: t.signUrl('./map-section.html', {
+        "map-url": attachment.url,
+        settingsOk: true
+      }),
+      height: 400
+    }
+  };
+  return mapSection;
+};
+
 TrelloPowerUp.initialize({
   'attachment-sections': function(t, options) {
     // options.entries is a list of the attachments for this card
@@ -187,27 +210,28 @@ TrelloPowerUp.initialize({
       // that returns the section title. If you do so, provide a unique id for
       // your section
       var sections = [];
-      for (let claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
-        let attachment = claimed[claimIndex];
-        // Capture the attachment variable in a closure so that it's attributes are safe to pass
-        // into promises such as the signUrl function.
-        //(function(attachment) {
-          let claimedAttachments = [];
-          claimedAttachments.push(attachment);
-          let mapSection = {
-            id: 'maprosoft-map', // optional if you aren't using a function for the title
-            claimed: claimedAttachments,
-            icon: MAPROSOFT_ICON_GRAY,
-            title: 'Maprosoft Map',
-            content: {
-              type: 'iframe',
-              url: t.signUrl('./map-section.html', {
-                "map-url": attachment.url,
-                settingsOk: true
-              }),
-              height: 400
-            }
-          };
+      for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
+        var attachment = claimed[claimIndex];
+        var mapSection = buildMapSection(attachment);
+        //// Capture the attachment variable in a closure so that it's attributes are safe to pass
+        //// into promises such as the signUrl function.
+        ////(function(attachment) {
+        //  var claimedAttachments = [];
+        //  claimedAttachments.push(attachment);
+        //  var mapSection = {
+        //    id: 'maprosoft-map', // optional if you aren't using a function for the title
+        //    claimed: claimedAttachments,
+        //    icon: MAPROSOFT_ICON_GRAY,
+        //    title: 'Maprosoft Map',
+        //    content: {
+        //      type: 'iframe',
+        //      url: t.signUrl('./map-section.html', {
+        //        "map-url": attachment.url,
+        //        settingsOk: true
+        //      }),
+        //      height: 400
+        //    }
+        //  };
           sections.push(mapSection);
         //})(claimed[claimIndex]);
       }
