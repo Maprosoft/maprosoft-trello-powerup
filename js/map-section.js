@@ -7,6 +7,8 @@ var settingsOk = t.arg('settingsOk');
 var mapUrl = t.arg('map-url');
 var inOverlayMode = t.arg('overlayMode');
 
+var mapRenderCount = 0;
+
 var resizeOverlayMap = function() {
     var mapFrameElement = document.getElementById('map-frame');
     var overlayContentElement = document.getElementById('map-overlay-content');
@@ -22,7 +24,8 @@ var handleWindowResize = function(event) {
 
 t.render(function () {
 
-    console.log('Rendering map section for URL ' + mapUrl);
+    mapRenderCount++;
+    console.log('Rendering map instance ' + mapRenderCount + ' section for URL ' + mapUrl);
 
     // make sure your rendering logic lives here, since we will
     // recall this method as the user adds and removes attachments
