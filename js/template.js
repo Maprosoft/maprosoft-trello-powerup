@@ -178,12 +178,17 @@ var buildMapSection = function(t, attachment) {
     "map-url": attachmentUrl,
     settingsOk: true
   });
+  if (attachmentUrl.indexOf('dropPin') > 0) {
+    var attachmentTitle = 'Maprosoft location map';
+  } else {
+    var attachmentTitle = 'Maprosoft shared map';
+  }
   //console.log('Signed URL for attachment ' + attachmentUrl + " => " + signedUrl);
   var mapSection = {
     //id: 'maprosoft-map', // optional if you aren't using a function for the title
     claimed: claimedAttachments,
     icon: MAPROSOFT_ICON_GRAY,
-    title: 'Maprosoft Map',
+    title: attachmentTitle,
     content: {
       type: 'iframe',
       url: signedUrl,
