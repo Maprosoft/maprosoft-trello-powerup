@@ -201,7 +201,10 @@ TrelloPowerUp.initialize({
             title: 'Maprosoft Map',
             content: {
               type: 'iframe',
-              url: t.signUrl('./map-section.html', { "map-url": attachment.url }),
+              url: t.signUrl('./map-section.html', {
+                "map-url": attachment.url,
+                settingsOk: true
+              }),
               height: 400
             }
           };
