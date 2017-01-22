@@ -167,7 +167,7 @@ var addLocationMapCallback = function(t) {
   });
 };
 
-var buildMapSection = function(attachment) {
+var buildMapSection = function(t, attachment) {
   // Capture the attachment variable in a closure so that it's attributes are safe to pass
   // into promises such as the signUrl function.
   //(function(attachment) {
@@ -212,7 +212,7 @@ TrelloPowerUp.initialize({
       var sections = [];
       for (var claimIndex = 0; claimIndex < claimed.length; claimIndex++) {
         var attachment = claimed[claimIndex];
-        var mapSection = buildMapSection(attachment);
+        var mapSection = buildMapSection(t, attachment);
         //// Capture the attachment variable in a closure so that it's attributes are safe to pass
         //// into promises such as the signUrl function.
         ////(function(attachment) {
