@@ -206,7 +206,7 @@ TrelloPowerUp.initialize({
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function(attachment) {
       var claim = isMapLinkAttachment(attachment);
-      console.log('Returning ' + isMapLinkAttachment + ' for attachment ' + attachment.url);
+      console.log('Returning ' + claim + ' for attachment ' + attachment.url);
       return claim;
     });
 
