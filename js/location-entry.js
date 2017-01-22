@@ -4,6 +4,8 @@ var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
 t.render(function() {
+  var addressTextArea = document.getElementById('address');
+  addressTextArea.focus();
   return t.get('board', 'shared', TEAM_TOKEN_KEY)
       .then(function(token) {
         if (token) {
