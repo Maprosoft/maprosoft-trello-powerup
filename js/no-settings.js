@@ -5,12 +5,12 @@ var t = TrelloPowerUp.iframe();
 // you can access arguments passed to your iframe like so
 
 var resizeOverlayMap = function() {
-    var mapFrameElement = document.getElementById('map-frame');
-    var overlayContentElement = document.getElementById('no-settings-content');
-    var overlayContentHeight = overlayContentElement.offsetHeight;
-    var mapOffsetTop = mapFrameElement.offsetTop;
-    var mapHeight = overlayContentHeight - mapOffsetTop;
-    mapFrameElement.height = mapHeight;
+    //var mapFrameElement = document.getElementById('map-frame');
+    //var overlayContentElement = document.getElementById('no-settings-content');
+    //var overlayContentHeight = overlayContentElement.offsetHeight;
+    //var mapOffsetTop = mapFrameElement.offsetTop;
+    //var mapHeight = overlayContentHeight - mapOffsetTop;
+    //mapFrameElement.height = mapHeight;
 };
 
 var handleWindowResize = function(event) {

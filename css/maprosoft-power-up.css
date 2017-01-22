@@ -9,6 +9,15 @@ body.map-section {
   height: 100%;
 }
 
+#no-settings-content {
+  background: white;
+  padding: 24px;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 500px;
+  max-height: 300px;
+}
+
 #map-overlay-content {
   background: white;
   padding: 24px;
