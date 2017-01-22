@@ -3,9 +3,9 @@
 var t = TrelloPowerUp.iframe();
 
 // you can access arguments passed to your iframe like so
-//var settingsOk = t.arg('settingsOk');
-//var mapUrl = t.arg('map-url');
-//var inOverlayMode = t.arg('overlayMode');
+var settingsOk = t.arg('settingsOk');
+var mapUrl = t.arg('map-url');
+var inOverlayMode = t.arg('overlayMode');
 
 var resizeOverlayMap = function() {
     var mapFrameElement = document.getElementById('map-frame');
@@ -21,11 +21,6 @@ var handleWindowResize = function(event) {
 };
 
 t.render(function () {
-
-    // you can access arguments passed to your iframe like so
-    var settingsOk = t.arg('settingsOk');
-    var mapUrl = t.arg('map-url');
-    var inOverlayMode = t.arg('overlayMode');
 
     console.log('Rendering map section for URL ' + mapUrl);
 
