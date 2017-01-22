@@ -93,13 +93,20 @@ var getSharedMapPopupItems = function(t, options) {
         var sharedMapInfo = JSON.parse(sharedMapInfoJson);
       } else {
         var sharedMapInfo = null;
-        return t.overlay({
-          url: './no-settings.html',
-          args: {}
-        })
-        .then(function () {
-          return t.closePopup();
-        });
+        return t.closePopup()
+          .then(function () {
+            return t.overlay({
+              url: './no-settings.html',
+              args: {}
+            })
+          });
+        //return t.overlay({
+        //  url: './no-settings.html',
+        //  args: {}
+        //})
+        //.then(function () {
+        //  return t.closePopup();
+        //});
       }
       if (sharedMapInfo && sharedMapInfo.mapNames) {
         return buildSharedMapPopupItems(t, sharedMapInfo);
