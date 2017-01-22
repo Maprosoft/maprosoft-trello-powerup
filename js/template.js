@@ -178,10 +178,7 @@ var buildMapSection = function(t, attachment) {
     "map-url": attachmentUrl,
     settingsOk: true
   });
-  //var signedUrl = t.signUrl('./map-section.html', {
-  //  "map-url": attachmentUrl,
-  //  settingsOk: true
-  //}).bind(attachmentUrl);
+  console.log('Signed URL for attachment ' + attachmentUrl + " => " + signedUrl);
   var mapSection = {
     id: 'maprosoft-map', // optional if you aren't using a function for the title
     claimed: claimedAttachments,
