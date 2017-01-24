@@ -16,9 +16,46 @@ var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 //var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
 //var cachedMapInfo = {};
 
+var teamNameToKey = function(teamNameOrKey) {
+  var key = teamNameOrKey;
+  key = key.toLowerCase();
+  key = key.replace(' ', '-');
+  key = key.replace('\'', '');
+  key = key.replace('"', '');
+  key = key.replace('~', '');
+  key = key.replace('`', '');
+  key = key.replace('!', '');
+  key = key.replace('@', '');
+  key = key.replace('#', '');
+  key = key.replace('$', '');
+  key = key.replace('%', '');
+  key = key.replace('^', '');
+  key = key.replace('&', '');
+  key = key.replace('*', '');
+  key = key.replace('(', '');
+  key = key.replace(')', '');
+  key = key.replace('{', '');
+  key = key.replace('}', '');
+  key = key.replace('[', '');
+  key = key.replace(']', '');
+  key = key.replace(':', '');
+  key = key.replace(';', '');
+  key = key.replace('.', '');
+  key = key.replace('<', '');
+  key = key.replace('>', '');
+  key = key.replace('?', '');
+  key = key.replace('/', '');
+  key = key.replace('\\', '');
+  key = key.replace('|', '');
+  key = key.replace('+', '');
+  key = key.replace('=', '');
+  key = key.replace('_', '');
+  return key;
+};
+
 var buildGeneralMapUrl = function(teamNameOrKey) {
-  var encodedTeamNameOrKey = encodeURIComponent(teamNameOrKey);
-  return 'https://www.maprosoft.com/app/map?team=' + encodedTeamNameOrKey;
+  var teamKey = teamNameToKey(teamNameOrKey);
+  return 'https://www.maprosoft.com/app/map?team=' + teamKey;
 };
 
 var buildGeocodeAddressUrl = function(token, address) {
@@ -27,9 +64,9 @@ var buildGeocodeAddressUrl = function(token, address) {
 };
 
 var buildUrlWithDropPin = function(teamNameOrKey, address, latitude, longitude) {
-  var encodedTeamNameOrKey = encodeURIComponent(teamNameOrKey);
+  var teamKey = teamNameToKey(teamNameOrKey);
   var encodedAddress = encodeURIComponent(address);
-  return 'https://www.maprosoft.com/app/map?team=' + encodedTeamNameOrKey +
+  return 'https://www.maprosoft.com/app/map?team=' + teamKey +
       '&dropPinTitle=' + encodedAddress +
       '&dropPinLatitude=' + latitude +
       '&dropPinLongitude=' + longitude +
@@ -39,8 +76,8 @@ var buildUrlWithDropPin = function(teamNameOrKey, address, latitude, longitude) 
 };
 
 var buildRetrieveSharedMapsUrl = function(teamNameOrKey, token) {
-  var encodedTeamNameOrKey = encodeURIComponent(teamNameOrKey);
-  return 'https://www.maprosoft.com/app/shared?team=' + encodedTeamNameOrKey + '&getSharedMapNames=yes';
+  var teamKey = teamNameToKey(teamNameOrKey);
+  return 'https://www.maprosoft.com/app/shared?team=' + teamKey + '&getSharedMapNames=yes';
 };
 
 var doGet = function(url) {
