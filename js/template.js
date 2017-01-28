@@ -231,7 +231,7 @@ TrelloPowerUp.initialize({
       return [];
     }
   },
-  'attachment-thumbnail': function(t, options){
+  /*'attachment-thumbnail': function(t, options){
     var parkName = formatNPSUrl(t, options.url);
     if (parkName) {
       // return an object with some or all of these properties:
@@ -248,14 +248,14 @@ TrelloPowerUp.initialize({
     } else {
       throw t.NotHandled();
     }
-  },
-  'board-buttons': function(t, options){
+  },*/
+  /*'board-buttons': function(t, options){
     return [{
       icon: MAPROSOFT_ICON_COLOR,
       text: 'Maprosoft Map',
       callback: boardButtonCallback
     }];
-  },
+  },*/
   'card-badges': function(t, options){
     return getBadges(t);
   },
@@ -264,16 +264,16 @@ TrelloPowerUp.initialize({
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Shared Map',
       callback: addSharedMapCallback
-    }, {
+    }/*, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',
       callback: addLocationMapCallback
-    }];
+    }*/];
   },
   'card-detail-badges': function(t, options) {
     return getBadges(t);
   },
-  'card-from-url': function(t, options) {
+  /*'card-from-url': function(t, options) {
     var parkName = formatNPSUrl(t, options.url);
     if(parkName){
       return {
@@ -294,7 +294,7 @@ TrelloPowerUp.initialize({
     } else {
       throw t.NotHandled();
     }
-  },
+  },*/
   'show-settings': function(t, options){
     return t.popup({
       title: 'Settings',
