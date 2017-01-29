@@ -80,6 +80,13 @@ var boardButtonCallback = function(t) {
 };
 
 var getSharedMapPopupItems = function(t, options) {
+  var retrievedSharedMapInfo = {
+    "teamName":"foo",
+    "mapNames":["Apple", "Orange", "Banana"]};
+  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+};
+
+var getSharedMapPopupItemsXXXXX = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   return Promise.all([
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
@@ -130,8 +137,8 @@ var buildSharedMapPopupItems = function(t, sharedMapInfo) {
 
 var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
   var encodedSharedMapName = encodeURIComponent(sharedMapName);
-  var encodeTeamName = encodeURIComponent(teamName);
-  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodeTeamName + '/' + encodedSharedMapName;
+  var encodedTeamName = encodeURIComponent(teamName);
+  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodedTeamName + '/' + encodedSharedMapName;
   return {
     text: sharedMapName,
     url: sharedMapUrl,
