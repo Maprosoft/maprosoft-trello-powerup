@@ -67,7 +67,10 @@ var addLocationMapCallback = function(t) {
 };
 
 var handleAddMapCallback = function(t) {
-    initialiseAddMapPopup();
+
+    setTimeout(function() {
+        initialiseAddMapPopup();
+    }, 5000);
     return t.popup({
         title: 'Add a map',
         url: './add-map-popup.html',
