@@ -10,6 +10,8 @@ var initialiseAddMapPopup = function() {
     $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
     var $actionLink = $('#action-a');
     $actionLink.click(handleSharedMapSelectionLink);
+    var $actionLinks = $('.shared-map-choice');
+    $actionLink.click(handleSharedMapSelectionLink);
 };
 
 var handleSharedMapSelectionLink = function(event) {
@@ -70,7 +72,7 @@ var handleAddMapCallback = function(t) {
 
     setTimeout(function() {
         initialiseAddMapPopup();
-    }, 5000);
+    }, 10000);
     return t.popup({
         title: 'Add a map',
         url: './add-map-popup.html',
