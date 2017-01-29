@@ -56,7 +56,8 @@ var teamNameToKey = function(teamNameOrKey) {
 var extractSharedMapNameFromUrl = function(url) {
   var sharedMapName = 'Maprosoft shared map';
   if (url) {
-    var urlParts = url.split('/');
+    var decodedUrl = decodeURI(url);
+    var urlParts = decodedUrl.split('/');
     if (urlParts && urlParts.length) {
       sharedMapName = urlParts[urlParts.length - 1];
     }
