@@ -56,26 +56,37 @@ var teamNameToKey = function(teamNameOrKey) {
 var extractSharedMapNameFromUrl = function(url) {
   var sharedMapName = 'Maprosoft shared map';
   if (url) {
-    //var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodeTeamName + '/' + encodedSharedMapName;
-    //var queryIndex = url.indexOf('?');
-    var parser = document.createElement('a');
-    //parser.href = "https://www.maprosoft.com:3000/app/shared/team-name-or-key/shared-map-name";
-    //parser.protocol; // => "https:"
-    //parser.hostname; // => "www.maprosoft.com"
-    //parser.port;     // => "3000"
-    //parser.pathname; // => "/app/shared/team-name-or-key/shared-map-name"
-    //parser.search;   // => ""
-    //parser.hash;     // => "#hash"
-    //parser.host; // => "www.maprosoft.com:3000"
-    if (parser && parser.pathname) {
-      var pathParts = parser.pathname.split('/');
-      if (pathParts && pathParts.length) {
-        sharedMapName = pathParts[pathParts.length - 1];
-      }
+    var urlParts = url.split('/');
+    if (urlParts && urlParts.length) {
+      sharedMapName = urlParts[urlParts.length - 1];
     }
   }
   return sharedMapName;
 };
+
+//var extractSharedMapNameFromUrl = function(url) {
+//  var sharedMapName = 'Maprosoft shared map';
+//  if (url) {
+//    //var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodeTeamName + '/' + encodedSharedMapName;
+//    //var queryIndex = url.indexOf('?');
+//    var parser = document.createElement('a');
+//    //parser.href = "https://www.maprosoft.com:3000/app/shared/team-name-or-key/shared-map-name";
+//    //parser.protocol; // => "https:"
+//    //parser.hostname; // => "www.maprosoft.com"
+//    //parser.port;     // => "3000"
+//    //parser.pathname; // => "/app/shared/team-name-or-key/shared-map-name"
+//    //parser.search;   // => ""
+//    //parser.hash;     // => "#hash"
+//    //parser.host; // => "www.maprosoft.com:3000"
+//    if (parser && parser.pathname) {
+//      var pathParts = parser.pathname.split('/');
+//      if (pathParts && pathParts.length) {
+//        sharedMapName = pathParts[pathParts.length - 1];
+//      }
+//    }
+//  }
+//  return sharedMapName;
+//};
 
 var buildGeneralMapUrl = function(teamNameOrKey) {
   var teamKey = teamNameToKey(teamNameOrKey);
