@@ -229,9 +229,9 @@ var getSharedMapPopupItems = function(t, options) {
               return t.closePopup();
             });
       }
-      if (sharedMapInfo && sharedMapInfo.mapNames) {
-        return buildSharedMapPopupItems(t, sharedMapInfo);
-      } else {
+      //if (sharedMapInfo && sharedMapInfo.mapNames) {
+      //  return buildSharedMapPopupItems(t, sharedMapInfo);
+      //} else {
         // If we don't have anything let's go fetch it
         if (teamName) {
           var teamKey = teamName;
@@ -245,7 +245,7 @@ var getSharedMapPopupItems = function(t, options) {
           });
           return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
-      }
+      //}
     }
   );
 };
