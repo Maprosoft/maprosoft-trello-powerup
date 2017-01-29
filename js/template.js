@@ -170,7 +170,7 @@ var buildSharedMapPopupItems = function(t, sharedMapInfo) {
   return popupItems;
 };
 
-var getSharedMapPopupItemsXxx = function(t, options) {
+var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   return Promise.all([
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
@@ -209,102 +209,6 @@ var getSharedMapPopupItemsXxx = function(t, options) {
     }
   });
 };
-
-var getSharedMapPopupItems = function(t, options) {
-  document.sharedMapPopupItems = [];
-  var Promise = TrelloPowerUp.Promise;
-  Promise.all([
-    t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
-    t.get('board', 'shared', TEAM_NAME_KEY),
-    t.get('board', 'shared', TEAM_TOKEN_KEY)
-  ])
-  .spread(function(sharedMapInfoJson, teamName, token) {
-    if (teamName && token && sharedMapInfoJson) {
-      var sharedMapInfo = JSON.parse(sharedMapInfoJson);
-    } else {
-      var sharedMapInfo = null;
-      return t.overlay({
-        url: './no-settings.html',
-        args: {}
-      })
-          .then(function () {
-            return t.closePopup();
-          });
-    }
-    if (sharedMapInfo && sharedMapInfo.mapNames) {
-      document.sharedMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
-    } else {
-      // If we don't have anything let's go fetch it
-      if (teamName) {
-        var teamKey = teamName;
-      } else {
-        var teamKey = 'demo';
-      }
-      return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
-        var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-        t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
-          // saved for next time
-        });
-        document.sharedMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-      });
-    }
-  })
-  .reflect();
-  return document.sharedMapPopupItems;
-};
-
-//var getSharedMapPopupItems = function(t, options) {
-//  return getSharedMapPopupItemsSynchronously(t, options)
-//      .then(function() {
-//        return document.sharedMapPopupItems;
-//      });
-//};
-//
-//var getSharedMapPopupItemsSynchronously = function(t, options) {
-//  document.sharedMapPopupItems = ['aaaa', 'bbbbbb'];
-//  var Promise = TrelloPowerUp.Promise;
-//  var deferred = Promise.defer();
-//  var itemsPromise = Promise.all([
-//    t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
-//    t.get('board', 'shared', TEAM_NAME_KEY),
-//    t.get('board', 'shared', TEAM_TOKEN_KEY)
-//  ])
-//  .spread(function(sharedMapInfoJson, teamName, token) {
-//    if (teamName && token && sharedMapInfoJson) {
-//      var sharedMapInfo = JSON.parse(sharedMapInfoJson);
-//    } else {
-//      var sharedMapInfo = null;
-//      return t.overlay({
-//        url: './no-settings.html',
-//        args: {}
-//      })
-//      .then(function () {
-//        return t.closePopup();
-//      });
-//    }
-//    if (sharedMapInfo && sharedMapInfo.mapNames) {
-//      document.sharedMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
-//      deferred.fulfill();
-//    } else {
-//      // If we don't have anything let's go fetch it
-//      if (teamName) {
-//        var teamKey = teamName;
-//      } else {
-//        var teamKey = 'demo';
-//      }
-//      return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
-//        var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-//        t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
-//          // saved for next time
-//        });
-//        document.sharedMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-//        deferred.fulfill();
-//      });
-//    }
-//  });
-//  //return itemsPromise;
-//  return deferred.promise;
-//};
 
 var addSharedMapCallbackA = function(t, options) {
   var items = getSharedMapPopupItems(t, options);
