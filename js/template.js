@@ -211,7 +211,6 @@ var getSharedMapPopupItemsXxxxxxxxxxxx = function(t, options) {
 };
 
 var getSharedMapPopupItems = function(t, options) {
-  var sharedMapPopupItems;
   var Promise = TrelloPowerUp.Promise;
   return Promise.join(
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
@@ -231,7 +230,7 @@ var getSharedMapPopupItems = function(t, options) {
             });
       }
       if (sharedMapInfo && sharedMapInfo.mapNames) {
-        sharedMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
+        return buildSharedMapPopupItems(t, sharedMapInfo);
       } else {
         // If we don't have anything let's go fetch it
         if (teamName) {
@@ -244,7 +243,7 @@ var getSharedMapPopupItems = function(t, options) {
           t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
             // saved for next time
           });
-          sharedMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+          return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
       }
     }
