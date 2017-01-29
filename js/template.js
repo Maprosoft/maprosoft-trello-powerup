@@ -232,7 +232,8 @@ var getSharedMapPopupItems = function(t, options) {
       });
     }
     if (sharedMapInfo && sharedMapInfo.mapNames) {
-      return buildSharedMapPopupItems(t, sharedMapInfo);
+      items = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+      return items;
     } else {
       // If we don't have anything let's go fetch it
       if (teamName) {
