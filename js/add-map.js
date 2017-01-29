@@ -43,6 +43,13 @@ var addLocationMapCallback = function(t) {
     });
 };
 
+var handleAddMapCallback = function(t) {
+    return t.popup({
+        title: 'Enter a location',
+        url: './add-map-popup.html'
+    });
+};
+
 var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
     var encodedSharedMapName = encodeURIComponent(sharedMapName);
     var encodedTeamName = encodeURIComponent(teamName);
