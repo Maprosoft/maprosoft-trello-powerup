@@ -45,8 +45,9 @@ var addLocationMapCallback = function(t) {
 
 var handleAddMapCallback = function(t) {
     return t.popup({
-        title: 'Enter a location',
-        url: './add-map-popup.html'
+        title: 'Add a map',
+        url: './add-map-popup.html',
+        height: 300
     });
 };
 

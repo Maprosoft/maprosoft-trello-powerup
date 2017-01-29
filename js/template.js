@@ -185,7 +185,7 @@ TrelloPowerUp.initialize({
       callback: addSharedMapCallbackC
     }, {
       icon: MAPROSOFT_ICON_GRAY,
-      text: 'Map',
+      text: 'Add map',
       callback: handleAddMapCallback
     }/*, {
       icon: MAPROSOFT_ICON_GRAY,
