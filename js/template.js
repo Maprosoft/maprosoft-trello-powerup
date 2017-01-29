@@ -232,7 +232,7 @@ var getSharedMapPopupItems = function(t, options) {
       });
     }
     if (sharedMapInfo && sharedMapInfo.mapNames) {
-      items = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+      items = buildSharedMapPopupItems(t, sharedMapInfo);
       return items;
     } else {
       // If we don't have anything let's go fetch it
