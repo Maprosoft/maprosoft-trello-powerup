@@ -198,7 +198,7 @@ var getSharedMapPopupItemsUsingPromise = function(t, options) {
 var getSharedMapPopupItemsDirectly = function(t, options) {
   var sharedMapInfo = {
     teamName: "mock",
-    mapNames: ["aaaaa", "bbbbb", "ccccc"]
+    mapNames: ["aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee", "fffff", "ggggg"]
   };
   return buildSharedMapPopupItems(t, sharedMapInfo);
 };
