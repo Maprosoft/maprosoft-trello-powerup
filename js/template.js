@@ -213,42 +213,42 @@ var getSharedMapPopupItemsXxxxxxxxxxxx = function(t, options) {
 var getSharedMapPopupItems = function(t, options) {
   var sharedMapPopupItems;
   var Promise = TrelloPowerUp.Promise;
-  return Promise.all([
+  return Promise.join(
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
     t.get('board', 'shared', TEAM_NAME_KEY),
-    t.get('board', 'shared', TEAM_TOKEN_KEY)
-  ])
-  .spread(function(sharedMapInfoJson, teamName, token) {
-    if (teamName && token && sharedMapInfoJson) {
-      var sharedMapInfo = JSON.parse(sharedMapInfoJson);
-    } else {
-      var sharedMapInfo = null;
-      return t.overlay({
-        url: './no-settings.html',
-        args: {}
-      })
-          .then(function () {
-            return t.closePopup();
-          });
-    }
-    if (sharedMapInfo && sharedMapInfo.mapNames) {
-      sharedMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
-    } else {
-      // If we don't have anything let's go fetch it
-      if (teamName) {
-        var teamKey = teamName;
+    t.get('board', 'shared', TEAM_TOKEN_KEY),
+    function(sharedMapInfoJson, teamName, token) {
+      if (teamName && token && sharedMapInfoJson) {
+        var sharedMapInfo = JSON.parse(sharedMapInfoJson);
       } else {
-        var teamKey = 'demo';
+        var sharedMapInfo = null;
+        return t.overlay({
+          url: './no-settings.html',
+          args: {}
+        })
+            .then(function () {
+              return t.closePopup();
+            });
       }
-      return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
-        var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-        t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
-          // saved for next time
+      if (sharedMapInfo && sharedMapInfo.mapNames) {
+        sharedMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
+      } else {
+        // If we don't have anything let's go fetch it
+        if (teamName) {
+          var teamKey = teamName;
+        } else {
+          var teamKey = 'demo';
+        }
+        return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
+          var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+          t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+            // saved for next time
+          });
+          sharedMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
         });
-        sharedMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-      });
+      }
     }
-  }).thenReturn(sharedMapPopupItems);
+  );
 };
 
 var addSharedMapCallbackA = function(t, options) {
