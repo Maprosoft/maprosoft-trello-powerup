@@ -123,32 +123,6 @@ var parkMap = {
   yose: 'Yosemite National Park',
   zion: 'Zion National Park'
 };
-var cardButtonCallback = function(t){
-  var items = Object.keys(parkMap).map(function(parkCode){
-    var urlForCode = 'http://www.nps.gov/' + parkCode + '/';
-    return {
-      text: parkMap[parkCode],
-      url: urlForCode,
-      callback: function(t){
-        return t.attach({ url: urlForCode, name: parkMap[parkCode] })
-            .then(function(){
-              return t.closePopup();
-            })
-      }
-    };
-  });
-
-  return t.popup({
-    title: 'Popup Search Example',
-    items: items,
-    search: {
-      count: 5,
-      placeholder: 'Search National Parks',
-      empty: 'No parks found'
-    }
-  });
-};
-
 
 
 var getSharedMapPopupItemsXXXXX = function(t, options) {
@@ -219,7 +193,33 @@ var buildSharedMapPopupItemXXXX = function(t, teamName, sharedMapName) {
   };
 };
 
-var addSharedMapCallback = function(t) {
+var addSharedMapCallback = function(t){
+  var items = Object.keys(parkMap).map(function(parkCode){
+    var urlForCode = 'http://www.nps.gov/' + parkCode + '/';
+    return {
+      text: parkMap[parkCode],
+      url: urlForCode,
+      callback: function(t){
+        return t.attach({ url: urlForCode, name: parkMap[parkCode] })
+            .then(function(){
+              return t.closePopup();
+            })
+      }
+    };
+  });
+
+  return t.popup({
+    title: 'Popup Search Example',
+    items: items,
+    search: {
+      count: 5,
+      placeholder: 'Search National Parks',
+      empty: 'No parks found'
+    }
+  });
+};
+
+var addSharedMapCallbackYYYY = function(t) {
   return t.popup({
     title: 'Select a Maprosoft map',
     items: getSharedMapPopupItems,
