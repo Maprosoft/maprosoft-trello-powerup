@@ -170,7 +170,7 @@ var buildSharedMapPopupItems = function(t, sharedMapInfo) {
   return popupItems;
 };
 
-var getSharedMapPopupItems = function(t, options) {
+var getSharedMapPopupItemsXxx = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   return Promise.all([
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
@@ -208,6 +208,48 @@ var getSharedMapPopupItems = function(t, options) {
       });
     }
   });
+};
+
+var getSharedMapPopupItems = function(t, options) {
+  var items = [];
+  var Promise = TrelloPowerUp.Promise;
+  Promise.all([
+    t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
+    t.get('board', 'shared', TEAM_NAME_KEY),
+    t.get('board', 'shared', TEAM_TOKEN_KEY)
+  ])
+    .spread(function(sharedMapInfoJson, teamName, token) {
+      if (teamName && token && sharedMapInfoJson) {
+        var sharedMapInfo = JSON.parse(sharedMapInfoJson);
+      } else {
+        var sharedMapInfo = null;
+        return t.overlay({
+          url: './no-settings.html',
+          args: {}
+        })
+        .then(function () {
+          return t.closePopup();
+        });
+      }
+      if (sharedMapInfo && sharedMapInfo.mapNames) {
+        return buildSharedMapPopupItems(t, sharedMapInfo);
+      } else {
+        // If we don't have anything let's go fetch it
+        if (teamName) {
+          var teamKey = teamName;
+        } else {
+          var teamKey = 'demo';
+        }
+        return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
+          var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+          t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+            // saved for next time
+          });
+          return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+        });
+      }
+    });
+    return items;
 };
 
 var addSharedMapCallbackA = function(t, options) {
@@ -353,14 +395,6 @@ TrelloPowerUp.initialize({
       icon: MAPROSOFT_ICON_GRAY,
       text: 'B: Shared Map',
       callback: addSharedMapCallbackB
-    },{
-      icon: MAPROSOFT_ICON_GRAY,
-      text: 'C: Shared Map',
-      callback: addSharedMapCallbackA(t, options)
-    }, {
-      icon: MAPROSOFT_ICON_GRAY,
-      text: 'D: Shared Map',
-      callback: addSharedMapCallbackB(t, options)
     }/*, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',
