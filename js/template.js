@@ -156,7 +156,7 @@ var buildSharedMapPopupItemXXXX = function(t, teamName, sharedMapName) {
   };
 };
 
-var addSharedMapCallback = function(t){
+var addSharedMapCallbackAAAAAAAAA = function(t){
   var items = Object.keys(parkMap).map(function(parkCode){
     var urlForCode = 'http://www.nps.gov/' + parkCode + '/';
     return {
@@ -219,7 +219,7 @@ var getSharedMapPopupItems = function(t, options) {
   //return cardButtonCallback(t);
 };
 
-var addSharedMapCallbackWWWWW = function(t) {
+var addSharedMapCallback = function(t) {
   return t.popup({
     title: 'Select a Maprosoft map',
     items: getSharedMapPopupItems,
