@@ -210,15 +210,6 @@ var getSharedMapPopupItems = function(t, options) {
   });
 };
 
-//var getSharedMapPopupItems = function(t, options) {
-//  var retrievedSharedMapInfo = {
-//    "teamName":"foo",
-//    "mapNames":["Apple", "Orange", "Banana"]};
-//  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-//
-//  //return cardButtonCallback(t);
-//};
-
 var addSharedMapCallbackA = function(t) {
   var items = getSharedMapPopupItems(t);
   return t.popup({
@@ -244,6 +235,15 @@ var addSharedMapCallbackB = function(t) {
     }
   });
 };
+
+//var getSharedMapPopupItems = function(t, options) {
+//  var retrievedSharedMapInfo = {
+//    "teamName":"foo",
+//    "mapNames":["Apple", "Orange", "Banana"]};
+//  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+//
+//  //return cardButtonCallback(t);
+//};
 
 var addLocationMapCallback = function(t) {
   return t.popup({
