@@ -170,9 +170,7 @@ var addLocationMapCallback = function(t) {
 var buildMapSection = function(t, attachment) {
   // Capture the attachment variable in a closure so that it's attributes are safe to pass
   // into promises such as the signUrl function.
-  //(function(attachment) {
   var claimedAttachments = [attachment];
-  //claimedAttachments.push(attachment);
   var attachmentUrl = attachment.url;
   var signedUrl = t.signUrl('./map-section.html', {
     "map-url": attachmentUrl,
@@ -181,7 +179,8 @@ var buildMapSection = function(t, attachment) {
   if (attachmentUrl.indexOf('dropPin') > 0) {
     var attachmentTitle = 'Maprosoft location map';
   } else {
-    var attachmentTitle = 'Maprosoft shared map';
+    //var attachmentTitle = 'Maprosoft shared map';
+    var attachmentTitle = extractSharedMapNameFromUrl(attachmentUrl);
   }
   //console.log('Signed URL for attachment ' + attachmentUrl + " => " + signedUrl);
   var mapSection = {
