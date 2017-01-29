@@ -219,8 +219,20 @@ var getSharedMapPopupItems = function(t, options) {
 //  //return cardButtonCallback(t);
 //};
 
-var addSharedMapCallback = function(t) {
-  //var items = getSharedMapPopupItems(t);
+var addSharedMapCallbackA = function(t) {
+  var items = getSharedMapPopupItems(t);
+  return t.popup({
+    title: 'Select a Maprosoft map',
+    items: items,
+    search: {
+      count: 5,
+      placeholder: 'Search shared maps',
+      empty: 'No share map found'
+    }
+  });
+};
+
+var addSharedMapCallbackB = function(t) {
   var items = getSharedMapPopupItems;
   return t.popup({
     title: 'Select a Maprosoft map',
@@ -335,9 +347,12 @@ TrelloPowerUp.initialize({
   'card-buttons': function(t, options) {
     return [{
       icon: MAPROSOFT_ICON_GRAY,
-      text: 'Shared Map',
-      callback: addSharedMapCallback
-      //callback: cardButtonCallback
+      text: 'Shared Map (A)',
+      callback: addSharedMapCallbackA
+    }, {
+      icon: MAPROSOFT_ICON_GRAY,
+      text: 'Shared Map (B)',
+      callback: addSharedMapCallbackB
     }/*, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',
