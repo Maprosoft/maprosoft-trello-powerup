@@ -218,38 +218,39 @@ var getSharedMapPopupItems = function(t, options) {
     t.get('board', 'shared', TEAM_NAME_KEY),
     t.get('board', 'shared', TEAM_TOKEN_KEY)
   ])
-    .spread(function(sharedMapInfoJson, teamName, token) {
-      if (teamName && token && sharedMapInfoJson) {
-        var sharedMapInfo = JSON.parse(sharedMapInfoJson);
+  .spread(function(sharedMapInfoJson, teamName, token) {
+    if (teamName && token && sharedMapInfoJson) {
+      var sharedMapInfo = JSON.parse(sharedMapInfoJson);
+    } else {
+      var sharedMapInfo = null;
+      return t.overlay({
+        url: './no-settings.html',
+        args: {}
+      })
+      .then(function () {
+        return t.closePopup();
+      });
+    }
+    if (sharedMapInfo && sharedMapInfo.mapNames) {
+      return buildSharedMapPopupItems(t, sharedMapInfo);
+    } else {
+      // If we don't have anything let's go fetch it
+      if (teamName) {
+        var teamKey = teamName;
       } else {
-        var sharedMapInfo = null;
-        return t.overlay({
-          url: './no-settings.html',
-          args: {}
-        })
-        .then(function () {
-          return t.closePopup();
-        });
+        var teamKey = 'demo';
       }
-      if (sharedMapInfo && sharedMapInfo.mapNames) {
-        return buildSharedMapPopupItems(t, sharedMapInfo);
-      } else {
-        // If we don't have anything let's go fetch it
-        if (teamName) {
-          var teamKey = teamName;
-        } else {
-          var teamKey = 'demo';
-        }
-        return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
-          var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-          t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
-            // saved for next time
-          });
-          return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+      return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
+        var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+        t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+          // saved for next time
         });
-      }
-    });
-    return items;
+        items = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+        return items;
+      });
+    }
+  });
+  return items;
 };
 
 var addSharedMapCallbackA = function(t, options) {
