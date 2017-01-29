@@ -80,12 +80,12 @@ var boardButtonCallback = function(t) {
 };
 
 var getSharedMapPopupItems = function(t, options) {
-  //var retrievedSharedMapInfo = {
-  //  "teamName":"foo",
-  //  "mapNames":["Apple", "Orange", "Banana"]};
-  //return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+  var retrievedSharedMapInfo = {
+    "teamName":"foo",
+    "mapNames":["Apple", "Orange", "Banana"]};
+  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
 
-  return cardButtonCallback(t);
+  //return cardButtonCallback(t);
 };
 
 //var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
@@ -231,6 +231,18 @@ var addSharedMapCallback = function(t) {
   });
 };
 
+var addSharedMapCallbackXXXX = function(t) {
+  return t.popup({
+    title: 'Select a Maprosoft map',
+    items: getSharedMapPopupItems,
+    search: {
+      count: 5,
+      placeholder: 'Search shared maps',
+      empty: 'No share map found'
+    }
+  });
+};
+
 var addLocationMapCallback = function(t) {
   return t.popup({
     title: 'Enter a location',
@@ -334,8 +346,8 @@ TrelloPowerUp.initialize({
     return [{
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Shared Map',
-      //callback: addSharedMapCallback
-      callback: cardButtonCallback
+      callback: addSharedMapCallback
+      //callback: cardButtonCallback
     }/*, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',
