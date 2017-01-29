@@ -79,34 +79,6 @@ var boardButtonCallback = function(t) {
       });
 };
 
-var getSharedMapPopupItems = function(t, options) {
-  var retrievedSharedMapInfo = {
-    "teamName":"foo",
-    "mapNames":["Apple", "Orange", "Banana"]};
-  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-
-  //return cardButtonCallback(t);
-};
-
-//var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
-//  var encodedSharedMapName = encodeURIComponent(sharedMapName);
-//  var encodedTeamName = encodeURIComponent(teamName);
-//  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodedTeamName + '/' + encodedSharedMapName;
-//  return {
-//    text: sharedMapName,
-//    url: sharedMapUrl,
-//    callback: function (t) {
-//      return t.attach({
-//        url: sharedMapUrl,
-//        name: sharedMapName
-//      })
-//      .then(function () {
-//        return t.closePopup();
-//      });
-//    }
-//  };
-//};
-
 
 var parkMap = {
   acad: 'Acadia National Park',
@@ -165,15 +137,6 @@ var getSharedMapPopupItemsXXXXX = function(t, options) {
   });
 };
 
-var buildSharedMapPopupItems = function(t, sharedMapInfo) {
-  var teamName = sharedMapInfo.teamName;
-  var popupItems = Object.keys(sharedMapInfo.mapNames).map(function (index) {
-    var sharedMapName = sharedMapInfo.mapNames[index];
-    return buildSharedMapPopupItem(t, teamName, sharedMapName);
-  });
-  return popupItems;
-};
-
 var buildSharedMapPopupItemXXXX = function(t, teamName, sharedMapName) {
   var encodedSharedMapName = encodeURIComponent(sharedMapName);
   var encodedTeamName = encodeURIComponent(teamName);
@@ -193,7 +156,7 @@ var buildSharedMapPopupItemXXXX = function(t, teamName, sharedMapName) {
   };
 };
 
-var addSharedMapCallback = function(t){
+var addSharedMapCallbackWWWWW = function(t){
   var items = Object.keys(parkMap).map(function(parkCode){
     var urlForCode = 'http://www.nps.gov/' + parkCode + '/';
     return {
@@ -219,19 +182,44 @@ var addSharedMapCallback = function(t){
   });
 };
 
-var addSharedMapCallbackYYYY = function(t) {
-  return t.popup({
-    title: 'Select a Maprosoft map',
-    items: getSharedMapPopupItems,
-    search: {
-      count: 5,
-      placeholder: 'Search shared maps',
-      empty: 'No share map found'
+var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
+  var encodedSharedMapName = encodeURIComponent(sharedMapName);
+  var encodedTeamName = encodeURIComponent(teamName);
+  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodedTeamName + '/' + encodedSharedMapName;
+  return {
+    text: sharedMapName,
+    url: sharedMapUrl,
+    callback: function (t) {
+      return t.attach({
+        url: sharedMapUrl,
+        name: sharedMapName
+      })
+          .then(function () {
+            return t.closePopup();
+          });
     }
-  });
+  };
 };
 
-var addSharedMapCallbackXXXX = function(t) {
+var buildSharedMapPopupItems = function(t, sharedMapInfo) {
+  var teamName = sharedMapInfo.teamName;
+  var popupItems = Object.keys(sharedMapInfo.mapNames).map(function (index) {
+    var sharedMapName = sharedMapInfo.mapNames[index];
+    return buildSharedMapPopupItem(t, teamName, sharedMapName);
+  });
+  return popupItems;
+};
+
+var getSharedMapPopupItems = function(t, options) {
+  var retrievedSharedMapInfo = {
+    "teamName":"foo",
+    "mapNames":["Apple", "Orange", "Banana"]};
+  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+
+  //return cardButtonCallback(t);
+};
+
+var addSharedMapCallback = function(t) {
   return t.popup({
     title: 'Select a Maprosoft map',
     items: getSharedMapPopupItems,
