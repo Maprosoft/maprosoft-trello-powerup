@@ -248,10 +248,11 @@ var getSharedMapPopupItems = function(t, options) {
   var teamKey = 'demo';
   return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
     var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-    t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+    return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
       // saved for next time
+    }).then(function() {
+      return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
     });
-    return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
   });
 
   //var Promise = TrelloPowerUp.Promise;
