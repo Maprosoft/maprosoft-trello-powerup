@@ -1,9 +1,16 @@
-$(document).ready(function() {
+//$(document).ready(function() {
+//    var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
+//    $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
+//    var $actionLink = $('#action-a');
+//    $actionLink.click(handleSharedMapSelectionLink);
+//});
+
+var initialiseAddMapPopup = function() {
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
     $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
     var $actionLink = $('#action-a');
     $actionLink.click(handleSharedMapSelectionLink);
-});
+};
 
 var handleSharedMapSelectionLink = function(event) {
     event.preventDefault();
@@ -60,6 +67,7 @@ var addLocationMapCallback = function(t) {
 };
 
 var handleAddMapCallback = function(t) {
+    initialiseAddMapPopup();
     return t.popup({
         title: 'Add a map',
         url: './add-map-popup.html',
