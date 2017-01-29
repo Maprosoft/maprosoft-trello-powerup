@@ -1,3 +1,19 @@
+$( document ).ready(function() {
+    var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
+    $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
+    var $actionLink = $('#action-a');
+    $actionLink.click(handleSharedMapSelectionLink);
+});
+
+var handleSharedMapSelectionLink = function(event) {
+    event.preventDefault();
+    var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
+    $sharedMapSelectionButton.text('hhhhhhhhhhhhhh');
+};
+
+var handleSharedMapSelectionButton = function(event) {
+
+};
 
 var addSharedMapCallbackA = function(t, options) {
     return t.popup({

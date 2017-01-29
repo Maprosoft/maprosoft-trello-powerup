@@ -11,31 +11,16 @@
       <div id="error-message"></div>
 
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown button
+        <button id="sharedMapSelectionButton" class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shared map
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a id="action-a" class="dropdown-item" href="#">Action</a>
+          <a id="action-b" class="dropdown-item" href="#">Another action</a>
+          <a id="action-c" class="dropdown-item" href="#">Something else here</a>
         </div>
       </div>
 
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
-      </div>
-      <!--
-      <select id="shared-map-names">
-        <option>aaaaa</option>
-        <option>bbbbb</option>
-        <option>ccccc</option>
-        <option>ddddd</option>
-      </select>
-      -->
       <p>Address:</p>
       <textarea id="address" name="textarea"rows="2" cols="40" placeholder="address"></textarea>
       <button id="save-location" class="mod-primary">Save</button>
