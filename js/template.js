@@ -210,11 +210,23 @@ var getSharedMapPopupItemsXxx = function(t, options) {
   });
 };
 
-var getSharedMapPopupItemsSynchronously = function(t, options) {
-  
+var delay = function(ms) {
+  var deferred = Promise.defer(); // warning, defer is deprecated, use the promise constructor
+  setTimeout(function(){
+    deferred.fulfill();
+  }, ms);
+  return deferred.promise;
 };
 
 var getSharedMapPopupItems = function(t, options) {
+  return getSharedMapPopupItemsSynchronously(t, options)
+      .then(function() {
+        return document.sharedMapPopupItems;
+      });
+};
+
+var getSharedMapPopupItemsSynchronously = function(t, options) {
+  document.sharedMapPopupItems = ['aaaa', 'bbbbbb'];
   var Promise = TrelloPowerUp.Promise;
   var deferred = Promise.defer();
   var itemsPromise = Promise.all([
@@ -236,8 +248,8 @@ var getSharedMapPopupItems = function(t, options) {
       });
     }
     if (sharedMapInfo && sharedMapInfo.mapNames) {
-      var items = buildSharedMapPopupItems(t, sharedMapInfo);
-      return items;
+      document.sharedMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
+      deferred.fulfill();
     } else {
       // If we don't have anything let's go fetch it
       if (teamName) {
@@ -250,8 +262,8 @@ var getSharedMapPopupItems = function(t, options) {
         t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
           // saved for next time
         });
-        var items = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-        return items;
+        document.sharedMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+        deferred.fulfill();
       });
     }
   });
