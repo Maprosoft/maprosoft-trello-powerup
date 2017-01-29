@@ -248,7 +248,7 @@ var getSharedMapPopupItems = function(t, options) {
         haredMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
       });
     }
-  }).return(sharedMapPopupItems);
+  }).thenReturn(sharedMapPopupItems);
 };
 
 var addSharedMapCallbackA = function(t, options) {
