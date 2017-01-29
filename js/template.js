@@ -210,7 +210,7 @@ var getSharedMapPopupItemsXxxxxxxxxxxx = function(t, options) {
   });
 };
 
-var getSharedMapPopupItems = function(t, options) {
+var getSharedMapPopupItemsSSSSSSSSSSSS = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   return Promise.join(
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
@@ -240,25 +240,51 @@ var getSharedMapPopupItems = function(t, options) {
           return t.closePopup();
         });
       }
-      //if (sharedMapInfo && sharedMapInfo.mapNames) {
-      //  return buildSharedMapPopupItems(t, sharedMapInfo);
-      //} else {
-        // If we don't have anything let's go fetch it
-        //if (teamName) {
-        //  var teamKey = teamName;
-        //} else {
-        //  var teamKey = 'demo';
-        //}
-        //return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
-        //  var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-        //  t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
-        //    // saved for next time
-        //  });
-        //  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-        //});
-      //}
     }
   );
+};
+
+var getSharedMapPopupItems = function(t, options) {
+  var teamKey = 'demo';
+  return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
+    var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+    t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+      // saved for next time
+    });
+    return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+  });
+
+  //var Promise = TrelloPowerUp.Promise;
+  //return Promise.join(
+  //    t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
+  //    t.get('board', 'shared', TEAM_NAME_KEY),
+  //    t.get('board', 'shared', TEAM_TOKEN_KEY),
+  //    function(sharedMapInfoJson, teamName, token) {
+  //      if (teamName && token && sharedMapInfoJson) {
+  //        //var sharedMapInfo = JSON.parse(sharedMapInfoJson);
+  //        if (teamName) {
+  //          var teamKey = teamName;
+  //        } else {
+  //          var teamKey = 'demo';
+  //        }
+  //        return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
+  //          var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+  //          t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+  //            // saved for next time
+  //          });
+  //          return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+  //        });
+  //      } else {
+  //        return t.overlay({
+  //          url: './no-settings.html',
+  //          args: {}
+  //        })
+  //            .then(function () {
+  //              return t.closePopup();
+  //            });
+  //      }
+  //    }
+  //);
 };
 
 var addSharedMapCallbackA = function(t, options) {
