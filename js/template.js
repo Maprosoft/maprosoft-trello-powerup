@@ -210,8 +210,13 @@ var getSharedMapPopupItemsXxx = function(t, options) {
   });
 };
 
+var getSharedMapPopupItemsSynchronously = function(t, options) {
+  
+};
+
 var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
+  var deferred = Promise.defer();
   var itemsPromise = Promise.all([
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
     t.get('board', 'shared', TEAM_NAME_KEY),
@@ -250,7 +255,8 @@ var getSharedMapPopupItems = function(t, options) {
       });
     }
   });
-  return itemsPromise;
+  //return itemsPromise;
+  return deferred.promise;
 };
 
 var addSharedMapCallbackA = function(t, options) {
