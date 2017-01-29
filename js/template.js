@@ -232,7 +232,7 @@ var getSharedMapPopupItems = function(t, options) {
           });
     }
     if (sharedMapInfo && sharedMapInfo.mapNames) {
-      haredMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
+      sharedMapPopupItems = buildSharedMapPopupItems(t, sharedMapInfo);
     } else {
       // If we don't have anything let's go fetch it
       if (teamName) {
@@ -245,7 +245,7 @@ var getSharedMapPopupItems = function(t, options) {
         t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
           // saved for next time
         });
-        haredMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+        sharedMapPopupItems = buildSharedMapPopupItems(t, retrievedSharedMapInfo);
       });
     }
   }).thenReturn(sharedMapPopupItems);
