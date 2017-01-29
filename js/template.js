@@ -220,9 +220,10 @@ var getSharedMapPopupItems = function(t, options) {
 };
 
 var addSharedMapCallback = function(t) {
+  var items = getSharedMapPopupItems(t);
   return t.popup({
     title: 'Select a Maprosoft map',
-    items: getSharedMapPopupItems,
+    items: items,
     search: {
       count: 5,
       placeholder: 'Search shared maps',
