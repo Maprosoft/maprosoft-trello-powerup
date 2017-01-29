@@ -229,6 +229,19 @@ var addSharedMapCallbackB = function(t, options) {
   });
 };
 
+var addSharedMapCallbackC = function(t, options) {
+  //var items = getSharedMapPopupItems;
+  return t.popup({
+    title: 'Select a Maprosoft map',
+    items: getSharedMapPopupItemsDirectly(t, options),
+    search: {
+      count: 5,
+      placeholder: 'Search shared maps',
+      empty: 'No share map found'
+    }
+  });
+};
+
 //var getSharedMapPopupItems = function(t, options) {
 //  var retrievedSharedMapInfo = {
 //    "teamName":"foo",
@@ -346,6 +359,10 @@ TrelloPowerUp.initialize({
       icon: MAPROSOFT_ICON_GRAY,
       text: 'B: Shared Map',
       callback: addSharedMapCallbackB
+    }, {
+      icon: MAPROSOFT_ICON_GRAY,
+      text: 'C: Shared Map',
+      callback: addSharedMapCallbackC
     }/*, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',
