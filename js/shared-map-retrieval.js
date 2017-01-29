@@ -1,4 +1,48 @@
 
+var addSharedMapCallbackA = function(t, options) {
+    return t.popup({
+        title: 'Select a Maprosoft map',
+        items: getSharedMapPopupItemsUsingPromise,
+        search: {
+            count: 5,
+            placeholder: 'Search shared maps',
+            empty: 'No share map found'
+        }
+    });
+};
+
+var addSharedMapCallbackB = function(t, options) {
+    return t.popup({
+        title: 'Select a Maprosoft map',
+        items: getSharedMapPopupItemsDirectly,
+        search: {
+            count: 5,
+            placeholder: 'Search shared maps',
+            empty: 'No share map found'
+        }
+    });
+};
+
+var addSharedMapCallbackC = function(t, options) {
+    return t.popup({
+        title: 'Select a Maprosoft map',
+        items: getSharedMapPopupItemsDirectly(t, options),
+        search: {
+            count: 5,
+            placeholder: 'Search shared maps',
+            empty: 'No share map found'
+        }
+    });
+};
+
+var addLocationMapCallback = function(t) {
+    return t.popup({
+        title: 'Enter a location',
+        url: './location-entry.html',
+        height: 250
+    });
+};
+
 var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
     var encodedSharedMapName = encodeURIComponent(sharedMapName);
     var encodedTeamName = encodeURIComponent(teamName);

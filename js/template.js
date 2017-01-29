@@ -79,52 +79,6 @@ var boardButtonCallback = function(t) {
       });
 };
 
-
-
-var addSharedMapCallbackA = function(t, options) {
-  return t.popup({
-    title: 'Select a Maprosoft map',
-    items: getSharedMapPopupItemsUsingPromise,
-    search: {
-      count: 5,
-      placeholder: 'Search shared maps',
-      empty: 'No share map found'
-    }
-  });
-};
-
-var addSharedMapCallbackB = function(t, options) {
-  return t.popup({
-    title: 'Select a Maprosoft map',
-    items: getSharedMapPopupItemsDirectly,
-    search: {
-      count: 5,
-      placeholder: 'Search shared maps',
-      empty: 'No share map found'
-    }
-  });
-};
-
-var addSharedMapCallbackC = function(t, options) {
-  return t.popup({
-    title: 'Select a Maprosoft map',
-    items: getSharedMapPopupItemsDirectly(t, options),
-    search: {
-      count: 5,
-      placeholder: 'Search shared maps',
-      empty: 'No share map found'
-    }
-  });
-};
-
-var addLocationMapCallback = function(t) {
-  return t.popup({
-    title: 'Enter a location',
-    url: './location-entry.html',
-    height: 250
-  });
-};
-
 var buildMapSection = function(t, attachment) {
   // Capture the attachment variable in a closure so that it's attributes are safe to pass
   // into promises such as the signUrl function.
@@ -229,6 +183,10 @@ TrelloPowerUp.initialize({
       icon: MAPROSOFT_ICON_GRAY,
       text: 'C: Shared Map',
       callback: addSharedMapCallbackC
+    }, {
+      icon: MAPROSOFT_ICON_GRAY,
+      text: 'Shared Map',
+      callback: addLocationMapCallback
     }/*, {
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Location Map',
