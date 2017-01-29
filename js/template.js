@@ -80,24 +80,24 @@ var boardButtonCallback = function(t) {
 };
 
 
-var parkMap = {
-  acad: 'Acadia National Park',
-  arch: 'Arches National Park',
-  badl: 'Badlands National Park',
-  brca: 'Bryce Canyon National Park',
-  crla: 'Crater Lake National Park',
-  dena: 'Denali National Park',
-  glac: 'Glacier National Park',
-  grca: 'Grand Canyon National Park',
-  grte: 'Grand Teton National Park',
-  olym: 'Olympic National Park',
-  yell: 'Yellowstone National Park',
-  yose: 'Yosemite National Park',
-  zion: 'Zion National Park'
-};
+//var parkMap = {
+//  acad: 'Acadia National Park',
+//  arch: 'Arches National Park',
+//  badl: 'Badlands National Park',
+//  brca: 'Bryce Canyon National Park',
+//  crla: 'Crater Lake National Park',
+//  dena: 'Denali National Park',
+//  glac: 'Glacier National Park',
+//  grca: 'Grand Canyon National Park',
+//  grte: 'Grand Teton National Park',
+//  olym: 'Olympic National Park',
+//  yell: 'Yellowstone National Park',
+//  yose: 'Yosemite National Park',
+//  zion: 'Zion National Park'
+//};
 
 
-var getSharedMapPopupItemsXXXXX = function(t, options) {
+var getSharedMapPopupItems = function(t, options) {
   var Promise = TrelloPowerUp.Promise;
   return Promise.all([
     t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
@@ -210,14 +210,14 @@ var buildSharedMapPopupItems = function(t, sharedMapInfo) {
   return popupItems;
 };
 
-var getSharedMapPopupItems = function(t, options) {
-  var retrievedSharedMapInfo = {
-    "teamName":"foo",
-    "mapNames":["Apple", "Orange", "Banana"]};
-  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
-
-  //return cardButtonCallback(t);
-};
+//var getSharedMapPopupItems = function(t, options) {
+//  var retrievedSharedMapInfo = {
+//    "teamName":"foo",
+//    "mapNames":["Apple", "Orange", "Banana"]};
+//  return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+//
+//  //return cardButtonCallback(t);
+//};
 
 var addSharedMapCallback = function(t) {
   var items = getSharedMapPopupItems(t);
