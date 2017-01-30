@@ -7,7 +7,7 @@ $(document).ready(function() {
 var initialiseAddMapPopup = function() {
     var $mapSelectionContainer = $('#map-selection-container');
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
-    $sharedMapSelectionButton.innerText = selectASharedMapChoiceText;
+    $sharedMapSelectionButton.text(selectASharedMapChoiceText);
     $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
     var $actionLink = $('#action-a');
     $actionLink.click(handleSharedMapSelectionLink);
