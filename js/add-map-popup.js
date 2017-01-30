@@ -7,6 +7,10 @@ var t = TrelloPowerUp.iframe();
 //    initialiseAddMapPopup();
 //});
 
+t.render(function() {
+    initialiseAddMapPopup();
+});
+
 var initialiseAddMapPopup = function() {
     var $addMapButton = $('#add-map-button');
     $addMapButton.click(handleAddMapButtonClick);
@@ -50,6 +54,10 @@ var handleAddMapButtonClick = function(event) {
 
 };
 
+var handleSharedMapSelectionButton = function(event) {
+
+};
+
 var handleSharedMapSelectionLink = function(event) {
     event.preventDefault();
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
@@ -62,8 +70,4 @@ var handleSharedMapSelectionLink = function(event) {
     });
 
 };
-
-t.render(function() {
-    initialiseAddMapPopup();
-});
 
