@@ -97,8 +97,8 @@ var buildUrlWithDropPin = function(teamNameOrKey, address, latitude, longitude) 
 
 var appendAddressParameters = function(mapUrl, nextSeparator, address, latitude, longitude) {
   var encodedAddress = encodeURIComponent(address);
-  return mapUrl +
-      '&dropPinTitle=' + encodedAddress +
+  return mapUrl + nextSeparator +
+      'dropPinTitle=' + encodedAddress +
       '&dropPinLatitude=' + latitude +
       '&dropPinLongitude=' + longitude +
       '&customLatitude=' + latitude +
