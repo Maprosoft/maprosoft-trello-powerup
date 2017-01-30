@@ -1,4 +1,4 @@
-var selectASharedMapChoiceText = 'Select a shared map';
+var selectASharedMapChoiceText = 'Basic map';
 
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
@@ -70,14 +70,14 @@ var handleAddMapButtonClick = function(event) {
     var addressTextArea = document.getElementById('address');
     var address = addressTextArea.value;
 
-    if (address || selectedSharedMapName) {
-        addMap(errorMessageElement, address, selectedSharedMapName);
-    } else {
-        setErrorMessage('Select a shared map or enter an address.');
-    }
+    //if (address || selectedSharedMapName) {
+        addMap(address, selectedSharedMapName);
+    //} else {
+    //    setErrorMessage('Select a shared map or enter an address.');
+    //}
 };
 
-var addMap = function(errorMessageElement, address, sharedMapName) {
+var addMap = function(address, sharedMapName) {
 
 
     var teamNameOrKey = 'demo';
@@ -126,7 +126,8 @@ var addMap = function(errorMessageElement, address, sharedMapName) {
                             return attachMapWithUrl(t, mapName, mapUrl);
                         });
                 } else {
-                    errorMessageElement.innerHTML = 'There was a problem working out the location of that address.';
+
+                    setErrorMessage('There was a problem working out the location of that address.');
                     //return t.closePopup();
                 }
             }).then(function(sharedMapInfo) {
@@ -135,7 +136,7 @@ var addMap = function(errorMessageElement, address, sharedMapName) {
             }).then(function() {
                 return t.closePopup();
             }).catch(function() {
-                errorMessageElement.innerHTML = 'There was a problem getting information from Maprosoft. Check your settings and internet connection.';
+                setErrorMessage('There was a problem getting information from Maprosoft. Check your settings and internet connection.');
             });
     } else {
         return attachMapWithUrl(t, sharedMapName, mapUrl);
