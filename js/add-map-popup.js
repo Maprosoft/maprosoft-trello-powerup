@@ -14,6 +14,26 @@ var initialiseAddMapPopup = function() {
     var $actionLinks = $('.shared-map-choice');
     $actionLinks.click(handleSharedMapSelectionLink);
     $mapSelectionContainer.removeClass('hidden');
+
+    var teamKey = 'demo';
+    getFreshMapInfo(teamKey)
+    .then(function(retrievedSharedMapInfo) {
+        var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+        if (sharedMapInfoJson) {
+            var $sharedMapsDropdown = $('shared-maps-dropdown');
+            for (var index = 0; index < sharedMapInfoJson.mapNames.length; index++) {
+                var mapName = sharedMapInfoJson.mapNames[index];
+                // <a id="action-x" class="dropdown-item shared-map-choice" href="#">None</a>
+                var $mapOption = $('a', {
+                    id: "foo",
+                    "class": "a",
+                    text: mapName
+                });
+                $mapOption.appendTo($sharedMapsDropdown);
+
+            }
+        }
+    });
 };
 
 var handleSharedMapSelectionLink = function(event) {
@@ -27,25 +47,6 @@ var handleSharedMapSelectionLink = function(event) {
 
     });
 
-    var teamKey = 'demo';
-    getFreshMapInfo(teamKey)
-        .then(function(retrievedSharedMapInfo) {
-            var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-            if (sharedMapInfoJson) {
-                var $sharedMapsDropdown = $('shared-maps-dropdown');
-                for (var index = 0; index < sharedMapInfoJson.mapNames.length; index++) {
-                    var mapName = sharedMapInfoJson.mapNames[index];
-                    // <a id="action-x" class="dropdown-item shared-map-choice" href="#">None</a>
-                    var $mapOption = $('a', {
-                        id: "foo",
-                        "class": "a",
-                        text: mapName
-                    });
-                    $mapOption.appendTo($sharedMapsDropdown);
-
-                }
-            }
-        });
 };
 
 var handleSharedMapSelectionButton = function(event) {
