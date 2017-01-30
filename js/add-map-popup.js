@@ -70,7 +70,7 @@ var handleAddMapButtonClick = function(event) {
         addMap(errorMessageElement, address, selectedSharedMapName);
     } else {
         //errorMessageElement.innerHTML = errorMessage;
-        $errorMessage.text(errorMessage);
+        $errorMessage.text('Select a shared map or enter an address.');
     }
 };
 
