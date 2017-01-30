@@ -3,10 +3,6 @@ var selectASharedMapChoiceText = 'Select a shared map';
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
-t.render(function() {
-    initialiseAddMapPopup();
-});
-
 //$(document).ready(function() {
 //    initialiseAddMapPopup();
 //});
@@ -66,3 +62,8 @@ var handleSharedMapSelectionLink = function(event) {
     });
 
 };
+
+t.render(function() {
+    initialiseAddMapPopup();
+});
+
