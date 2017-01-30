@@ -22,7 +22,7 @@ var handleSharedMapSelectionLink = function(event) {
     //$sharedMapSelectionButton.text('hhhhhhhhhhhhhh');
     var sharedMapOption = event.target;
     var sharedMapName = sharedMapOption.innerText;
-    $sharedMapSelectionButton.text('hhhhhhhhhhhhhh');
+    $sharedMapSelectionButton.text(sharedMapName);
 };
 
 var handleSharedMapSelectionButton = function(event) {
