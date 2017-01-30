@@ -1,4 +1,5 @@
 var defaultMapName = 'Default map';
+var defaultFullMapName = 'Default Maprosoft map';
 
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
@@ -94,7 +95,7 @@ var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
         var mapName = sharedMapName;
         var mapUrl = buildSharedMapUrl(teamNameOrKey, sharedMapName);
     } else {
-        var mapName = defaultMapName;
+        var mapName = defaultFullMapName;
         var mapUrl = buildGeneralMapUrl(teamNameOrKey);
     }
 
