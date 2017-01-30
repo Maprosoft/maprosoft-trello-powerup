@@ -17,12 +17,12 @@ var initialiseAddMapPopup = function() {
 
     var teamKey = 'demo';
     getFreshMapInfo(teamKey)
-    .then(function(retrievedSharedMapInfo) {
-        var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-        if (sharedMapInfoJson) {
+    .then(function(sharedMapInfo) {
+        //var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
+        if (sharedMapInfo) {
             var $sharedMapsDropdown = $('shared-maps-dropdown');
-            for (var index = 0; index < sharedMapInfoJson.mapNames.length; index++) {
-                var mapName = sharedMapInfoJson.mapNames[index];
+            for (var index = 0; index < sharedMapInfo.mapNames.length; index++) {
+                var mapName = sharedMapInfo.mapNames[index];
                 // <a id="action-x" class="dropdown-item shared-map-choice" href="#">None</a>
                 var $mapOption = $('a', {
                     id: "foo",
