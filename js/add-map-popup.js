@@ -24,13 +24,14 @@ var initialiseAddMapPopup = function() {
             for (var index = 0; index < sharedMapInfo.mapNames.length; index++) {
                 var mapName = sharedMapInfo.mapNames[index];
                 // <a id="action-x" class="dropdown-item shared-map-choice" href="#">None</a>
-                var $mapOption = $('a', {
+                var $mapOption = $('<a>', {
                     //id: "foo",
                     "class": "dropdown-item shared-map-choice",
                     href: '#',
                     text: mapName
                 });
-                $mapOption.appendTo($sharedMapsDropdown);
+                //$mapOption.appendTo($sharedMapsDropdown);
+                $sharedMapsDropdown.append($mapOption);
 
             }
             $sharedMapSelectionButton.attr('aria-expanded', 'false');
