@@ -55,13 +55,17 @@ var getSelectedSharedMapName = function() {
     }
 };
 
-var handleAddMapButtonClick = function(event) {
-    var errorMessage = '';
-
-    //var errorMessageElement = document.getElementById('error-message');
-    //errorMessageElement.innerHTML = '';
+var setErrorMessage = function(errorMessage) {
     var $errorMessage = $('#error-message');
-    $errorMessage.text('');
+    if (errorMessage) {
+        $errorMessage.html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' + errorMessage);
+    } else {
+        $errorMessage.text('');
+    }
+};
+
+var handleAddMapButtonClick = function(event) {
+    setErrorMessage('');
     var selectedSharedMapName = getSelectedSharedMapName();
     var addressTextArea = document.getElementById('address');
     var address = addressTextArea.value;
@@ -69,8 +73,7 @@ var handleAddMapButtonClick = function(event) {
     if (address || selectedSharedMapName) {
         addMap(errorMessageElement, address, selectedSharedMapName);
     } else {
-        //errorMessageElement.innerHTML = errorMessage;
-        $errorMessage.text('Select a shared map or enter an address.');
+        setErrorMessage('Select a shared map or enter an address.');
     }
 };
 
