@@ -84,7 +84,7 @@ var buildGeocodeAddressUrl = function(token, address) {
 
 var buildTeamSharedMapsUrl = function(teamNameOrKey) {
   var teamKey = teamNameToKey(teamNameOrKey);
-  return 'https://www.maprosoft.com/app/shared?team=' + teamKey;
+  return 'https://www.maprosoft.com/shared-maps.html?team=' + teamKey;
 };
 
 var buildRetrieveSharedMapsUrl = function(teamNameOrKey, token) {
