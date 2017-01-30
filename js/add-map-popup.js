@@ -4,7 +4,7 @@ var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
 t.render(function() {
-    initialiseAddMapPopup()
+    initialiseAddMapPopup();
 });
 
 //$(document).ready(function() {
