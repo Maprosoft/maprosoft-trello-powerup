@@ -20,7 +20,7 @@ var initialiseAddMapPopup = function() {
     .then(function(sharedMapInfo) {
         //var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
         if (sharedMapInfo) {
-            var $sharedMapsDropdown = $('shared-maps-dropdown');
+            var $sharedMapsDropdown = $('#shared-maps-dropdown');
             for (var index = 0; index < sharedMapInfo.mapNames.length; index++) {
                 var mapName = sharedMapInfo.mapNames[index];
                 // <a id="action-x" class="dropdown-item shared-map-choice" href="#">None</a>
