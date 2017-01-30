@@ -1,10 +1,19 @@
 var selectASharedMapChoiceText = 'Select a shared map';
 
-$(document).ready(function() {
-    initialiseAddMapPopup();
+var Promise = TrelloPowerUp.Promise;
+var t = TrelloPowerUp.iframe();
+
+t.render(function() {
+    initialiseAddMapPopup()
 });
 
+//$(document).ready(function() {
+//    initialiseAddMapPopup();
+//});
+
 var initialiseAddMapPopup = function() {
+    var $addMapButton = $('#add-map-button');
+    $addMapButton.click(handleAddMapButtonClick);
     var $mapSelectionContainer = $('#map-selection-container');
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
     $sharedMapSelectionButton.text(selectASharedMapChoiceText);
@@ -31,7 +40,6 @@ var initialiseAddMapPopup = function() {
                     href: '#',
                     text: mapName
                 });
-                //$mapOption.appendTo($sharedMapsDropdown);
                 $sharedMapsDropdown.append($mapOption);
                 $mapOption.click(handleSharedMapSelectionLink);
 
@@ -40,6 +48,10 @@ var initialiseAddMapPopup = function() {
             //$sharedMapsDropdown.dropdown();
         }
     });
+};
+
+var handleAddMapButtonClick = function(event) {
+
 };
 
 var handleSharedMapSelectionLink = function(event) {
@@ -52,9 +64,5 @@ var handleSharedMapSelectionLink = function(event) {
     getSharedMapPopupItemsUsingPromise().then(function() {
 
     });
-
-};
-
-var handleSharedMapSelectionButton = function(event) {
 
 };
