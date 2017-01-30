@@ -71,12 +71,12 @@ var handleAddMapButtonClick = function(event) {
     }
 };
 
-var addMap = function(errorMessageElement, address, selectedSharedMapName) {
+var addMap = function(errorMessageElement, address, sharedMapName) {
 
 
     var teamNameOrKey = 'demo';
 
-    if (selectedSharedMapName) {
+    if (sharedMapName) {
         var mapUrl = buildSharedMapUrl(teamNameOrKey, sharedMapName);
     } else {
         var mapUrl = buildGeneralMapUrl(teamNameOrKey);
