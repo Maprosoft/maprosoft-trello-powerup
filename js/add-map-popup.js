@@ -1,4 +1,4 @@
-var selectASharedMapChoiceText = 'Basic map';
+var defaultMapName = 'Default map';
 
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
@@ -12,7 +12,7 @@ var initialiseAddMapPopup = function() {
     $addMapButton.click(handleAddMapButtonClick);
     var $mapSelectionContainer = $('#map-selection-container');
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
-    $sharedMapSelectionButton.text(selectASharedMapChoiceText);
+    $sharedMapSelectionButton.text(defaultMapName);
     $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
     var $actionLink = $('#action-a');
     $actionLink.click(handleSharedMapSelectionLink);
@@ -48,7 +48,7 @@ var initialiseAddMapPopup = function() {
 var getSelectedSharedMapName = function() {
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
     var buttonText = $sharedMapSelectionButton.text();
-    if (buttonText && buttonText !== selectASharedMapChoiceText) {
+    if (buttonText && buttonText !== defaultMapName) {
         return buttonText;
     } else {
         return null;
@@ -78,13 +78,27 @@ var handleAddMapButtonClick = function(event) {
 };
 
 var addMap = function(address, sharedMapName) {
+    t.get('board', 'shared', TEAM_NAME_KEY).then(function(teamNameOrKey) {
+        if (teamNameOrKey) {
+            addMapForTeam(teamNameOrKey, address, sharedMapName);
+        } else {
+            setErrorMessage('Your Maprosoft team name isn\'t set - try setting it again using the Power-Up seetings.');
+        }
+    }).catch(function() {
+        setErrorMessage('It looks like there was a problem getting your team name - try setting it again using the Power-Up seetings.');
+    });
+};
+
+var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
 
 
     var teamNameOrKey = 'demo';
 
     if (sharedMapName) {
+        var mapName = sharedMapName;
         var mapUrl = buildSharedMapUrl(teamNameOrKey, sharedMapName);
     } else {
+        var mapName = defaultMapName;
         var mapUrl = buildGeneralMapUrl(teamNameOrKey);
     }
 
@@ -139,7 +153,7 @@ var addMap = function(address, sharedMapName) {
                 setErrorMessage('There was a problem getting information from Maprosoft. Check your settings and internet connection.');
             });
     } else {
-        return attachMapWithUrl(t, sharedMapName, mapUrl);
+        return attachMapWithUrl(t, mapName, mapUrl);
     }
 };
 
