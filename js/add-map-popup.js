@@ -33,7 +33,7 @@ var initialiseAddMapPopup = function() {
                 $mapOption.appendTo($sharedMapsDropdown);
 
             }
-            //$sharedMapsDropdown.dropdown()
+            $sharedMapsDropdown.dropdown();
         }
     });
 };
