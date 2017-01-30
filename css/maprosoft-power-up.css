@@ -9,6 +9,10 @@ body.map-section {
   height: 100%;
 }
 
+button.btn {
+  padding: 0.06em 0.22em;
+}
+
 #no-settings-content {
   background: white;
   padding: 24px;
