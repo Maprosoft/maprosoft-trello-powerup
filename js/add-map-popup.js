@@ -21,6 +21,7 @@ var initialiseAddMapPopup = function() {
         //var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
         if (sharedMapInfo) {
             var $sharedMapsDropdown = $('#shared-maps-dropdown');
+            $sharedMapsDropdown.empty();
             for (var index = 0; index < sharedMapInfo.mapNames.length; index++) {
                 var mapName = sharedMapInfo.mapNames[index];
                 // <a id="action-x" class="dropdown-item shared-map-choice" href="#">None</a>
@@ -34,8 +35,8 @@ var initialiseAddMapPopup = function() {
                 $sharedMapsDropdown.append($mapOption);
 
             }
-            $sharedMapSelectionButton.attr('aria-expanded', 'false');
-            $sharedMapsDropdown.dropdown();
+            //$sharedMapSelectionButton.attr('aria-expanded', 'false');
+            //$sharedMapsDropdown.dropdown();
         }
     });
 };
