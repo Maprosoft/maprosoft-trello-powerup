@@ -9,8 +9,8 @@ body.map-section {
   height: 100%;
 }
 
-button.btn {
-  padding: 0.06em 0.22em;
+button.btn-sm {
+  padding: 0.25rem 0.5rem !important;
 }
 
 #no-settings-content {
