@@ -25,14 +25,15 @@ var initialiseAddMapPopup = function() {
                 var mapName = sharedMapInfo.mapNames[index];
                 // <a id="action-x" class="dropdown-item shared-map-choice" href="#">None</a>
                 var $mapOption = $('a', {
-                    id: "foo",
-                    "class": "a",
+                    //id: "foo",
+                    "class": "dropdown-item shared-map-choice",
+                    href: '#',
                     text: mapName
                 });
                 $mapOption.appendTo($sharedMapsDropdown);
 
             }
-            $sharedMapsDropdown.dropdown()
+            //$sharedMapsDropdown.dropdown()
         }
     });
 };
