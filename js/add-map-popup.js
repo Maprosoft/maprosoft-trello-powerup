@@ -60,10 +60,6 @@ var handleAddMapButtonClick = function(event) {
 
     var errorMessageElement = document.getElementById('error-message');
     errorMessageElement.innerHTML = '';
-
-
-    var teamNameOrKey = 'demo';
-
     var selectedSharedMapName = getSelectedSharedMapName();
     var addressTextArea = document.getElementById('address');
     var address = addressTextArea.value;
@@ -76,6 +72,10 @@ var handleAddMapButtonClick = function(event) {
 };
 
 var addMap = function(errorMessageElement, address, selectedSharedMapName) {
+
+
+    var teamNameOrKey = 'demo';
+
     if (selectedSharedMapName) {
         var mapUrl = buildSharedMapUrl(teamNameOrKey, sharedMapName);
     } else {
