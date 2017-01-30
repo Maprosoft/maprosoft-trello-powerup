@@ -90,10 +90,6 @@ var addMap = function(address, sharedMapName) {
 };
 
 var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
-
-
-    var teamNameOrKey = 'demo';
-
     if (sharedMapName) {
         var mapName = sharedMapName;
         var mapUrl = buildSharedMapUrl(teamNameOrKey, sharedMapName);
