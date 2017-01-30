@@ -11,7 +11,7 @@ var initialiseAddMapPopup = function() {
     var $actionLink = $('#action-a');
     $actionLink.click(handleSharedMapSelectionLink);
     var $actionLinks = $('.shared-map-choice');
-    $actionLink.click(handleSharedMapSelectionLink);
+    $actionLinks.click(handleSharedMapSelectionLink);
 };
 
 var handleSharedMapSelectionLink = function(event) {
@@ -92,9 +92,9 @@ var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
                 url: sharedMapUrl,
                 name: sharedMapName
             })
-                .then(function () {
-                    return t.closePopup();
-                });
+            .then(function () {
+                return t.closePopup();
+            });
         }
     };
 };
