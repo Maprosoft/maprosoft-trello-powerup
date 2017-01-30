@@ -80,6 +80,12 @@ var handleAddMapButtonClick = function(event) {
 
 var addMap = function(address, sharedMapName) {
     t.get('board', 'shared', TEAM_NAME_KEY).then(function(teamNameOrKey) {
+
+        var $viewLink = $('#view-shared-maps-link');
+        var sharedMapsUrl = buildTeamSharedMapsUrl(teamNameOrKey);
+        $viewLink.attr('href', sharedMapsUrl);
+        $viewLink.removeClass('hidden');
+
         if (teamNameOrKey) {
             addMapForTeam(teamNameOrKey, address, sharedMapName);
         } else {

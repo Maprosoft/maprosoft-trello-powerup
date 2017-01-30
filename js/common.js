@@ -82,6 +82,11 @@ var buildGeocodeAddressUrl = function(token, address) {
   return 'https://www.maprosoft.com/app/geocode?token=' + token + '&address=' + encodedAddress;
 };
 
+var buildTeamSharedMapsUrl = function(teamNameOrKey) {
+  var teamKey = teamNameToKey(teamNameOrKey);
+  return 'https://www.maprosoft.com/app/shared?team=' + teamKey;
+};
+
 var buildRetrieveSharedMapsUrl = function(teamNameOrKey, token) {
   var teamKey = teamNameToKey(teamNameOrKey);
   return 'https://www.maprosoft.com/app/shared?team=' + teamKey + '&getSharedMapNames=yes';
