@@ -52,9 +52,10 @@ var handleAddMapCallback = function(t) {
 };
 
 var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
-    var encodedSharedMapName = encodeURIComponent(sharedMapName);
-    var encodedTeamName = encodeURIComponent(teamName);
-    var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodedTeamName + '/' + encodedSharedMapName;
+    //var encodedSharedMapName = encodeURIComponent(sharedMapName);
+    //var encodedTeamName = encodeURIComponent(teamName);
+    //var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodedTeamName + '/' + encodedSharedMapName;
+    var sharedMapUrl = buildSharedMapUrl(teamName, sharedMapName);
     return {
         text: sharedMapName,
         url: sharedMapUrl,
