@@ -116,7 +116,8 @@ var addMap = function(errorMessageElement, address, sharedMapName) {
                             //var url = buildUrlWithDropPin(teamName, inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
                             var nextSeparator = '?';
                             mapUrl = appendAddressParameters(mapUrl, nextSeparator, inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
-                            return attachMapWithUrl(t, inputAddress, mapUrl);
+                            var mapName = inputAddress;
+                            return attachMapWithUrl(t, mapName, mapUrl);
                         });
                 } else {
                     errorMessageElement.innerHTML = 'There was a problem working out the location of that address.';
@@ -131,7 +132,7 @@ var addMap = function(errorMessageElement, address, sharedMapName) {
                 errorMessageElement.innerHTML = 'There was a problem getting information from Maprosoft. Check your settings and internet connection.';
             });
     } else {
-        return attachMapWithUrl(t, inputAddress, mapUrl);
+        return attachMapWithUrl(t, sharedMapName, mapUrl);
     }
 };
 
