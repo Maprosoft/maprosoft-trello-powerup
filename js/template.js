@@ -171,7 +171,7 @@ TrelloPowerUp.initialize({
     return getBadges(t);
   },
   'card-buttons': function(t, options) {
-    return [{
+    return [/*{
       icon: MAPROSOFT_ICON_GRAY,
       text: 'A: Shared Map',
       callback: addSharedMapCallbackA
@@ -183,7 +183,7 @@ TrelloPowerUp.initialize({
       icon: MAPROSOFT_ICON_GRAY,
       text: 'C: Shared Map',
       callback: addSharedMapCallbackC
-    }, {
+    }, */{
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Add map',
       callback: handleAddMapCallback
