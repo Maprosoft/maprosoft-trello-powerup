@@ -88,11 +88,14 @@ var buildMapSection = function(t, attachment) {
     "map-url": attachmentUrl,
     settingsOk: true
   });
-  if (attachmentUrl.indexOf('dropPin') > 0) {
-    var attachmentTitle = 'Maprosoft location map';
+  if (attachment.name) {
+    var attachmentTitle = attachment.name;
   } else {
-    //var attachmentTitle = 'Maprosoft shared map';
-    var attachmentTitle = extractSharedMapNameFromUrl(attachmentUrl);
+    if (attachmentUrl.indexOf('dropPin') > 0) {
+      var attachmentTitle = 'Maprosoft location map';
+    } else {
+      var attachmentTitle = extractSharedMapNameFromUrl(attachmentUrl);
+    }
   }
   //console.log('Signed URL for attachment ' + attachmentUrl + " => " + signedUrl);
   var mapSection = {
