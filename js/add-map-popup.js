@@ -22,6 +22,10 @@ var initialiseAddMapPopup = function() {
     $mapSelectionContainer.removeClass('hidden');
 
 
+
+
+    // TODO: cache team info
+
     t.get('board', 'shared', TEAM_NAME_KEY).then(function(teamNameOrKey) {
 
         var $viewLink = $('#view-shared-maps-link');
