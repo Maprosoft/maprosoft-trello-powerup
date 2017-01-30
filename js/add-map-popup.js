@@ -1,9 +1,6 @@
-//$(document).ready(function() {
-//    var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
-//    $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
-//    var $actionLink = $('#action-a');
-//    $actionLink.click(handleSharedMapSelectionLink);
-//});
+$(document).ready(function() {
+    initialiseAddMapPopup();
+});
 
 var initialiseAddMapPopup = function() {
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
