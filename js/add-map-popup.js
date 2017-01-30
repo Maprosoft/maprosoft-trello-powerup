@@ -3,6 +3,8 @@ $(document).ready(function() {
 });
 
 var initialiseAddMapPopup = function() {
+    var $mapSelectionContainer = $('#map-selection-container');
+    $mapSelectionContainer.removeClass('hidden');
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
     $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
     var $actionLink = $('#action-a');
