@@ -65,9 +65,9 @@ var handleSharedMapSelectionLink = function(event) {
     var sharedMapName = sharedMapOption.innerText;
     $sharedMapSelectionButton.text(sharedMapName);
 
-    getSharedMapPopupItemsUsingPromise().then(function() {
-
-    });
+    //getSharedMapPopupItemsUsingPromise().then(function() {
+    //
+    //});
 
 };
 
