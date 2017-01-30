@@ -58,8 +58,10 @@ var getSelectedSharedMapName = function() {
 var handleAddMapButtonClick = function(event) {
     var errorMessage = '';
 
-    var errorMessageElement = document.getElementById('error-message');
-    errorMessageElement.innerHTML = '';
+    //var errorMessageElement = document.getElementById('error-message');
+    //errorMessageElement.innerHTML = '';
+    var $errorMessage = $('#error-message');
+    $errorMessage.text('');
     var selectedSharedMapName = getSelectedSharedMapName();
     var addressTextArea = document.getElementById('address');
     var address = addressTextArea.value;
@@ -67,7 +69,8 @@ var handleAddMapButtonClick = function(event) {
     if (address || selectedSharedMapName) {
         addMap(errorMessageElement, address, selectedSharedMapName);
     } else {
-        errorMessageElement.innerHTML = errorMessage;
+        //errorMessageElement.innerHTML = errorMessage;
+        $errorMessage.text(errorMessage);
     }
 };
 
