@@ -18,6 +18,10 @@ p.form-label {
   margin-bottom: 0.1rem;
 }
 
+#map-selection-container {
+  margin-bottom: 5px;
+}
+
 #shared-maps-dropdown {
   margin-top: -10px;
 }
