@@ -9,6 +9,19 @@ var mapUi = {
 
 t.render(function() {
     initialiseAddMapPopup();
+
+    Promise.all([
+        t.get('board', 'shared', TEAM_NAME_KEY),
+        t.get('board', 'shared', TEAM_TOKEN_KEY)
+    ])
+    .spread(function(teamName, token) {
+        if (teamName) {
+            return showNoSettingsPopup(t);
+        }
+        if (token) {
+            return showNoSettingsPopup(t);
+        }
+    });
 });
 
 var initialiseAddMapPopup = function() {

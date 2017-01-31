@@ -165,6 +165,16 @@ var isMapLinkAttachment = function(attachment) {
   return attachment.url.indexOf('https://www.maprosoft.com/app/map') === 0 || attachment.url.indexOf('https://www.maprosoft.com/app/shared') === 0;
 };
 
+var showNoSettingsPopup = function(t) {
+  return t.overlay({
+    url: './no-settings.html',
+    args: {}
+  })
+  .then(function () {
+    return t.closePopup();
+  });
+};
+
 // This example is from https://developer.mozilla.org/en-US/docs/Web/Events/resize:
 var optimizedResize = (function() {
 

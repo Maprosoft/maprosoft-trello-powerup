@@ -21,7 +21,7 @@ t.render(function() {
   .then(function(){
     t.sizeTo('#settings-content')
     .done();
-  })
+  });
 });
 
 document.getElementById('save-settings').addEventListener('click', function() {
