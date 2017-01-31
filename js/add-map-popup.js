@@ -15,14 +15,17 @@ var initialiseAddMapPopup = function() {
     var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
     $sharedMapSelectionButton.text(defaultMapName);
     $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
+    var $refreshSharedMapsLink = $('#refresh-shared-maps-link');
+    $refreshSharedMapsLink.click(buildSharedMapsSelector);
     var $actionLink = $('#action-a');
     $actionLink.click(handleSharedMapSelectionLink);
     var $actionLinks = $('.shared-map-choice');
     $actionLinks.click(handleSharedMapSelectionLink);
     $mapSelectionContainer.removeClass('hidden');
+    buildSharedMapsSelector();
+};
 
-
-
+var buildSharedMapsSelector = function() {
 
     // TODO: cache team info
 
@@ -57,7 +60,6 @@ var initialiseAddMapPopup = function() {
     }).catch(function() {
         //setErrorMessage('It looks like there was a problem getting your team name - try setting it again using the Power-Up seetings.');
     });
-
 
 };
 
