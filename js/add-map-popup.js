@@ -16,13 +16,18 @@ var initialiseAddMapPopup = function() {
     $sharedMapSelectionButton.text(defaultMapName);
     $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
     var $refreshSharedMapsLink = $('#refresh-shared-maps-link');
-    $refreshSharedMapsLink.click(buildSharedMapsSelector);
+    $refreshSharedMapsLink.click(refreshSharedMaps);
     var $actionLink = $('#action-a');
     $actionLink.click(handleSharedMapSelectionLink);
     var $actionLinks = $('.shared-map-choice');
     $actionLinks.click(handleSharedMapSelectionLink);
     $mapSelectionContainer.removeClass('hidden');
     buildSharedMapsSelector();
+};
+
+var refreshSharedMaps = function(event) {
+    buildSharedMapsSelector();
+    event.preventDefault();
 };
 
 var buildSharedMapsSelector = function() {
