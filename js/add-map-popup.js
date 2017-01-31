@@ -44,10 +44,12 @@ var setRefereshing = function(refreshing) {
         mapUi.$refreshSharedMapsIcon.addClass('fa-spin');
         mapUi.refreshing = true;
     } else {
+        mapUi.$refreshSharedMapsIcon.addClass('hidden');
         mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
         mapUi.$refreshSharedMapsSuccessIcon.removeClass('hidden');
         setTimeout(function() {
             mapUi.$refreshSharedMapsSuccessIcon.addClass('hidden');
+            mapUi.$refreshSharedMapsIcon.removeClass('hidden');
             mapUi.refreshing = false;
         }, 5000);
     }
