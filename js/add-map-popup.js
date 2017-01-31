@@ -18,32 +18,46 @@ var initialiseAddMapPopup = function() {
         $sharedMapSelectionButton: $('#sharedMapSelectionButton'),
         $refreshSharedMapsLink: $('#refresh-shared-maps-link'),
         $refreshSharedMapsIcon: $('#refresh-shared-maps-icon'),
-        $actionLinks: $('.shared-map-choice')
+        $refreshSharedMapsSuccessIcon: $('#refresh-shared-maps-success-icon'),
+        $actionLinks: $('.shared-map-choice'),
+        refreshing: false
     };
-    //var $addMapButton = $('#add-map-button');
     mapUi.$addMapButton.click(handleAddMapButtonClick);
-    //var $mapSelectionContainer = $('#map-selection-container');
-    //var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
     mapUi.$sharedMapSelectionButton.text(defaultMapName);
     mapUi.$sharedMapSelectionButton.click(handleSharedMapSelectionButton);
-    //var $refreshSharedMapsLink = $('#refresh-shared-maps-link');
     mapUi.$refreshSharedMapsLink.click(refreshSharedMaps);
-    //var $actionLinks = $('.shared-map-choice');
     mapUi.$actionLinks.click(handleSharedMapSelectionLink);
     mapUi.$mapSelectionContainer.removeClass('hidden');
     buildSharedMapsSelector();
 };
 
 var refreshSharedMaps = function(event) {
-    buildSharedMapsSelector();
-    event.preventDefault();
+    if (!mapUi.refreshing) {
+        buildSharedMapsSelector();
+        event.preventDefault();
+    }
+};
+
+var setRefereshing = function(refreshing) {
+    if (refreshing) {
+        mapUi.$refreshSharedMapsSuccessIcon.addClass('hidden');
+        mapUi.$refreshSharedMapsIcon.addClass('fa-spin');
+        mapUi.refreshing = true;
+    } else {
+        mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
+        mapUi.$refreshSharedMapsSuccessIcon.removeClass('hidden');
+        setTimeout(function() {
+            mapUi.$refreshSharedMapsSuccessIcon.addClass('hidden');
+            mapUi.refreshing = false;
+        }, 5000);
+    }
 };
 
 var buildSharedMapsSelector = function() {
 
     // TODO: cache team info
 
-    mapUi.$refreshSharedMapsIcon.addClass('fa-spin');
+    setRefereshing(true);
     t.get('board', 'shared', TEAM_NAME_KEY)
     .then(function(teamNameOrKey) {
         var $viewLink = $('#view-shared-maps-link');
@@ -71,11 +85,11 @@ var buildSharedMapsSelector = function() {
             }
         })
         .finally(function() {
-            mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
+            setRefereshing(false);
         });
     }).catch(function(exception) {
         //setErrorMessage('It looks like there was a problem getting your team name - try setting it again using the Power-Up seetings.');
-        mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
+        setRefereshing(false);
     });
 };
 
