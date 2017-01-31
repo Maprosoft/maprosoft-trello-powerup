@@ -70,10 +70,10 @@ var buildSharedMapsSelector = function() {
                 }
             }
         })
-        .always(function() {
+        .finally(function() {
             mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
         });
-    }).catch(function() {
+    }).catch(function(exception) {
         //setErrorMessage('It looks like there was a problem getting your team name - try setting it again using the Power-Up seetings.');
         mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
     });
