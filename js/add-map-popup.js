@@ -28,6 +28,7 @@ var initialiseAddMapPopup = function() {
     mapUi.$refreshSharedMapsLink.click(refreshSharedMaps);
     mapUi.$actionLinks.click(handleSharedMapSelectionLink);
     mapUi.$mapSelectionContainer.removeClass('hidden');
+    $('[data-toggle="tooltip"]').tooltip();
     buildSharedMapsSelector();
 };
 
