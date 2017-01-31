@@ -15,10 +15,10 @@ t.render(function() {
         t.get('board', 'shared', TEAM_TOKEN_KEY)
     ])
     .spread(function(teamName, token) {
-        if (teamName) {
+        if (!teamName) {
             return showNoSettingsPopup(t);
         }
-        if (token) {
+        if (!token) {
             return showNoSettingsPopup(t);
         }
     });
