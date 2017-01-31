@@ -50,7 +50,7 @@ p.form-label {
   max-height: 90%;
 }
 
-.hidden {
+.hidden, i.hidden {
   display: none;
 }
 
