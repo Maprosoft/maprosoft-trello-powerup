@@ -34,8 +34,8 @@ var initialiseAddMapPopup = function() {
 var refreshSharedMaps = function(event) {
     if (!mapUi.refreshing) {
         buildSharedMapsSelector();
-        event.preventDefault();
     }
+    event.preventDefault();
 };
 
 var setRefereshing = function(refreshing) {
