@@ -3,25 +3,34 @@ var defaultFullMapName = 'Default Maprosoft map';
 
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
+var mapUi = {
+
+};
 
 t.render(function() {
     initialiseAddMapPopup();
 });
 
 var initialiseAddMapPopup = function() {
-    var $addMapButton = $('#add-map-button');
-    $addMapButton.click(handleAddMapButtonClick);
-    var $mapSelectionContainer = $('#map-selection-container');
-    var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
-    $sharedMapSelectionButton.text(defaultMapName);
-    $sharedMapSelectionButton.click(handleSharedMapSelectionButton);
-    var $refreshSharedMapsLink = $('#refresh-shared-maps-link');
-    $refreshSharedMapsLink.click(refreshSharedMaps);
-    var $actionLink = $('#action-a');
-    $actionLink.click(handleSharedMapSelectionLink);
-    var $actionLinks = $('.shared-map-choice');
-    $actionLinks.click(handleSharedMapSelectionLink);
-    $mapSelectionContainer.removeClass('hidden');
+    mapUi = {
+        $addMapButton: $('#add-map-button'),
+        $mapSelectionContainer: $('#map-selection-container'),
+        $sharedMapSelectionButton: $('#sharedMapSelectionButton'),
+        $refreshSharedMapsLink: $('#refresh-shared-maps-link'),
+        $refreshSharedMapsIcon: $('#refresh-shared-maps-icon'),
+        $actionLinks: $('.shared-map-choice')
+    };
+    //var $addMapButton = $('#add-map-button');
+    mapUi.$addMapButton.click(handleAddMapButtonClick);
+    //var $mapSelectionContainer = $('#map-selection-container');
+    //var $sharedMapSelectionButton = $('#sharedMapSelectionButton');
+    mapUi.$sharedMapSelectionButton.text(defaultMapName);
+    mapUi.$sharedMapSelectionButton.click(handleSharedMapSelectionButton);
+    //var $refreshSharedMapsLink = $('#refresh-shared-maps-link');
+    mapUi.$refreshSharedMapsLink.click(refreshSharedMaps);
+    //var $actionLinks = $('.shared-map-choice');
+    mapUi.$actionLinks.click(handleSharedMapSelectionLink);
+    mapUi.$mapSelectionContainer.removeClass('hidden');
     buildSharedMapsSelector();
 };
 
@@ -34,38 +43,40 @@ var buildSharedMapsSelector = function() {
 
     // TODO: cache team info
 
-    t.get('board', 'shared', TEAM_NAME_KEY).then(function(teamNameOrKey) {
-
+    mapUi.$refreshSharedMapsIcon.addClass('fa-spin');
+    t.get('board', 'shared', TEAM_NAME_KEY)
+    .then(function(teamNameOrKey) {
         var $viewLink = $('#view-shared-maps-link');
         var sharedMapsUrl = buildTeamSharedMapsUrl(teamNameOrKey);
         $viewLink.attr('href', sharedMapsUrl);
         $viewLink.removeClass('hidden');
 
         getFreshMapInfo(teamNameOrKey)
-            .then(function(sharedMapInfo) {
-                //var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
-                if (sharedMapInfo) {
-                    var $sharedMapsDropdown = $('#shared-maps-dropdown');
-                    $sharedMapsDropdown.empty();
-                    for (var index = 0; index < sharedMapInfo.mapNames.length; index++) {
-                        var mapName = sharedMapInfo.mapNames[index];
-                        var $mapOption = $('<a>', {
-                            //id: "foo",
-                            "class": "dropdown-item shared-map-choice",
-                            href: '#',
-                            text: mapName
-                        });
-                        $sharedMapsDropdown.append($mapOption);
-                        $mapOption.click(handleSharedMapSelectionLink);
-                    }
+        .then(function(sharedMapInfo) {
+            //var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
+            if (sharedMapInfo) {
+                var $sharedMapsDropdown = $('#shared-maps-dropdown');
+                $sharedMapsDropdown.empty();
+                for (var index = 0; index < sharedMapInfo.mapNames.length; index++) {
+                    var mapName = sharedMapInfo.mapNames[index];
+                    var $mapOption = $('<a>', {
+                        //id: "foo",
+                        "class": "dropdown-item shared-map-choice",
+                        href: '#',
+                        text: mapName
+                    });
+                    $sharedMapsDropdown.append($mapOption);
+                    $mapOption.click(handleSharedMapSelectionLink);
                 }
-            });
-
-
+            }
+        })
+        .always(function() {
+            mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
+        });
     }).catch(function() {
         //setErrorMessage('It looks like there was a problem getting your team name - try setting it again using the Power-Up seetings.');
+        mapUi.$refreshSharedMapsIcon.removeClass('fa-spin');
     });
-
 };
 
 var getSelectedSharedMapName = function() {
