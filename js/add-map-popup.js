@@ -21,11 +21,11 @@ t.render(function() {
         if (!token) {
             return showNoSettingsPopup(t);
         }
-        buildSharedMapsSelectorWithTeam(teamName);
+            initialiseAddMapPopup(teamName);
     });
 });
 
-var initialiseAddMapPopup = function() {
+var initialiseAddMapPopup = function(teamName) {
     mapUi = {
         $addMapButton: $('#add-map-button'),
         $mapSelectionContainer: $('#map-selection-container'),
@@ -35,6 +35,7 @@ var initialiseAddMapPopup = function() {
         $refreshSharedMapsSuccessIcon: $('#refresh-shared-maps-success-icon'),
         $viewSharedMapsLink: $('#view-shared-maps-link'),
         $actionLinks: $('.shared-map-choice'),
+        teamName: teamName,
         refreshing: false
     };
     mapUi.$addMapButton.click(handleAddMapButtonClick);
@@ -44,7 +45,7 @@ var initialiseAddMapPopup = function() {
     mapUi.$actionLinks.click(handleSharedMapSelectionLink);
     mapUi.$mapSelectionContainer.removeClass('hidden');
     $('[data-toggle="tooltip"]').tooltip();
-    buildSharedMapsSelector();
+    buildSharedMapsSelectorWithTeam(teamName);
 };
 
 var refreshSharedMaps = function(event) {
