@@ -21,11 +21,11 @@ t.render(function() {
         if (!token) {
             return showNoSettingsPopup(t);
         }
-            initialiseAddMapPopup(teamName);
+            initialiseAddMapPopup(teamName, token);
     });
 });
 
-var initialiseAddMapPopup = function(teamName) {
+var initialiseAddMapPopup = function(teamName, token) {
     mapUi = {
         $addMapButton: $('#add-map-button'),
         $mapSelectionContainer: $('#map-selection-container'),
@@ -36,6 +36,7 @@ var initialiseAddMapPopup = function(teamName) {
         $viewSharedMapsLink: $('#view-shared-maps-link'),
         $actionLinks: $('.shared-map-choice'),
         teamName: teamName,
+        token: token,
         refreshing: false
     };
     mapUi.$addMapButton.click(handleAddMapButtonClick);
@@ -72,31 +73,15 @@ var setRefereshing = function(refreshing) {
     }
 };
 
-var buildSharedMapsSelector = function() {
-
-    // TODO: cache team info
-
-    setRefereshing(true);
-    t.get('board', 'shared', TEAM_NAME_KEY)
-    .then(function(teamNameOrKey) {
-        buildSharedMapsSelectorWithTeam(teamNameOrKey)
-        .finally(function() {
-            setRefereshing(false);
-        });
-    }).catch(function(exception) {
-        //setErrorMessage('It looks like there was a problem getting your team name - try setting it again using the Power-Up seetings.');
-        setRefereshing(false);
-    });
-};
-
 var buildSharedMapsSelectorWithTeam = function(teamNameOrKey) {
-    var sharedMapsUrl = buildTeamSharedMapsUrl(teamNameOrKey);
+    setRefereshing(true);
+
+    var sharedMapsUrl = buildTeamSharedMapsUrl(mapUi.teamName);
     mapUi.$viewSharedMapsLink.attr('href', sharedMapsUrl);
     mapUi.$viewSharedMapsLink.removeClass('hidden');
 
-    return getFreshMapInfo(teamNameOrKey)
+    return getFreshMapInfo(mapUi.teamName)
     .then(function(sharedMapInfo) {
-        //var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
         if (sharedMapInfo) {
             var $sharedMapsDropdown = $('#shared-maps-dropdown');
             $sharedMapsDropdown.empty();
@@ -117,6 +102,52 @@ var buildSharedMapsSelectorWithTeam = function(teamNameOrKey) {
         setRefereshing(false);
     });
 };
+
+//var buildSharedMapsSelector = function() {
+//
+//    // TODO: cache team info
+//
+//    setRefereshing(true);
+//    t.get('board', 'shared', TEAM_NAME_KEY)
+//    .then(function(teamNameOrKey) {
+//        buildSharedMapsSelectorWithTeam(teamNameOrKey)
+//        .finally(function() {
+//            setRefereshing(false);
+//        });
+//    }).catch(function(exception) {
+//        //setErrorMessage('It looks like there was a problem getting your team name - try setting it again using the Power-Up seetings.');
+//        setRefereshing(false);
+//    });
+//};
+//
+//var buildSharedMapsSelectorWithTeam = function(teamNameOrKey) {
+//    var sharedMapsUrl = buildTeamSharedMapsUrl(teamNameOrKey);
+//    mapUi.$viewSharedMapsLink.attr('href', sharedMapsUrl);
+//    mapUi.$viewSharedMapsLink.removeClass('hidden');
+//
+//    return getFreshMapInfo(teamNameOrKey)
+//    .then(function(sharedMapInfo) {
+//        //var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
+//        if (sharedMapInfo) {
+//            var $sharedMapsDropdown = $('#shared-maps-dropdown');
+//            $sharedMapsDropdown.empty();
+//            for (var index = 0; index < sharedMapInfo.mapNames.length; index++) {
+//                var mapName = sharedMapInfo.mapNames[index];
+//                var $mapOption = $('<a>', {
+//                    //id: "foo",
+//                    "class": "dropdown-item shared-map-choice",
+//                    href: '#',
+//                    text: mapName
+//                });
+//                $sharedMapsDropdown.append($mapOption);
+//                $mapOption.click(handleSharedMapSelectionLink);
+//            }
+//        }
+//    })
+//    .finally(function() {
+//        setRefereshing(false);
+//    });
+//};
 
 var buildSharedMapsSelectorOLD = function(teamNameOrKey) {
 
