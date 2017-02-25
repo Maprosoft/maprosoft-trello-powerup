@@ -178,23 +178,23 @@ TrelloPowerUp.initialize({
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Add map',
       callback: handleAddMapCallback
-    }, {
-      icon: MAPROSOFT_ICON_GRAY,
-      text: 'A: Map',
-      callback: addSharedMapCallbackA
-    }, {
-      icon: MAPROSOFT_ICON_GRAY,
-      text: 'B: Map',
-      callback: addSharedMapCallbackB
-    }, {
-      icon: MAPROSOFT_ICON_GRAY,
-      text: 'C: Map',
-      callback: addSharedMapCallbackC
-    }, /*, {
-      icon: MAPROSOFT_ICON_GRAY,
-      text: 'Location Map',
-      callback: addLocationMapCallback
-    }*/];
+    //} , {
+    //  icon: MAPROSOFT_ICON_GRAY,
+    //  text: 'A: Map',
+    //  callback: addSharedMapCallbackA
+    //}, {
+    //  icon: MAPROSOFT_ICON_GRAY,
+    //  text: 'B: Map',
+    //  callback: addSharedMapCallbackB
+    //}, {
+    //  icon: MAPROSOFT_ICON_GRAY,
+    //  text: 'C: Map',
+    //  callback: addSharedMapCallbackC
+    //}, {
+    //  icon: MAPROSOFT_ICON_GRAY,
+    //  text: 'Location Map',
+    //  callback: addLocationMapCallback
+    }];
   },
   'card-detail-badges': function(t, options) {
     return getBadges(t);
