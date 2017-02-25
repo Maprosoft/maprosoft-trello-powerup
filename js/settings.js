@@ -5,8 +5,8 @@ var t = TrelloPowerUp.iframe();
 
 t.render(function() {
   return Promise.all([
-    t.get('board', 'shared', TEAM_NAME_KEY),
-    t.get('board', 'shared', TEAM_TOKEN_KEY)
+    t.get('board', 'private', TEAM_NAME_KEY),
+    t.get('board', 'private', TEAM_TOKEN_KEY)
   ])
   .spread(function(teamName, token) {
     if (teamName) {
@@ -41,14 +41,14 @@ document.getElementById('save-settings').addEventListener('click', function() {
         return;
     }
 
-    return t.set('board', 'shared', TEAM_NAME_KEY, teamName)
+    return t.set('board', 'private', TEAM_NAME_KEY, teamName)
     .then(function() {
-        return t.set('board', 'shared', TEAM_TOKEN_KEY, token);
+        return t.set('board', 'private', TEAM_TOKEN_KEY, token);
     }).then(function() {
         return doGet(buildRetrieveSharedMapsUrl(teamName, token));
     }).then(function(sharedMapInfo) {
       var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
-      return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
+      return t.set('board', 'private', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
     }).then(function() {
         return t.closePopup();
     }).catch(function() {
@@ -57,11 +57,11 @@ document.getElementById('save-settings').addEventListener('click', function() {
 });
 
 document.getElementById('clear-settings').addEventListener('click', function() {
-  return t.set('board', 'shared', TEAM_NAME_KEY, '')
+  return t.set('board', 'private', TEAM_NAME_KEY, '')
       .then(function() {
-        return t.set('board', 'shared', TEAM_TOKEN_KEY, '');
+        return t.set('board', 'private', TEAM_TOKEN_KEY, '');
       }).then(function() {
-        return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, '{}');
+        return t.set('board', 'private', CACHED_SHARED_MAP_INFO_KEY, '{}');
       }).then(function() {
         return t.closePopup();
       });

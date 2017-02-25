@@ -6,7 +6,7 @@ var t = TrelloPowerUp.iframe();
 t.render(function() {
   var addressTextArea = document.getElementById('address');
   addressTextArea.focus();
-  return t.get('board', 'shared', TEAM_TOKEN_KEY)
+  return t.get('board', 'private', TEAM_TOKEN_KEY)
       .then(function(token) {
         if (token) {
           return geocodeAddress(token, address);
@@ -28,7 +28,7 @@ document.getElementById('save-location').addEventListener('click', function() {
   var errorMessageElement = document.getElementById('error-message');
   errorMessageElement.innerHTML = '';
   if (address) {
-    return t.get('board', 'shared', TEAM_TOKEN_KEY)
+    return t.get('board', 'private', TEAM_TOKEN_KEY)
         .then(function(token) {
           return geocodeAddress(token, address);
         }).then(function(geocodeResult) {
@@ -48,7 +48,7 @@ document.getElementById('save-location').addEventListener('click', function() {
           if (geocodeResult && geocodeResult.success && geocodeResult.data && geocodeResult.data.geocodedLocation) {
             var geocodedLocation = geocodeResult.data.geocodedLocation;
             var inputAddress = geocodeResult.data.inputAddress;
-            return t.get('board', 'shared', TEAM_NAME_KEY)
+            return t.get('board', 'private', TEAM_NAME_KEY)
             .then(function(teamName) {
                   var url = buildUrlWithDropPin(teamName, inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
                   return t.attach({
@@ -64,7 +64,7 @@ document.getElementById('save-location').addEventListener('click', function() {
           }
         }).then(function(sharedMapInfo) {
           var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
-          return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
+          return t.set('board', 'private', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
         }).then(function() {
           return t.closePopup();
         }).catch(function() {

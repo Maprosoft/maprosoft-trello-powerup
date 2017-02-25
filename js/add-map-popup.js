@@ -11,8 +11,8 @@ t.render(function() {
     //initialiseAddMapPopup();
 
     Promise.all([
-        t.get('board', 'shared', TEAM_NAME_KEY),
-        t.get('board', 'shared', TEAM_TOKEN_KEY)
+        t.get('board', 'private', TEAM_NAME_KEY),
+        t.get('board', 'private', TEAM_TOKEN_KEY)
     ])
     .spread(function(teamName, token) {
         if (!teamName) {
@@ -108,7 +108,7 @@ var buildSharedMapsSelectorWithTeam = function(teamNameOrKey) {
 //    // TODO: cache team info
 //
 //    setRefereshing(true);
-//    t.get('board', 'shared', TEAM_NAME_KEY)
+//    t.get('board', 'private', TEAM_NAME_KEY)
 //    .then(function(teamNameOrKey) {
 //        buildSharedMapsSelectorWithTeam(teamNameOrKey)
 //        .finally(function() {
@@ -154,7 +154,7 @@ var buildSharedMapsSelectorOLD = function(teamNameOrKey) {
     // TODO: cache team info
 
     setRefereshing(true);
-    t.get('board', 'shared', TEAM_NAME_KEY)
+    t.get('board', 'private', TEAM_NAME_KEY)
     .then(function(teamNameOrKey) {
         var $viewLink = $('#view-shared-maps-link');
         var sharedMapsUrl = buildTeamSharedMapsUrl(teamNameOrKey);
@@ -226,7 +226,7 @@ var addMap = function(address, sharedMapName) {
 
     // TODO: cache team info
 
-    t.get('board', 'shared', TEAM_NAME_KEY).then(function(teamNameOrKey) {
+    t.get('board', 'private', TEAM_NAME_KEY).then(function(teamNameOrKey) {
         if (teamNameOrKey) {
             addMapForTeam(teamNameOrKey, address, sharedMapName);
         } else {
@@ -247,7 +247,7 @@ var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
     }
 
 
-    //var promise = t.get('board', 'shared', TEAM_TOKEN_KEY);
+    //var promise = t.get('board', 'private', TEAM_TOKEN_KEY);
     //if (address) {
     //    promise = promise.then(function(token) {
     //        return geocodeAddress(token, address);
@@ -255,7 +255,7 @@ var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
     //}
 
     if (address) {
-        var promise = t.get('board', 'shared', TEAM_TOKEN_KEY)
+        var promise = t.get('board', 'private', TEAM_TOKEN_KEY)
             .then(function(token) {
                 return geocodeAddress(token, address);
             }).then(function(geocodeResult) {
@@ -275,7 +275,7 @@ var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
                 if (geocodeResult && geocodeResult.success && geocodeResult.data && geocodeResult.data.geocodedLocation) {
                     var geocodedLocation = geocodeResult.data.geocodedLocation;
                     var inputAddress = geocodeResult.data.inputAddress;
-                    return t.get('board', 'shared', TEAM_NAME_KEY)
+                    return t.get('board', 'private', TEAM_NAME_KEY)
                         .then(function(teamName) {
                             //var url = buildUrlWithDropPin(teamName, inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
                             var nextSeparator = '?';
@@ -290,7 +290,7 @@ var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
                 }
             }).then(function(sharedMapInfo) {
                 var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
-                return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
+                return t.set('board', 'private', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
             }).then(function() {
                 return t.closePopup();
             }).catch(function() {

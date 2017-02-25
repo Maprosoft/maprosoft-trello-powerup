@@ -83,9 +83,9 @@ var buildSharedMapPopupItems = function(t, sharedMapInfo) {
 var getSharedMapPopupItemsXxxxxxxxxxxx = function(t, options) {
     var Promise = TrelloPowerUp.Promise;
     return Promise.all([
-        t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
-        t.get('board', 'shared', TEAM_NAME_KEY),
-        t.get('board', 'shared', TEAM_TOKEN_KEY)
+        t.get('board', 'private', CACHED_SHARED_MAP_INFO_KEY),
+        t.get('board', 'private', TEAM_NAME_KEY),
+        t.get('board', 'private', TEAM_TOKEN_KEY)
     ])
         .spread(function(sharedMapInfoJson, teamName, token) {
             if (teamName && token && sharedMapInfoJson) {
@@ -111,7 +111,7 @@ var getSharedMapPopupItemsXxxxxxxxxxxx = function(t, options) {
                 }
                 return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
                     var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-                    t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+                    t.set('board', 'private', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
                         // saved for next time
                     });
                     return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
@@ -123,9 +123,9 @@ var getSharedMapPopupItemsXxxxxxxxxxxx = function(t, options) {
 var getSharedMapPopupItemsSSSSSSSSSSSS = function(t, options) {
     var Promise = TrelloPowerUp.Promise;
     return Promise.join(
-        t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY),
-        t.get('board', 'shared', TEAM_NAME_KEY),
-        t.get('board', 'shared', TEAM_TOKEN_KEY),
+        t.get('board', 'private', CACHED_SHARED_MAP_INFO_KEY),
+        t.get('board', 'private', TEAM_NAME_KEY),
+        t.get('board', 'private', TEAM_TOKEN_KEY),
         function(sharedMapInfoJson, teamName, token) {
             if (teamName && token && sharedMapInfoJson) {
                 //var sharedMapInfo = JSON.parse(sharedMapInfoJson);
@@ -136,7 +136,7 @@ var getSharedMapPopupItemsSSSSSSSSSSSS = function(t, options) {
                 }
                 return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
                     var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-                    t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+                    t.set('board', 'private', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
                         // saved for next time
                     });
                     return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
@@ -159,7 +159,7 @@ var getSharedMapPopupItemsUsingPromise = function(t, options) {
     return getFreshMapInfo(teamKey)
         .then(function(retrievedSharedMapInfo) {
             var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
-            return t.set('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+            return t.set('board', 'private', CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
                 // saved for next time
             }).then(function() {
                 return buildSharedMapPopupItems(t, retrievedSharedMapInfo);

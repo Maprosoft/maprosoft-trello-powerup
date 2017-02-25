@@ -158,7 +158,7 @@ var formatNPSUrl = function(t, url) {
 };
 
 //var getSharedMapInfo = function(t) {
-//  return t.get('board', 'shared', CACHED_SHARED_MAP_INFO_KEY, null);
+//  return t.get('board', 'private', CACHED_SHARED_MAP_INFO_KEY, null);
 //};
 
 var isMapLinkAttachment = function(attachment) {
