@@ -43,7 +43,7 @@ var addLocationMapCallback = function(t) {
     });
 };
 
-var handleAddMapCallback = function(t) {
+var handleAddMapCallbackFix = function(t, options) {
     return t.popup({
         title: 'Add a map',
         items: getSharedMapPopupItemsUsingPromise(t, options),
@@ -56,7 +56,7 @@ var handleAddMapCallback = function(t) {
     });
 };
 
-var handleAddMapCallbackFix = function(t) {
+var handleAddMapCallback = function(t) {
     return t.popup({
         title: 'Add a map',
         url: './add-map-popup.html',
