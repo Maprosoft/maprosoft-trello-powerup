@@ -30,7 +30,7 @@ var addSharedMapCallbackC = function(t, options) {
         search: {
             count: 5,
             placeholder: 'Search shared maps',
-            empty: 'No share map found'
+            empty: 'No shared map found'
         }
     });
 };
@@ -44,6 +44,19 @@ var addLocationMapCallback = function(t) {
 };
 
 var handleAddMapCallback = function(t) {
+    return t.popup({
+        title: 'Add a map',
+        items: getSharedMapPopupItemsUsingPromise(t, options),
+        search: {
+            count: 5,
+            placeholder: 'Search shared maps',
+            empty: 'No shared map found',
+            searching: 'Loading shared maps...'
+        }
+    });
+};
+
+var handleAddMapCallbackFix = function(t) {
     return t.popup({
         title: 'Add a map',
         url: './add-map-popup.html',
