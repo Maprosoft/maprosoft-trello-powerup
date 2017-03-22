@@ -10,6 +10,9 @@ var CACHED_SHARED_MAP_INFO_KEY = 'cached-shared-map-info';
 var TEAM_NAME_KEY = 'maprosoft-team-name';
 var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 
+var SETTINGS_SCOPE = 'organization';
+var SETTINGS_VISIBILITY = 'shared';
+
 //var Promise = TrelloPowerUp.Promise;
 //var t = TrelloPowerUp.iframe();
 
@@ -158,7 +161,7 @@ var formatNPSUrl = function(t, url) {
 };
 
 //var getSharedMapInfo = function(t) {
-//  return t.get('board', 'private', CACHED_SHARED_MAP_INFO_KEY, null);
+//  return t.get(SETTINGS_SCOPE, SETTINGS_VISIBILITY, CACHED_SHARED_MAP_INFO_KEY, null);
 //};
 
 var isMapLinkAttachment = function(attachment) {

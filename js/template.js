@@ -51,7 +51,7 @@ var getBadges = function(t) {
 };
 
 var boardButtonCallback = function(t) {
-  return t.get('board', 'private', TEAM_NAME_KEY)
+  return t.get(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY)
       .then(function(teamName) {
         if (teamName) {
           var generalMapUrl = buildGeneralMapUrl(teamName);
