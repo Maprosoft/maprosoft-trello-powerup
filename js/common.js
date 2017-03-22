@@ -188,10 +188,12 @@ var showNoSettingsPopup = function(t) {
 };
 
 var closeSettingsPopup = function(t) {
+  console.log('Closing settings...');
   return t.closePopup();
 };
 
 var openSettingsPopup = function(t) {
+  console.log('Opening settings...');
   return t.popup({
     title: 'Settings',
     url: './settings.html',
