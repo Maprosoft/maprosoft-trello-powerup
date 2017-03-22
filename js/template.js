@@ -177,7 +177,7 @@ TrelloPowerUp.initialize({
     return [{
       icon: MAPROSOFT_ICON_GRAY,
       text: 'Add map',
-      callback: handleAddMapCallback
+      callback: handleAddMapCallbackWithSettingsCheck
     //}, {
     //  icon: MAPROSOFT_ICON_GRAY,
     //  text: 'Add map (fix)',

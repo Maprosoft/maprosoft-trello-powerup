@@ -64,6 +64,43 @@ var handleAddMapCallback = function(t) {
     });
 };
 
+var handleAddMapCallbackWithSettingsCheck = function(t) {
+    var Promise = TrelloPowerUp.Promise;
+    return Promise.join(
+        t.get(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY),
+        t.get(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_TOKEN_KEY),
+        function(teamName, token) {
+            if (teamName && token) {
+                if (teamName) {
+                    var teamKey = teamName;
+                } else {
+                    var teamKey = 'demo';
+                }
+                return getFreshMapInfo(teamKey).then(function(retrievedSharedMapInfo) {
+                    var sharedMapInfoJson = JSON.stringify(retrievedSharedMapInfo);
+                    t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson).then(function() {
+                        // saved for next time
+                    });
+                    return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
+                });
+            } else {
+                return t.overlay({
+                    url: './no-settings.html',
+                    args: {}
+                })
+                    .then(function () {
+                        return t.closePopup();
+                    });
+            }
+        }
+    );
+    return t.popup({
+        title: 'Add a map',
+        url: './add-map-popup.html',
+        height: 300
+    });
+};
+
 var buildSharedMapPopupItem = function(t, teamName, sharedMapName) {
     //var encodedSharedMapName = encodeURIComponent(sharedMapName);
     //var encodedTeamName = encodeURIComponent(teamName);
