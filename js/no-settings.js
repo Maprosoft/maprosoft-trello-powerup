@@ -31,14 +31,14 @@ t.render(function () {
     document.addEventListener('click', function(event) {
         var eventtarget = event.target;
         if (eventtarget.tagName == 'BODY' || eventtarget.id == 'close-no-settings' || eventtarget.id == 'close-no-settings-button') {
-            t.closeOverlay().done();
+            t.closeOverlay().closePopup().done();
         }
     });
 
     // close overlay if user presses escape key
     document.addEventListener('keyup', function(event) {
         if (event.keyCode == 27) {
-            t.closeOverlay().done();
+            t.closeOverlay().closePopup().done();
         }
     });
 });
