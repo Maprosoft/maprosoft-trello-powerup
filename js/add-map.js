@@ -84,13 +84,18 @@ var handleAddMapCallbackWithSettingsCheck = function(t) {
                     return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
                 });
             } else {
-                return t.overlay({
+                return t.popup({
+                    title: 'Settings',
                     url: './settings.html',
-                    args: {}
-                })
-                    .then(function () {
-                        return t.closePopup();
-                    });
+                    height: 184
+                });
+                //return t.overlay({
+                //    url: './settings.html',
+                //    args: {}
+                //})
+                //    .then(function () {
+                //        return t.closePopup();
+                //    });
             }
         }
     );
