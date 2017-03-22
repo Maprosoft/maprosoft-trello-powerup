@@ -187,6 +187,18 @@ var showNoSettingsPopup = function(t) {
   });
 };
 
+var closeSettingsPopup = function(t) {
+  return t.closePopup();
+};
+
+var openSettingsPopup = function(t) {
+  return t.popup({
+    title: 'Settings',
+    url: './settings.html',
+    height: 184
+  });
+};
+
 // This example is from https://developer.mozilla.org/en-US/docs/Web/Events/resize:
 var optimizedResize = (function() {
 

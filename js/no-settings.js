@@ -42,3 +42,13 @@ t.render(function () {
         }
     });
 });
+
+document.getElementById('update-settings').addEventListener('click', function() {
+    return
+    closeSettingsPopup(t)
+    .then(function() {
+        openSettingsPopup(t);
+    });
+});
+
+
