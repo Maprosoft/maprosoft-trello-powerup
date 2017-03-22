@@ -68,13 +68,14 @@ var boardButtonCallback = function(t) {
             return t.closePopup();
           });
         } else {
-          return t.overlay({
-            url: './no-settings.html',
-            args: {}
-          })
-          .then(function () {
-            return t.closePopup();
-          });
+          //return t.overlay({
+          //  url: './no-settings.html',
+          //  args: {}
+          //})
+          //.then(function () {
+          //  return t.closePopup();
+          //});
+          return showNoSettingsPopup();
         }
       });
 };

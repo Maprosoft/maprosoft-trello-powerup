@@ -140,13 +140,14 @@ var getSharedMapPopupItemsXxxxxxxxxxxx = function(t, options) {
                 var sharedMapInfo = JSON.parse(sharedMapInfoJson);
             } else {
                 var sharedMapInfo = null;
-                return t.overlay({
-                    url: './no-settings.html',
-                    args: {}
-                })
-                    .then(function () {
-                        return t.closePopup();
-                    });
+                //return t.overlay({
+                //    url: './no-settings.html',
+                //    args: {}
+                //})
+                //.then(function () {
+                //    return t.closePopup();
+                //});
+                return showNoSettingsPopup();
             }
             if (sharedMapInfo && sharedMapInfo.mapNames) {
                 return buildSharedMapPopupItems(t, sharedMapInfo);
@@ -190,13 +191,14 @@ var getSharedMapPopupItemsSSSSSSSSSSSS = function(t, options) {
                     return buildSharedMapPopupItems(t, retrievedSharedMapInfo);
                 });
             } else {
-                return t.overlay({
-                    url: './no-settings.html',
-                    args: {}
-                })
-                    .then(function () {
-                        return t.closePopup();
-                    });
+                //return t.overlay({
+                //    url: './no-settings.html',
+                //    args: {}
+                //})
+                //.then(function () {
+                //    return t.closePopup();
+                //});
+                return showNoSettingsPopup();
             }
         }
     );

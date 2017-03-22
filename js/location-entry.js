@@ -11,13 +11,14 @@ t.render(function() {
         if (token) {
           return geocodeAddress(token, address);
         } else {
-          return t.overlay({
-            url: './no-settings.html',
-            args: {}
-          })
-          .then(function () {
-            return t.closePopup();
-          });
+          //return t.overlay({
+          //  url: './no-settings.html',
+          //  args: {}
+          //})
+          //.then(function () {
+          //  return t.closePopup();
+          //});
+          return showNoSettingsPopup();
         }
       });
 });
