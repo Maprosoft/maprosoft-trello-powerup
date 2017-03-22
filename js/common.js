@@ -181,6 +181,7 @@ var showNoSettingsPopup = function(t) {
     title: 'Settings',
     url: './no-settings.html',
     height: 184
+  })
   .then(function () {
     return t.closePopup();
   });
