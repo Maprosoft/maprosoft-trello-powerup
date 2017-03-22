@@ -85,7 +85,7 @@ var handleAddMapCallbackWithSettingsCheck = function(t) {
                 });
             } else {
                 return t.overlay({
-                    url: './no-settings.html',
+                    url: './settings.html',
                     args: {}
                 })
                     .then(function () {
