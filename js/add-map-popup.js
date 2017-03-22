@@ -21,7 +21,7 @@ t.render(function() {
         if (!token) {
             return showNoSettingsPopup(t);
         }
-            initialiseAddMapPopup(teamName, token);
+        initialiseAddMapPopup(teamName, token);
     });
 });
 

@@ -169,10 +169,18 @@ var isMapLinkAttachment = function(attachment) {
 };
 
 var showNoSettingsPopup = function(t) {
-  return t.overlay({
+  //return t.overlay({
+  //  url: './no-settings.html',
+  //  args: {}
+  //})
+  //.then(function () {
+  //  return t.closePopup();
+  //});
+
+  return t.popup({
+    title: 'Settings',
     url: './no-settings.html',
-    args: {}
-  })
+    height: 184
   .then(function () {
     return t.closePopup();
   });
