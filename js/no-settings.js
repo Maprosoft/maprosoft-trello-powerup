@@ -44,8 +44,9 @@ t.render(function () {
 });
 
 document.getElementById('update-settings').addEventListener('click', function() {
+    var closeSettingPromise = closeSettingsPopup(t);
     return
-    closeSettingsPopup(t)
+    closeSettingPromise
     .then(function() {
         openSettingsPopup(t);
     });
