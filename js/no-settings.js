@@ -44,12 +44,14 @@ t.render(function () {
 });
 
 document.getElementById('update-settings').addEventListener('click', function() {
-    var closeSettingPromise = closeSettingsPopup(t);
-    return
-    closeSettingPromise
-    .then(function() {
-        openSettingsPopup(t);
-    });
+    //var closeSettingPromise = closeSettingsPopup(t);
+    //return
+    //closeSettingPromise
+    //.then(function() {
+    //    openSettingsPopup(t);
+    //});
+
+    return openSettingsPopup(t);
 
 
     //var closeSettingPromise = closeSettingsPopup(t);
