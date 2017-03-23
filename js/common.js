@@ -80,6 +80,10 @@ var buildGeneralMapUrl = function(teamNameOrKey) {
   return 'https://www.maprosoft.com/app/map?team=' + teamKey;
 };
 
+var validateTokenAndteam = function(token, team) {
+  return 'https://www.maprosoft.com/app/validate-token?team=' + team + '&token=' + token;
+};
+
 var buildGeocodeAddressUrl = function(token, address) {
   var encodedAddress = encodeURIComponent(address);
   return 'https://www.maprosoft.com/app/geocode?token=' + token + '&address=' + encodedAddress;

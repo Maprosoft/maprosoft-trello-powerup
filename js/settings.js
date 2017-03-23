@@ -41,8 +41,10 @@ document.getElementById('save-settings').addEventListener('click', function() {
         return;
     }
 
-    return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY, teamName)
+    return validateTokenAndteam(token, teamName)
     .then(function() {
+        return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY, teamName);
+    }).then(function() {
         return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_TOKEN_KEY, token);
     }).then(function() {
         return doGet(buildRetrieveSharedMapsUrl(teamName, token));
