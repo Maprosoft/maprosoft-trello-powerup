@@ -31,6 +31,14 @@ p.form-label {
   padding: 24px;
 }
 
+#no-settings-section {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  text-align: center;
+  display: block
+}
+
 #map-overlay-content {
   background: white;
   padding: 24px;
