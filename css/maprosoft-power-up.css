@@ -29,10 +29,6 @@ p.form-label {
 #no-settings-content {
   background: white;
   padding: 24px;
-  min-width: 200px;
-  min-height: 200px;
-  max-width: 400px;
-  max-height: 300px;
 }
 
 #map-overlay-content {
