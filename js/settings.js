@@ -41,20 +41,44 @@ document.getElementById('save-settings').addEventListener('click', function() {
         return;
     }
 
-    return validateTokenAndteam(token, teamName)
-    .then(function() {
-        return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY, teamName);
-    }).then(function() {
-        return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_TOKEN_KEY, token);
-    }).then(function() {
-        return doGet(buildRetrieveSharedMapsUrl(teamName, token));
-    }).then(function(sharedMapInfo) {
-      var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
-      return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
-    }).then(function() {
-        return t.closePopup();
+    //return validateTokenAndTeam(token, teamName)
+    //.then(function() {
+    //    return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY, teamName);
+    //}).then(function() {
+    //    return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_TOKEN_KEY, token);
+    //}).then(function() {
+    //    return doGet(buildRetrieveSharedMapsUrl(teamName, token));
+    //}).then(function(sharedMapInfo) {
+    //  var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
+    //  return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
+    //}).then(function() {
+    //    return t.closePopup();
+    //}).catch(function() {
+    //  errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
+    //});
+
+    var validateUrl = buildValidateTokenAndTeamUrl(token, team);
+    return doGet(validateUrl)
+    .then(function(validationResult) {
+        if (validationResult && validationResult.success) {
+            return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY, teamName)
+            .then(function() {
+                return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_TOKEN_KEY, token);
+            }).then(function() {
+                return doGet(buildRetrieveSharedMapsUrl(teamName, token));
+            }).then(function(sharedMapInfo) {
+                var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
+                return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, CACHED_SHARED_MAP_INFO_KEY, sharedMapInfoJson);
+            }).then(function() {
+                return t.closePopup();
+            }).catch(function() {
+                errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
+            });
+        } else {
+            errorMessageElement.innerHTML = 'It looks like that combination of token and team is not right';
+        }
     }).catch(function() {
-      errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
+        errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
     });
 });
 

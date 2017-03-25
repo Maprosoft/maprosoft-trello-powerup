@@ -80,7 +80,7 @@ var buildGeneralMapUrl = function(teamNameOrKey) {
   return 'https://www.maprosoft.com/app/map?team=' + teamKey;
 };
 
-var validateTokenAndteam = function(token, team) {
+var buildValidateTokenAndTeamUrl = function(token, team) {
   return 'https://www.maprosoft.com/app/validate-token?team=' + team + '&token=' + token;
 };
 
