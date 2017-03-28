@@ -12,6 +12,7 @@ var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 
 var SETTINGS_SCOPE = 'organization';
 var SETTINGS_VISIBILITY = 'shared';
+var AUTO_HIDE_MAP_TOOLBAR = true;
 
 //var Promise = TrelloPowerUp.Promise;
 //var t = TrelloPowerUp.iframe();
@@ -77,7 +78,9 @@ var buildSharedMapUrl = function(teamNameOrKey, sharedMapName) {
 
 var buildGeneralMapUrl = function(teamNameOrKey) {
   var teamKey = teamNameToKey(teamNameOrKey);
-  return 'https://www.maprosoft.com/app/map?team=' + teamKey;
+  var mapUrl = 'https://www.maprosoft.com/app/map?team=' + teamKey + '&autoHideMapToolbar=yes';
+  mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
+  return mapUrl;
 };
 
 var buildValidateTokenAndTeamUrl = function(token, team) {
@@ -104,6 +107,7 @@ var buildUrlWithDropPin = function(teamNameOrKey, address, latitude, longitude) 
   var mapUrl = 'https://www.maprosoft.com/app/map?team=' + teamKey;
   var nextSeparator = '&';
   mapUrl = appendAddressParameters(mapUrl, nextSeparator, address, latitude, longitude);
+  mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
   return mapUrl;
 };
 
@@ -116,6 +120,14 @@ var appendAddressParameters = function(mapUrl, nextSeparator, address, latitude,
       '&customLatitude=' + latitude +
       '&customLongitude=' + longitude +
       '&customZoom=16';
+};
+
+var appendAutoHideToolbarParameter = function(mapUrl, separator) {
+  if (AUTO_HIDE_MAP_TOOLBAR) {
+    return mapUrl + separator + 'autoHideMapToolbar=yes';
+  } else {
+    return mapUrl;
+  }
 };
 
 var doGet = function(url) {

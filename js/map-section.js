@@ -66,17 +66,12 @@ t.render(function () {
             return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
         })
         .then(function (attachments) {
-            //var urls = attachments.map(function(a){
-            //  return a.url;
-            //});
-            //document.getElementById('urls').textContent = urls.join(', ');
-
+            if (mapUrl.indexOf('?') > 0) {
+                mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
+            } else {
+                mapUrl = appendAutoHideToolbarParameter(mapUrl, '?');
+            }
             mapFrameElement.src = mapUrl;
-
-            //var mapUrlDebugElement = document.getElementById('map-url-debug');
-            //if (mapUrlDebugElement) {
-            //    mapUrlDebugElement.innerHTML = mapUrl;
-            //}
         });
     }
 });

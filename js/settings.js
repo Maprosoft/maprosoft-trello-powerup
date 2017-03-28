@@ -77,7 +77,7 @@ document.getElementById('save-settings').addEventListener('click', function() {
         } else {
             errorMessageElement.innerHTML = 'It looks like that combination of token and team is not right';
         }
-    }).catch(function() {
+    }).catch(function(error) {
         errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
     });
 });
