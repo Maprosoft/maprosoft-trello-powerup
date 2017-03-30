@@ -10,7 +10,8 @@ var CACHED_SHARED_MAP_INFO_KEY = 'cached-shared-map-info';
 var TEAM_NAME_KEY = 'maprosoft-team-name';
 var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 
-var SETTINGS_SCOPE = 'organization';
+//var SETTINGS_SCOPE = 'organization';
+var SETTINGS_SCOPE = 'board';
 var SETTINGS_VISIBILITY = 'shared';
 var AUTO_HIDE_MAP_TOOLBAR = true;
 
