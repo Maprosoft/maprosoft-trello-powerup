@@ -72,7 +72,7 @@ document.getElementById('save-settings').addEventListener('click', function() {
             }).then(function() {
                 return t.closePopup();
             }).catch(function() {
-                errorMessageElement.innerHTML = 'There was a problem getting team information from Maprosoft. Check the team name and token you entered and your internet connection.';
+                errorMessageElement.innerHTML = 'There was a problem updating the settings. You may need to ask a board administrator.';
             });
         } else {
             errorMessageElement.innerHTML = 'It looks like that combination of token and team is not right';
