@@ -1,7 +1,7 @@
 {
   "name": "Maprosoft",
   "description": "",
-  "details": "A Trello Power-Up for Maprosoft maps.",
+  "details": "Connect Trello to [Maprosoft](https://www.maprosoft.com) so see maps on your board.",
   "icon": {
     "url": "./images/Maprosoft-logo-no-text-transparent-bg-901x846.png"
   },
