@@ -1,7 +1,7 @@
 {
   "name": "Maprosoft",
   "description": "",
-  "details": "Connect Trello to [Maprosoft](https://www.maprosoft.com) to see maps on your board. To get started, enable the Power-Up, and enter your Maprosoft team settings. ![Maprosoft Power-Up screenshot](//www.maprosoft.com/images/pages/addons/trello/map-in-trello-725x830.png 'Maprosoft Power-Up screenshot')",
+  "details": "Connect Trello to [Maprosoft](https://www.maprosoft.com) to see your team's Maprosoft maps on your board. To get started, enable the Power-Up, and enter your Maprosoft team settings. ![Maprosoft Power-Up screenshot](//www.maprosoft.com/images/pages/addons/trello/map-in-trello-725x830.png 'Maprosoft Power-Up screenshot')",
   "icon": {
     "url": "./images/Maprosoft-logo-no-text-transparent-bg-901x846.png"
   },
