@@ -146,31 +146,6 @@ TrelloPowerUp.initialize({
       return [];
     }
   },
-  /*'attachment-thumbnail': function(t, options){
-    var parkName = formatNPSUrl(t, options.url);
-    if (parkName) {
-      // return an object with some or all of these properties:
-      // url, title, image, openText, modified (Date), created (Date), createdBy, modifiedBy
-      return {
-        url: options.url,
-        title: parkName,
-        image: {
-          url: './images/nps.svg',
-          logo: true // false if you are using a thumbnail of the content
-        },
-        openText: 'Open in NPS'
-      };
-    } else {
-      throw t.NotHandled();
-    }
-  },*/
-  /*'board-buttons': function(t, options){
-    return [{
-      icon: MAPROSOFT_ICON_COLOR,
-      text: 'Maprosoft Map',
-      callback: boardButtonCallback
-    }];
-  },*/
   'card-badges': function(t, options){
     return getBadges(t);
   },
@@ -204,28 +179,6 @@ TrelloPowerUp.initialize({
   'card-detail-badges': function(t, options) {
     return getBadges(t);
   },
-  /*'card-from-url': function(t, options) {
-    var parkName = formatNPSUrl(t, options.url);
-    if(parkName){
-      return {
-        name: parkName,
-        desc: 'An awesome park: ' + options.url
-      };
-    } else {
-      throw t.NotHandled();
-    }
-  },
-  'format-url': function(t, options) {
-    var parkName = formatNPSUrl(t, options.url);
-    if(parkName){
-      return {
-        icon: MAPROSOFT_ICON_GRAY,
-        text: parkName
-      };
-    } else {
-      throw t.NotHandled();
-    }
-  },*/
   'show-settings': function(t, options){
     return openSettingsPopup(t);
   }

@@ -3,8 +3,6 @@
 var MAPROSOFT_ICON_WITH_TEXT_COLOR = './images/Maprosoft-logo-with-text-color.svg';
 var MAPROSOFT_ICON_GRAY = './images/Maprosoft-logo-no-text-gray.svg';
 var MAPROSOFT_ICON_COLOR = './images/Maprosoft-logo-no-text-color.svg';
-var WHITE_ICON = './images/icon-white.svg';
-var GRAY_ICON = './images/icon-gray.svg';
 
 var CACHED_SHARED_MAP_INFO_KEY = 'cached-shared-map-info';
 var TEAM_NAME_KEY = 'maprosoft-team-name';
@@ -15,11 +13,11 @@ var SETTINGS_SCOPE = 'organization';
 var SETTINGS_VISIBILITY = 'shared';
 var AUTO_HIDE_MAP_TOOLBAR = true;
 
-//var Promise = TrelloPowerUp.Promise;
-//var t = TrelloPowerUp.iframe();
-
-//var retrieveSharedMapsUrl = 'https://www.maprosoft.com/app/shared?team=demo&getSharedMapNames=yes';
-//var cachedMapInfo = {};
+var MAPROSOFT_WEBSITE_URL = 'https://www.maprosoft.com';
+var MAPROSOFT_APP_URL = MAPROSOFT_WEBSITE_URL + '/app';
+var MAPROSOFT_SHARED_MAP_URL_BASE = MAPROSOFT_APP_URL + '/shared';
+var MAPROSOFT_SHARED_MAPS_PAGE_URL_BASE = MAPROSOFT_APP_URL + '/shared-maps.html';
+var MAPROSOFT_MAP_URL_BASE = MAPROSOFT_APP_URL + '/map';
 
 var teamNameToKey = function(teamNameOrKey) {
   var key = teamNameOrKey;
@@ -73,39 +71,39 @@ var extractSharedMapNameFromUrl = function(url) {
 var buildSharedMapUrl = function(teamNameOrKey, sharedMapName) {
   var encodedSharedMapName = encodeURIComponent(sharedMapName);
   var encodedTeamNameOrKey = encodeURIComponent(teamNameOrKey);
-  var sharedMapUrl = 'https://www.maprosoft.com/app/shared/' + encodedTeamNameOrKey + '/' + encodedSharedMapName;
+  var sharedMapUrl = MAPROSOFT_SHARED_MAP_URL_BASE + '/' + encodedTeamNameOrKey + '/' + encodedSharedMapName;
   return sharedMapUrl;
 };
 
 var buildGeneralMapUrl = function(teamNameOrKey) {
   var teamKey = teamNameToKey(teamNameOrKey);
-  var mapUrl = 'https://www.maprosoft.com/app/map?team=' + teamKey + '&autoHideMapToolbar=yes';
+  var mapUrl = MAPROSOFT_MAP_URL_BASE + '?team=' + teamKey + '&autoHideMapToolbar=yes';
   mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
   return mapUrl;
 };
 
 var buildValidateTokenAndTeamUrl = function(token, team) {
-  return 'https://www.maprosoft.com/app/validate-token?team=' + team + '&token=' + token;
+  return MAPROSOFT_APP_URL + '/validate-token?team=' + team + '&token=' + token;
 };
 
 var buildGeocodeAddressUrl = function(token, address) {
   var encodedAddress = encodeURIComponent(address);
-  return 'https://www.maprosoft.com/app/geocode?token=' + token + '&address=' + encodedAddress;
+  return MAPROSOFT_APP_URL + '/geocode?token=' + token + '&address=' + encodedAddress;
 };
 
 var buildTeamSharedMapsUrl = function(teamNameOrKey) {
   var teamKey = teamNameToKey(teamNameOrKey);
-  return 'https://www.maprosoft.com/shared-maps.html?team=' + teamKey;
+  return MAPROSOFT_SHARED_MAPS_PAGE_URL_BASE + '?team=' + teamKey;
 };
 
 var buildRetrieveSharedMapsUrl = function(teamNameOrKey, token) {
   var teamKey = teamNameToKey(teamNameOrKey);
-  return 'https://www.maprosoft.com/app/shared?team=' + teamKey + '&getSharedMapNames=yes';
+  return MAPROSOFT_SHARED_MAP_URL_BASE + '?team=' + teamKey + '&getSharedMapNames=yes';
 };
 
 var buildUrlWithDropPin = function(teamNameOrKey, address, latitude, longitude) {
   var teamKey = teamNameToKey(teamNameOrKey);
-  var mapUrl = 'https://www.maprosoft.com/app/map?team=' + teamKey;
+  var mapUrl = MAPROSOFT_MAP_URL_BASE + '?team=' + teamKey;
   var nextSeparator = '&';
   mapUrl = appendAddressParameters(mapUrl, nextSeparator, address, latitude, longitude);
   mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
@@ -124,8 +122,9 @@ var appendAddressParameters = function(mapUrl, nextSeparator, address, latitude,
 };
 
 var appendAutoHideToolbarParameter = function(mapUrl, separator) {
-  if (AUTO_HIDE_MAP_TOOLBAR) {
-    return mapUrl + separator + 'autoHideMapToolbar=yes';
+  var extraParam = 'autoHideMapToolbar=yes';
+  if (AUTO_HIDE_MAP_TOOLBAR && mapUrl.indexOf(extraParam) < 0) {
+    return mapUrl + separator + extraParam;
   } else {
     return mapUrl;
   }
@@ -165,24 +164,8 @@ var getFreshMapInfo = function(teamName) {
   return doGet(retrieveSharedMapsUrl);
 };
 
-var formatNPSUrl = function(t, url) {
-  if(!/^https?:\/\/www\.nps\.gov\/[a-z]{4}\//.test(url)){
-    return null;
-  }
-  var parkShort = /^https?:\/\/www\.nps\.gov\/([a-z]{4})\//.exec(url)[1];
-  if (parkShort && parkMap[parkShort]){
-    return parkMap[parkShort];
-  } else{
-    return null;
-  }
-};
-
-//var getSharedMapInfo = function(t) {
-//  return t.get(SETTINGS_SCOPE, SETTINGS_VISIBILITY, CACHED_SHARED_MAP_INFO_KEY, null);
-//};
-
 var isMapLinkAttachment = function(attachment) {
-  return attachment.url.indexOf('https://www.maprosoft.com/app/map') === 0 || attachment.url.indexOf('https://www.maprosoft.com/app/shared') === 0;
+  return attachment.url.indexOf(MAPROSOFT_MAP_URL_BASE) === 0 || attachment.url.indexOf(MAPROSOFT_SHARED_MAP_URL_BASE) === 0;
 };
 
 var showNoSettingsPopup = function(t) {
