@@ -114,8 +114,8 @@ var appendAddressParameters = function(mapUrl, address, latitude, longitude) {
   var encodedAddress = encodeURIComponent(address);
   return mapUrl + nextSeparator +
       'dropPinTitle=' + encodedAddress +
-      '&dropPinLatitude=' + latitude +
       '&dropPinLongitude=' + longitude +
+      '&dropPinLatitude=' + latitude +
       '&customLatitude=' + latitude +
       '&customLongitude=' + longitude +
       '&customZoom=16';
