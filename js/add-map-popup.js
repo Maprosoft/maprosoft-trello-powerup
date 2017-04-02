@@ -278,8 +278,7 @@ var addMapForTeam = function(teamNameOrKey, address, sharedMapName) {
                     return t.get(SETTINGS_SCOPE, SETTINGS_VISIBILITY, TEAM_NAME_KEY)
                         .then(function(teamName) {
                             //var url = buildUrlWithDropPin(teamName, inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
-                            var nextSeparator = '?';
-                            mapUrl = appendAddressParameters(mapUrl, nextSeparator, inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
+                            mapUrl = appendAddressParameters(mapUrl, inputAddress, geocodedLocation.latitude, geocodedLocation.longitude);
                             var mapName = inputAddress;
                             return attachMapWithUrl(t, mapName, mapUrl);
                         });

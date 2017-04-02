@@ -78,7 +78,7 @@ var buildSharedMapUrl = function(teamNameOrKey, sharedMapName) {
 var buildGeneralMapUrl = function(teamNameOrKey) {
   var teamKey = teamNameToKey(teamNameOrKey);
   var mapUrl = MAPROSOFT_MAP_URL_BASE + '?team=' + teamKey + '&autoHideMapToolbar=yes';
-  mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
+  mapUrl = appendAutoHideToolbarParameter(mapUrl);
   return mapUrl;
 };
 
@@ -104,13 +104,13 @@ var buildRetrieveSharedMapsUrl = function(teamNameOrKey, token) {
 var buildUrlWithDropPin = function(teamNameOrKey, address, latitude, longitude) {
   var teamKey = teamNameToKey(teamNameOrKey);
   var mapUrl = MAPROSOFT_MAP_URL_BASE + '?team=' + teamKey;
-  var nextSeparator = '&';
-  mapUrl = appendAddressParameters(mapUrl, nextSeparator, address, latitude, longitude);
-  mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
+  mapUrl = appendAddressParameters(mapUrl, address, latitude, longitude);
+  mapUrl = appendAutoHideToolbarParameter(mapUrl);
   return mapUrl;
 };
 
-var appendAddressParameters = function(mapUrl, nextSeparator, address, latitude, longitude) {
+var appendAddressParameters = function(mapUrl, address, latitude, longitude) {
+  var nextSeparator = determineNextQuerySeparator(mapUrl);
   var encodedAddress = encodeURIComponent(address);
   return mapUrl + nextSeparator +
       'dropPinTitle=' + encodedAddress +
@@ -121,12 +121,22 @@ var appendAddressParameters = function(mapUrl, nextSeparator, address, latitude,
       '&customZoom=16';
 };
 
-var appendAutoHideToolbarParameter = function(mapUrl, separator) {
+var appendAutoHideToolbarParameter = function(mapUrl) {
   var extraParam = 'autoHideMapToolbar=yes';
   if (AUTO_HIDE_MAP_TOOLBAR && mapUrl.indexOf(extraParam) < 0) {
+    var separator = determineNextQuerySeparator(mapUrl);
     return mapUrl + separator + extraParam;
   } else {
     return mapUrl;
+  }
+};
+
+var determineNextQuerySeparator = function(url) {
+  var questionIndex = url.indexOf('?');
+  if (questionIndex < 0) {
+    return '?';
+  } else {
+    return '&';
   }
 };
 

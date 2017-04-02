@@ -66,11 +66,7 @@ t.render(function () {
             return attachment.url.indexOf('https://www.maprosoft.com/app/map') == 0;
         })
         .then(function (attachments) {
-            if (mapUrl.indexOf('?') > 0) {
-                mapUrl = appendAutoHideToolbarParameter(mapUrl, '&');
-            } else {
-                mapUrl = appendAutoHideToolbarParameter(mapUrl, '?');
-            }
+            mapUrl = appendAutoHideToolbarParameter(mapUrl);
             mapFrameElement.src = mapUrl;
         });
     }
