@@ -10,7 +10,7 @@ var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 
 var ORGANIZATION_SCOPE = 'organization';
 var BOARD_SCOPE = 'board';
-//var SETTINGS_SCOPE = 'organization';
+var SETTINGS_SCOPE = ORGANIZATION_SCOPE;
 var SETTINGS_VISIBILITY = 'shared';
 var AUTO_HIDE_MAP_TOOLBAR = true;
 
