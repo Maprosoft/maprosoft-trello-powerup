@@ -45,12 +45,14 @@ document.getElementById('save-settings').addEventListener('click', function() {
     return doGet(validateUrl)
     .then(function(validationResult) {
         if (validationResult && validationResult.success) {
-            var keysToValues = {
-                TEAM_NAME_KEY: teamName,
-                TEAM_TOKEN_KEY: token
-            };
-            return t.set(SETTINGS_SCOPE, SETTINGS_VISIBILITY, keysToValues)
+            //var keysToValues = {
+            //    TEAM_NAME_KEY: teamName,
+            //    TEAM_TOKEN_KEY: token
+            //};
+            return t.set(SETTINGS_SCOPE, TEAM_NAME_KEY, teamName)
             .then(function() {
+                return t.set(SETTINGS_SCOPE, TEAM_TOKEN_KEY, token)
+            }).then(function() {
                 return doGet(buildRetrieveSharedMapsUrl(teamName, token));
             }).then(function(sharedMapInfo) {
                 var sharedMapInfoJson = JSON.stringify(sharedMapInfo);
