@@ -8,8 +8,9 @@ var CACHED_SHARED_MAP_INFO_KEY = 'cached-shared-map-info';
 var TEAM_NAME_KEY = 'maprosoft-team-name';
 var TEAM_TOKEN_KEY = 'maprosoft-team-token';
 
-var SETTINGS_SCOPE = 'organization';
-//var SETTINGS_SCOPE = 'board';
+var ORGANIZATION_SCOPE = 'organization';
+var BOARD_SCOPE = 'board';
+//var SETTINGS_SCOPE = 'organization';
 var SETTINGS_VISIBILITY = 'shared';
 var AUTO_HIDE_MAP_TOOLBAR = true;
 
@@ -187,17 +188,34 @@ var showNoSettingsPopup = function(t) {
 };
 
 var closeSettingsPopup = function(t) {
-  console.log('Closing settings...');
+  //console.log('Closing settings...');
   return t.closePopup();
 };
 
 var openSettingsPopup = function(t) {
-  console.log('Opening settings...');
+  //console.log('Opening settings...');
   return t.popup({
     title: 'Settings',
     url: './settings.html',
     height: 184
   });
+};
+
+var getData = function(t, key) {
+  return t.set(ORGANIZATION_SCOPE, SETTINGS_VISIBILITY, 'dummy-key', 'dummy-data')
+    .then(function(dummyData) {
+        return t.get(ORGANIZATION_SCOPE, SETTINGS_VISIBILITY, key);
+    })
+    .catch(function() {
+      return t.get(BOARD_SCOPE, SETTINGS_VISIBILITY, key)
+    });
+};
+
+var setData = function(t, key, data) {
+  return t.set(ORGANIZATION_SCOPE, SETTINGS_VISIBILITY, key, data)
+    .catch(function() {
+      return t.set(BOARD_SCOPE, SETTINGS_VISIBILITY, key, data)
+    });
 };
 
 // This example is from https://developer.mozilla.org/en-US/docs/Web/Events/resize:
